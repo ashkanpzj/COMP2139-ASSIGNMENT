@@ -1,0 +1,150 @@
+﻿@model IEnumerable<Assignment1.Models.Event>
+@{
+ViewData["Title"] = "Events";
+var categories = ViewBag.Categories as string[] ?? Array.Empty<string>();
+var lowTicketsAny = Model.Any(e => e.AvailableTickets > 0 && e.AvailableTickets < 5);
+}
+
+<h2 class="mb-4 text-center">Events</h2>
+
+<!-- فیلترها -->
+<form method="get" class="row g-3 align-items-end mb-4">
+    <div class="col-md-3">
+        <label for="search" class="form-label">Search</label>
+        <input type="text" id="search" name="search" value="@ViewBag.Search" class="form-control" placeholder="Search title or description..." />
+    </div>
+
+    <div class="col-md-2">
+        <label for="category" class="form-label">Category</label>
+        <select id="category" name="category" class="form-select">
+            @foreach (var cat in categories)
+            {
+            <option value="@cat" selected="@(ViewBag.Category == cat)">@cat</option>
+            }
+        </select>
+    </div>
+
+    <div class="col-md-2">
+        <label for="startDate" class="form-label">Start Date</label>
+        <input type="date" id="startDate" name="startDate" value="@ViewBag.StartDate" class="form-control" />
+    </div>
+
+    <div class="col-md-2">
+        <label for="endDate" class="form-label">End Date</label>
+        <input type="date" id="endDate" name="endDate" value="@ViewBag.EndDate" class="form-control" />
+    </div>
+
+    <div class="col-md-2">
+        <label for="sort" class="form-label">Sort By</label>
+        <select id="sort" name="sort" class="form-select">
+            <option value="date" selected="@(ViewBag.Sort == "date")">Date</option>
+            <option value="alpha" selected="@(ViewBag.Sort == "alpha")">Alphabetical (A–Z)</option>
+            <option value="price" selected="@(ViewBag.Sort == "price")">Price</option>
+        </select>
+    </div>
+
+    <div class="col-md-1 d-grid">
+        <button type="submit" class="btn btn-primary">Filter</button>
+    </div>
+    <div class="col-md-1 d-grid">
+        <a asp-action="Index" class="btn btn-outline-secondary">Reset</a>
+    </div>
+</form>
+
+@if (User.Identity?.IsAuthenticated ?? false)
+{
+<div class="mb-3 text-end">
+    <a asp-action="Create" class="btn btn-success">+ Create Event</a>
+</div>
+}
+
+@if (lowTicketsAny)
+{
+<div class="alert alert-warning text-center fw-bold shadow-sm mb-3">
+    ⚠️ Some events are almost sold out! (Less than 5 tickets remaining)
+</div>
+}
+
+@if (!Model.Any())
+{
+<div class="alert alert-info text-center">No events found.</div>
+}
+else
+{
+<div class="table-responsive">
+    <table class="table table-striped table-bordered align-middle shadow-sm">
+        <thead class="table-light">
+        <tr>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Price ($)</th>
+            <th>Available</th>
+            @if (User.Identity?.IsAuthenticated ?? false)
+            {
+            <th class="text-center" style="width: 160px;">Actions</th>
+            }
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (var e in Model)
+        {
+        var isSoldOut = e.AvailableTickets <= 0;
+        var isLow = e.AvailableTickets > 0 && e.AvailableTickets < 5;
+
+        <tr class="@(isSoldOut ? "sold-out-row" : (isLow ? "low-tickets-row" : ""))">
+            <td>@e.Title</td>
+            <td>@e.Date.ToLocalTime().ToString("yyyy-MM-dd hh:mm tt")</td>
+            <td class="text-truncate" style="max-width: 360px;">@e.Description</td>
+            <td>@e.Category</td>
+            <td>@(e.Price?.ToString("0.00") ?? "-")</td>
+            <td>
+                @if (isSoldOut)
+                {
+                <span class="badge-outline-gray">Sold Out</span>
+                }
+                else if (isLow)
+                {
+                <span class="text-danger fw-bold">Only @e.AvailableTickets left</span>
+                }
+                else
+                {
+                @e.AvailableTickets
+                }
+            </td>
+
+            @if (User.Identity?.IsAuthenticated ?? false)
+            {
+            <td class="text-center">
+                <a asp-action="Edit" asp-route-id="@e.EventId" class="btn btn-sm btn-warning me-1">Edit</a>
+                <a asp-action="Delete" asp-route-id="@e.EventId" class="btn btn-sm btn-danger"
+                   onclick="return confirm('Are you sure you want to delete this event?')">Delete</a>
+            </td>
+            }
+        </tr>
+        }
+        </tbody>
+    </table>
+</div>
+}
+
+<style>
+    .low-tickets-row {
+        border: 2px solid #dc3545 !important;
+        background-color: #fff5f5 !important;
+    }
+    
+    .badge-outline-gray {
+        display: inline-block;
+        border: 1px solid #555;
+        color: #444;
+        background: transparent;
+        border-radius: .375rem;
+        padding: .15rem .5rem;
+        font-size: .875rem;
+        font-weight: 600;
+        line-height: 1.2;
+        white-space: nowrap;
+    }
+</style>

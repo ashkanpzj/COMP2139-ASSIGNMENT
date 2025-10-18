@@ -1,0 +1,63 @@
+﻿@model dynamic
+@{
+    ViewData["Title"] = "Purchase Receipt";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-header bg-success text-white text-center py-3 rounded-top-4">
+            <h3 class="mb-0 fw-bold">🎟 Purchase Receipt</h3>
+        </div>
+        <div class="card-body px-5 py-4">
+            <div class="mb-4 text-center">
+                <h4 class="fw-semibold mb-1">@Model.EventTitle</h4>
+                <p class="text-muted mb-1">
+                    <strong>Event Date:</strong> 
+                    @Model.EventDate.ToLocalTime().ToString("dddd, MMMM dd yyyy - hh:mm tt")
+                </p>
+            </div>
+
+            <hr />
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <p><strong>Purchased On:</strong> @Model.PurchasedAtLocal.ToString("dddd, MMMM dd yyyy - hh:mm tt")</p>
+                    <p><strong>Quantity:</strong> @Model.Quantity</p>
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Unit Price:</strong> $@Model.UnitPrice.ToString("0.00")</p>
+                    <p><strong>Total Cost:</strong> <span class="fw-bold text-success">$@Model.TotalPrice.ToString("0.00")</span></p>
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="mt-4">
+                @if (!string.IsNullOrEmpty(Model.GuestName))
+                {
+                    <p><strong>Buyer Name:</strong> @Model.GuestName</p>
+                    <p><strong>Email:</strong> @Model.GuestEmail</p>
+                }
+                else
+                {
+                    <p><strong>Buyer:</strong> @User.Identity?.Name</p>
+                }
+            </div>
+
+            <div class="text-center mt-5">
+                <a asp-controller="Home" asp-action="Index" class="btn btn-outline-primary px-4">Back to Home</a>
+                <a asp-controller="Tickets" asp-action="Index" class="btn btn-primary px-4">Buy More Tickets</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    body {
+        background-color: #f8f9fa;
+    }
+    .card {
+        max-width: 700px;
+        margin: 0 auto;
+    }
+</style>

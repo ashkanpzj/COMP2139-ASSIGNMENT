@@ -1,0 +1,114 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+<!DOCTYPE html>
+<html lang="en" translate="no">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Event Management</title>
+
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Assignment1.styles.css" asp-append-version="true" />
+
+    <style>
+        html, body { height: 100%; margin: 0; padding: 0; background: #fff; }
+        body { display: flex; flex-direction: column; min-height: 100vh; }
+        main { flex: 1 0 auto; }
+        footer { flex-shrink: 0; }
+
+        .navbar {
+            margin-bottom: 0 !important;
+            border-bottom: 0 !important;
+            box-shadow: 0 1px 3px rgba(0,0,0,.05);
+        }
+        
+        .home-shell { padding: 0; }
+        
+        .page-shell { padding-top: 16px; padding-bottom: 16px; }
+    </style>
+</head>
+
+<body class="notranslate">
+<header>
+    <nav class="navbar navbar-expand-sm navbar-light bg-white">
+        <div class="container-fluid">
+            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNavbar"
+                    aria-controls="topNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-between" id="topNavbar">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link text-dark" asp-controller="Events" asp-action="Index">Events</a></li>
+                    <li class="nav-item"><a class="nav-link text-dark" asp-controller="Tickets" asp-action="Index">Tickets</a></li>
+                </ul>
+                
+                @if (ViewContext.RouteData.Values["controller"]?.ToString() == "Home" &&
+                     ViewContext.RouteData.Values["action"]?.ToString() == "Index")
+                {
+                    <form method="get" asp-controller="Home" asp-action="Search"
+                          class="d-flex align-items-center me-3" role="search">
+                        <input type="text" name="q" class="form-control" placeholder="Search..." style="width: 220px;" />
+                        <select name="kind" class="form-select ms-2" style="width: 130px;">
+                            <option value="event" selected>Events</option>
+                            <option value="ticket">Tickets</option>
+                        </select>
+                        <button type="submit" class="btn btn-outline-primary ms-2">Search</button>
+                    </form>
+                }
+                
+                <ul class="navbar-nav">
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <li class="nav-item d-flex align-items-center me-2">
+                            <span class="nav-link text-dark">Hello, @User.Identity?.Name!</span>
+                        </li>
+                        <li class="nav-item">
+                            <form class="d-inline" asp-area="Identity" asp-page="/Account/Logout" method="post">
+                                <button type="submit" class="btn btn-link nav-link text-dark">Logout</button>
+                            </form>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item"><a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a></li>
+                        <li class="nav-item"><a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a></li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<main role="main">
+    @if (ViewContext.RouteData.Values["controller"]?.ToString() == "Home" &&
+         ViewContext.RouteData.Values["action"]?.ToString() == "Index")
+    {
+        <div class="home-shell">
+            @RenderBody()
+        </div>
+    }
+    else
+    {
+        <div class="container page-shell">
+            @RenderBody()
+        </div>
+    }
+</main>
+
+<footer class="border-top text-muted">
+    <div class="container py-3 text-center">
+        &copy; 2025 - Ashkan Pazaj 101563426
+    </div>
+</footer>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

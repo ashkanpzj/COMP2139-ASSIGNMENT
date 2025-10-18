@@ -1,0 +1,95 @@
+﻿@{
+ViewData["Title"] = "Home";
+}
+
+<div id="twoCols" class="two-columns">
+    <section class="col-pane has-bg">
+        <div class="bg" style="background-image: url('@Url.Content("~/images/Events.jpg")');"></div>
+        <div class="label">EVENTS</div>
+        <a class="hitarea" href="@Url.Action("Index", "Events")" title="Events"></a>
+    </section>
+
+    <section class="col-pane has-bg">
+        <div class="bg" style="background-image: url('@Url.Content("~/images/Ticket.jpg")');"></div>
+        <div class="label">TICKETS</div>
+        <a class="hitarea" href="@Url.Action("Index", "Tickets")" title="Tickets"></a>
+    </section>
+</div>
+
+<style>
+    html, body {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        background: #fff;
+        font-family: 'Segoe UI', sans-serif;
+        overflow: hidden;
+    }
+    
+    .two-columns {
+        display: flex;
+        align-items: stretch;
+        width: 100%;
+        height: calc(100vh - 100px);
+        background: #fff;
+        overflow: hidden;
+    }
+
+    .col-pane {
+        width: 50%;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+        transition: width .55s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    .has-bg .bg {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+        filter: blur(6px) brightness(70%);
+        transition: filter .45s ease-in-out;
+        pointer-events: none;
+    }
+
+    .has-bg .label {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-weight: 900;
+        font-size: 8vw;
+        color: rgba(0, 0, 0, .85);
+        letter-spacing: .25rem;
+        text-transform: uppercase;
+        z-index: 2;
+        text-align: center;
+        white-space: nowrap;
+        transition: color .55s cubic-bezier(.4, 0, .2, 1), opacity .55s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    .hitarea {
+        position: absolute;
+        inset: 0;
+        z-index: 3;
+        display: block;
+        text-indent: -9999px;
+    }
+
+    .two-columns:hover .col-pane:hover { width: calc(100% - 10px); }
+    .two-columns:hover .col-pane:not(:hover) { width: 10px; filter: brightness(.9) blur(1px); }
+    .two-columns:hover .col-pane:hover .bg { filter: blur(0) brightness(100%); }
+    .two-columns:hover .col-pane:hover .label { color: rgba(0, 0, 0, .97); }
+    .two-columns:hover .col-pane:not(:hover) .label { opacity: 0; }
+
+    @@media (max-width: 768px) {
+        .two-columns {
+            flex-direction: column;
+            height: calc(100vh - 100px);
+        }
+        .col-pane { width: 100%; height: 50%; }
+        .has-bg .label { font-size: 10vw; letter-spacing: .15rem; }
+    }
+</style>
+    

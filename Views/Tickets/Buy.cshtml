@@ -1,0 +1,64 @@
+﻿@model Assignment1.Controllers.TicketsController.BuyTicketVm
+@{
+    ViewData["Title"] = "Buy Tickets";
+}
+
+<h2 class="mb-3">Buy Tickets - @Model.EventTitle</h2>
+
+<div class="card">
+    <div class="card-body">
+        <form asp-action="Buy" method="post" class="row g-3">
+            <input type="hidden" asp-for="EventId" />
+            <input type="hidden" asp-for="IsGuest" />
+
+            <div class="col-12 col-md-4">
+                <label class="form-label">Unit Price</label>
+                <input class="form-control" value="@Model.UnitPrice.ToString("0.00")" readonly />
+            </div>
+
+            <div class="col-12 col-md-4">
+                <label class="form-label">Available</label>
+                <input class="form-control" value="@Model.Available" readonly />
+            </div>
+
+            <div class="col-12 col-md-4">
+                <label asp-for="Quantity" class="form-label"></label>
+                <input asp-for="Quantity" type="number" min="1" max="@Model.Available" class="form-control" />
+                <span asp-validation-for="Quantity" class="text-danger"></span>
+            </div>
+
+            @if (Model.IsGuest)
+            {
+                <div class="col-12"><hr /></div>
+                <div class="col-12"><h5>Guest Information</h5></div>
+
+                <div class="col-12 col-md-4">
+                    <label asp-for="GuestFirstName" class="form-label"></label>
+                    <input asp-for="GuestFirstName" class="form-control" />
+                    <span asp-validation-for="GuestFirstName" class="text-danger"></span>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <label asp-for="GuestLastName" class="form-label"></label>
+                    <input asp-for="GuestLastName" class="form-control" />
+                    <span asp-validation-for="GuestLastName" class="text-danger"></span>
+                </div>
+
+                <div class="col-12 col-md-4">
+                    <label asp-for="GuestEmail" class="form-label"></label>
+                    <input asp-for="GuestEmail" type="email" class="form-control" />
+                    <span asp-validation-for="GuestEmail" class="text-danger"></span>
+                </div>
+            }
+
+            <div class="col-12 d-flex justify-content-end gap-2">
+                <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+                <button type="submit" class="btn btn-primary">Confirm Purchase</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,61 @@
+﻿@model Assignment1.Models.Event
+
+@{
+    ViewData["Title"] = "Edit Event";
+}
+
+<h2>Edit Event</h2>
+
+<form asp-action="Edit" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="EventId" />
+
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="Title" class="form-label"></label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Date" class="form-label">Event Date & Time</label>
+        <input asp-for="Date"
+               type="datetime-local"
+               class="form-control"
+               value="@(Model.Date.ToLocalTime().ToString("yyyy-MM-ddTHH:mm"))"
+               step="60" />
+        <span asp-validation-for="Date" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Description" class="form-label"></label>
+        <textarea asp-for="Description" class="form-control"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Category" class="form-label"></label>
+        <select asp-for="Category" class="form-select" asp-items="ViewBag.Categories"></select>
+        <span asp-validation-for="Category" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Price" class="form-label">Price ($)</label>
+        <input asp-for="Price" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="AvailableTickets" class="form-label">Available Tickets</label>
+        <input asp-for="AvailableTickets" class="form-control" />
+        <span asp-validation-for="AvailableTickets" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-warning">Save Changes</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
