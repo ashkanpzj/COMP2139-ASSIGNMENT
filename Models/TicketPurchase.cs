@@ -32,5 +32,8 @@ namespace Assignment1.Models
 
         [EmailAddress, StringLength(256)]
         public string? GuestEmail { get; set; }
+
+        [Range(1, 5)]
+        public int? Rating { get; set; }
     }
 }

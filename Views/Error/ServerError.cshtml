@@ -1,0 +1,56 @@
+@{
+    ViewData["Title"] = "Server Error";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="error-page">
+    <div class="error-content text-center py-5">
+        <div class="error-code error-500">500</div>
+        <h1 class="error-title">Something Went Wrong</h1>
+        <p class="error-message">
+            We're sorry, but something unexpected happened on our end. 
+            Our team has been notified and is working on it.
+        </p>
+        <div class="error-actions mt-4">
+            <a href="/" class="btn btn-primary btn-lg me-2">
+                <i class="bi bi-house"></i> Go Home
+            </a>
+            <button onclick="location.reload()" class="btn btn-outline-primary btn-lg">
+                Try Again
+            </button>
+        </div>
+    </div>
+</div>
+
+<style>
+    .error-page {
+        min-height: 60vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .error-code {
+        font-size: 8rem;
+        font-weight: 800;
+        line-height: 1;
+    }
+    .error-500 {
+        color: #ef4444;
+        text-shadow: 4px 4px 0 #fee2e2;
+    }
+    .error-title {
+        font-size: 2rem;
+        font-weight: 600;
+        color: #1e293b;
+        margin-top: 1rem;
+    }
+    .error-message {
+        font-size: 1.1rem;
+        color: #64748b;
+        max-width: 450px;
+        margin: 1rem auto 0;
+    }
+</style>
+
+
+

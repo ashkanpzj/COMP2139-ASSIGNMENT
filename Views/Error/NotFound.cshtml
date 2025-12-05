@@ -1,0 +1,53 @@
+@{
+    ViewData["Title"] = "Page Not Found";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="error-page">
+    <div class="error-content text-center py-5">
+        <div class="error-code">404</div>
+        <h1 class="error-title">Page Not Found</h1>
+        <p class="error-message">
+            Oops! The page you're looking for doesn't exist or has been moved.
+        </p>
+        <div class="error-actions mt-4">
+            <a href="/" class="btn btn-primary btn-lg me-2">
+                <i class="bi bi-house"></i> Go Home
+            </a>
+            <a href="/Events" class="btn btn-outline-primary btn-lg">
+                Browse Events
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .error-page {
+        min-height: 60vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .error-code {
+        font-size: 8rem;
+        font-weight: 800;
+        color: #6366f1;
+        line-height: 1;
+        text-shadow: 4px 4px 0 #e0e7ff;
+    }
+    .error-title {
+        font-size: 2rem;
+        font-weight: 600;
+        color: #1e293b;
+        margin-top: 1rem;
+    }
+    .error-message {
+        font-size: 1.1rem;
+        color: #64748b;
+        max-width: 400px;
+        margin: 1rem auto 0;
+    }
+</style>
+
+
+

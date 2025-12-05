@@ -1,0 +1,924 @@
+@model Assignment1.ViewModels.DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="dashboard-page">
+    <!-- Main Content -->
+    <div class="dashboard-sections">
+        <!-- Upcoming Tickets -->
+        <section class="dashboard-section">
+            <div class="section-header">
+                <h2>Upcoming Tickets</h2>
+            </div>
+            <div class="section-content" id="ticketsContainer">
+                @if (!Model.UpcomingTickets.Any())
+                {
+                    <div class="empty-state">
+                        <i class="bi bi-ticket-perforated"></i>
+                        <p>No upcoming tickets</p>
+                        <a asp-controller="Tickets" asp-action="Index" class="btn btn-primary btn-sm">Browse Events</a>
+                    </div>
+                }
+                else
+                {
+                    <div class="tickets-list" id="ticketsGrid">
+                        @foreach (var ticket in Model.UpcomingTickets)
+                        {
+                            <div class="ticket-card">
+                                <div class="ticket-card-header">
+                                    <span class="ticket-status">Active</span>
+                                </div>
+                                <div class="ticket-card-body">
+                                    <h3 class="ticket-event-name">@ticket.EventTitle</h3>
+                                    <div class="ticket-detail-row">
+                                        <i class="bi bi-calendar3"></i>
+                                        <span>@ticket.EventDateLocal.ToString("ddd, MMM d, yyyy")</span>
+                                    </div>
+                                    <div class="ticket-detail-row">
+                                        <i class="bi bi-clock"></i>
+                                        <span>@ticket.EventDateLocal.ToString("h:mm tt")</span>
+                                    </div>
+                                    <div class="ticket-info-row">
+                                        <div class="ticket-info-item">
+                                            <span class="info-label">Qty</span>
+                                            <span class="info-value">@ticket.Quantity</span>
+                                        </div>
+                                        <div class="ticket-info-item">
+                                            <span class="info-label">Total</span>
+                                            <span class="info-value text-success">@ticket.TotalPrice.ToString("C")</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ticket-card-footer">
+                                    <button type="button" class="btn-ticket qr-toggle" 
+                                            data-qr="@ticket.QrCodeDataUrl" data-title="@ticket.EventTitle">
+                                        <i class="bi bi-qr-code"></i> QR
+                                    </button>
+                                    <a asp-action="DownloadTicketPdf" asp-route-id="@ticket.PurchaseId" class="btn-ticket btn-ticket-primary">
+                                        <i class="bi bi-download"></i> PDF
+                                    </a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                    @if (Model.TicketsTotalPages > 1)
+                    {
+                        <nav class="pagination-nav" id="ticketsPagination">
+                            <button class="page-btn @(Model.TicketsPage == 1 ? "disabled" : "")" data-page="@(Model.TicketsPage - 1)">
+                                <i class="bi bi-chevron-left"></i>
+                            </button>
+                            @for (var i = 1; i <= Model.TicketsTotalPages; i++)
+                            {
+                                <button class="page-btn @(Model.TicketsPage == i ? "active" : "")" data-page="@i">@i</button>
+                            }
+                            <button class="page-btn @(Model.TicketsPage == Model.TicketsTotalPages ? "disabled" : "")" data-page="@(Model.TicketsPage + 1)">
+                                <i class="bi bi-chevron-right"></i>
+                            </button>
+                        </nav>
+                    }
+                }
+            </div>
+        </section>
+
+        <!-- Purchase History -->
+        <section class="dashboard-section">
+            <div class="section-header">
+                <h2>Purchase History</h2>
+            </div>
+            <div class="section-content">
+                @if (!Model.PurchaseHistory.Any())
+                {
+                    <div class="empty-state">
+                        <i class="bi bi-clock-history"></i>
+                        <p>No past events yet</p>
+                    </div>
+                }
+                else
+                {
+                    <div class="history-list">
+                        @foreach (var purchase in Model.PurchaseHistory)
+                        {
+                            <div class="history-item">
+                                <div class="history-info">
+                                    <h4>@purchase.EventTitle</h4>
+                                    <p>@purchase.EventDateLocal.ToString("MMM d, yyyy")</p>
+                                    <span class="history-amount">@purchase.TotalPrice.ToString("C") - @purchase.Quantity tickets</span>
+                                </div>
+                                <div class="rating-container">
+                                    @if (purchase.Rating.HasValue)
+                                    {
+                                        <span class="rating-status rated">Your rating</span>
+                                        <div class="history-rating locked" data-event-id="@purchase.EventId">
+                                            @for (int i = 1; i <= 5; i++)
+                                            {
+                                                <span class="rating-star @(purchase.Rating >= i ? "filled" : "")">
+                                                    <i class="bi bi-star-fill"></i>
+                                                </span>
+                                            }
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <span class="rating-status unrated">Rate this event</span>
+                                        <div class="history-rating" data-event-id="@purchase.EventId">
+                                            @for (int i = 1; i <= 5; i++)
+                                            {
+                                                <span class="rating-star" data-value="@i">
+                                                    <i class="bi bi-star-fill"></i>
+                                                </span>
+                                            }
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        </section>
+
+        <!-- My Events (Organizer) -->
+        <section class="dashboard-section">
+            <div class="section-header">
+                <h2>My Events</h2>
+            </div>
+            <div class="section-content">
+                @if (!Model.MyEvents.Any())
+                {
+                    <div class="empty-state">
+                        <i class="bi bi-calendar-plus"></i>
+                        <p>No events created yet</p>
+                        <a asp-controller="Events" asp-action="Create" class="btn btn-primary btn-sm">Create Event</a>
+                    </div>
+                }
+                else
+                {
+                    <div class="events-list">
+                        @foreach (var ev in Model.MyEvents)
+                        {
+                            <div class="event-item">
+                                <div class="event-main">
+                                    <h4>@ev.EventTitle</h4>
+                                    <p>@ev.EventDateLocal.ToString("ddd, MMM d, yyyy - h:mm tt")</p>
+                                </div>
+                                <div class="event-stats">
+                                    <div class="event-stat">
+                                        <span class="stat-num">@ev.TicketsSold</span>
+                                        <span class="stat-text">Sold</span>
+                                    </div>
+                                    <div class="event-stat highlight">
+                                        <span class="stat-num">@ev.TotalRevenue.ToString("C0")</span>
+                                        <span class="stat-text">Revenue</span>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        </section>
+    </div>
+</div>
+
+<!-- QR Modal -->
+<div class="modal-overlay" id="qrOverlay">
+    <div class="modal-content">
+        <button type="button" class="modal-close" id="qrCloseBtn">
+            <i class="bi bi-x-lg"></i>
+        </button>
+        <h3 id="qrModalTitle">Ticket QR Code</h3>
+        <img id="qrModalImage" src="" alt="QR Code" />
+        <p class="modal-hint">Scan at venue entrance</p>
+    </div>
+</div>
+
+<!-- Toast Container -->
+<div id="toastContainer"></div>
+
+<style>
+    .dashboard-page {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+
+    /* Dashboard Sections */
+    .dashboard-sections {
+        display: grid;
+        gap: 1.5rem;
+    }
+
+    @@media (min-width: 1024px) {
+        .dashboard-sections {
+            grid-template-columns: 2fr 1fr;
+        }
+
+        .dashboard-section:first-child {
+            grid-row: span 2;
+        }
+    }
+
+    .dashboard-section {
+        background: white;
+        border-radius: 0.75rem;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        border: 1px solid #e2e8f0;
+        overflow: hidden;
+    }
+
+    .section-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem 1.25rem;
+        border-bottom: 1px solid #f1f5f9;
+    }
+
+    .section-header h2 {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #1e293b;
+        margin: 0;
+    }
+
+    .section-content {
+        padding: 1.25rem;
+    }
+
+    /* Empty State */
+    .empty-state {
+        text-align: center;
+        padding: 2rem 1rem;
+        color: #94a3b8;
+    }
+
+    .empty-state i {
+        font-size: 2.5rem;
+        margin-bottom: 0.75rem;
+        display: block;
+        opacity: 0.5;
+    }
+
+    .empty-state p {
+        margin: 0 0 1rem;
+    }
+
+    /* Ticket Cards */
+    .tickets-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.25rem;
+        min-height: 610px;
+    }
+
+    @@media (max-width: 600px) {
+        .tickets-list {
+            grid-template-columns: 1fr;
+            min-height: auto;
+        }
+    }
+
+    .ticket-card {
+        background: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 0.75rem;
+        overflow: hidden;
+        transition: all 0.2s;
+        height: 290px;
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .ticket-card:hover {
+        box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+        transform: translateY(-2px);
+    }
+
+    .ticket-card-header {
+        padding: 0.625rem 1rem;
+        background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    }
+
+    .ticket-status {
+        font-size: 0.7rem;
+        font-weight: 700;
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .ticket-card-body {
+        padding: 1.25rem;
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .ticket-event-name {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #1e293b;
+        margin: 0 0 0.625rem;
+        line-height: 1.3;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .ticket-detail-row {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.8rem;
+        color: #64748b;
+        margin-bottom: 0.25rem;
+    }
+
+    .ticket-detail-row i {
+        color: #94a3b8;
+        font-size: 0.75rem;
+    }
+
+    .ticket-info-row {
+        display: flex;
+        gap: 1.25rem;
+        margin-top: auto;
+        padding-top: 0.625rem;
+        border-top: 1px solid #e2e8f0;
+    }
+
+    .ticket-info-item {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .ticket-info-item .info-label {
+        font-size: 0.65rem;
+        color: #94a3b8;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+    }
+
+    .ticket-info-item .info-value {
+        font-size: 0.9rem;
+        font-weight: 700;
+        color: #1e293b;
+    }
+
+    .ticket-card-footer {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+        padding: 1.25rem;
+        background: #f8fafc;
+        border-top: 1px solid #e2e8f0;
+        margin-top: auto;
+    }
+
+    .btn-ticket {
+        padding: 1rem 1.25rem;
+        font-size: 0.9rem;
+        font-weight: 600;
+        border-radius: 0.625rem;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.625rem;
+        transition: all 0.15s;
+        text-decoration: none;
+    }
+
+    .btn-ticket.qr-toggle {
+        background: white;
+        color: #475569;
+        border: 1px solid #e2e8f0;
+    }
+
+    .btn-ticket.qr-toggle:hover {
+        background: #6366f1;
+        color: white;
+        border-color: #6366f1;
+    }
+
+    .btn-ticket-primary {
+        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+        color: white;
+    }
+
+    .btn-ticket-primary:hover {
+        background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+        color: white;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+    }
+
+    /* Pagination */
+    .pagination-nav {
+        display: flex;
+        justify-content: center;
+        gap: 0.375rem;
+        margin-top: 1.25rem;
+        padding-top: 1rem;
+        border-top: 1px solid #f1f5f9;
+    }
+
+    .page-btn {
+        width: 32px;
+        height: 32px;
+        border: 1px solid #e2e8f0;
+        background: white;
+        border-radius: 0.375rem;
+        font-size: 0.8rem;
+        font-weight: 500;
+        color: #64748b;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.15s;
+    }
+
+    .page-btn:hover:not(.disabled):not(.active) {
+        border-color: #6366f1;
+        color: #6366f1;
+    }
+
+    .page-btn.active {
+        background: #6366f1;
+        border-color: #6366f1;
+        color: white;
+    }
+
+    .page-btn.disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+
+    /* History List - Scrollable */
+    .history-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        max-height: 300px;
+        overflow-y: auto;
+        padding-right: 0.5rem;
+    }
+
+    .history-list::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .history-list::-webkit-scrollbar-track {
+        background: #f1f5f9;
+        border-radius: 3px;
+    }
+
+    .history-list::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 3px;
+    }
+
+    .history-list::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+    }
+
+    .history-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.875rem;
+        background: #fafbfc;
+        border-radius: 0.5rem;
+        border: 1px solid #e2e8f0;
+        flex-shrink: 0;
+    }
+
+    .history-info h4 {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: #1e293b;
+        margin: 0 0 0.125rem;
+    }
+
+    .history-info p {
+        font-size: 0.75rem;
+        color: #64748b;
+        margin: 0 0 0.25rem;
+    }
+
+    .history-amount {
+        font-size: 0.75rem;
+        font-weight: 500;
+        color: #059669;
+    }
+
+    .rating-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.25rem;
+    }
+
+    .rating-status {
+        font-size: 0.65rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+    }
+
+    .rating-status.rated {
+        color: #059669;
+    }
+
+    .rating-status.unrated {
+        color: #94a3b8;
+    }
+
+    .history-rating {
+        display: flex;
+        gap: 2px;
+    }
+
+    .rating-star {
+        font-size: 1rem;
+        color: #e2e8f0;
+        cursor: pointer;
+        transition: transform 0.1s;
+    }
+
+    .rating-star:hover {
+        transform: scale(1.2);
+    }
+
+    .rating-star.filled,
+    .rating-star:hover {
+        color: #f59e0b;
+    }
+
+    /* Locked rating (already rated) */
+    .history-rating.locked {
+        pointer-events: none;
+    }
+
+    .history-rating.locked .rating-star {
+        cursor: default;
+    }
+
+    .history-rating.locked .rating-star:hover {
+        transform: none;
+    }
+
+    /* Events List - Scrollable */
+    .events-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        max-height: 300px;
+        overflow-y: auto;
+        padding-right: 0.5rem;
+    }
+
+    .events-list::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .events-list::-webkit-scrollbar-track {
+        background: #f1f5f9;
+        border-radius: 3px;
+    }
+
+    .events-list::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 3px;
+    }
+
+    .events-list::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+    }
+
+    .event-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.875rem;
+        background: #fafbfc;
+        border-radius: 0.5rem;
+        border: 1px solid #e2e8f0;
+        gap: 1rem;
+        flex-shrink: 0;
+    }
+
+    .event-main h4 {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: #1e293b;
+        margin: 0 0 0.25rem;
+    }
+
+    .event-main p {
+        font-size: 0.75rem;
+        color: #64748b;
+        margin: 0;
+    }
+
+    .event-stats {
+        display: flex;
+        gap: 1rem;
+        text-align: center;
+    }
+
+    .event-stat {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .event-stat .stat-num {
+        font-size: 1rem;
+        font-weight: 700;
+        color: #1e293b;
+    }
+
+    .event-stat .stat-text {
+        font-size: 0.65rem;
+        color: #94a3b8;
+        text-transform: uppercase;
+    }
+
+    .event-stat.highlight .stat-num {
+        color: #059669;
+    }
+
+    /* Modal */
+    .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.6);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        padding: 1rem;
+    }
+
+    .modal-overlay.active {
+        display: flex;
+    }
+
+    .modal-content {
+        background: white;
+        border-radius: 1rem;
+        padding: 1.5rem;
+        text-align: center;
+        position: relative;
+        max-width: 320px;
+        width: 100%;
+    }
+
+    .modal-close {
+        position: absolute;
+        top: 0.75rem;
+        right: 0.75rem;
+        width: 32px;
+        height: 32px;
+        border: none;
+        background: #f1f5f9;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #64748b;
+    }
+
+    .modal-close:hover {
+        background: #e2e8f0;
+        color: #1e293b;
+    }
+
+    .modal-content h3 {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #1e293b;
+        margin: 0 0 1rem;
+    }
+
+    .modal-content img {
+        width: 200px;
+        height: 200px;
+    }
+
+    .modal-hint {
+        font-size: 0.8rem;
+        color: #94a3b8;
+        margin: 1rem 0 0;
+    }
+
+    /* Loading state */
+    .tickets-loading {
+        opacity: 0.5;
+        pointer-events: none;
+    }
+
+    .text-success {
+        color: #059669 !important;
+    }
+</style>
+
+<script>
+(function() {
+    let currentPage = @Model.TicketsPage;
+    let totalPages = @Model.TicketsTotalPages;
+
+    // QR Modal
+    const overlay = document.getElementById('qrOverlay');
+    const qrImg = document.getElementById('qrModalImage');
+    const qrTitle = document.getElementById('qrModalTitle');
+    const closeBtn = document.getElementById('qrCloseBtn');
+
+    function attachQrHandlers() {
+        document.querySelectorAll('.qr-toggle').forEach(btn => {
+            btn.addEventListener('click', () => {
+                qrImg.src = btn.dataset.qr || '';
+                qrTitle.textContent = btn.dataset.title ? btn.dataset.title : 'Ticket QR Code';
+                overlay.classList.add('active');
+            });
+        });
+    }
+    attachQrHandlers();
+
+    const closeModal = () => overlay.classList.remove('active');
+    closeBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+
+    // Toast
+    function showToast(message, type = 'success') {
+        const container = document.getElementById('toastContainer');
+        const toast = document.createElement('div');
+        toast.className = 'toast-notification ' + type;
+        toast.textContent = message;
+        container.appendChild(toast);
+        setTimeout(() => {
+            toast.style.opacity = '0';
+            setTimeout(() => toast.remove(), 300);
+        }, 2500);
+    }
+
+    // Pagination
+    function loadTicketsPage(page) {
+        if (page < 1 || page > totalPages || page === currentPage) return;
+
+        const container = document.getElementById('ticketsContainer');
+        container.classList.add('tickets-loading');
+
+        fetch(`@Url.Action("GetTicketsPage")?page=${page}`)
+            .then(r => r.json())
+            .then(data => {
+                if (data.success) {
+                    currentPage = data.currentPage;
+                    totalPages = data.totalPages;
+                    renderTickets(data.tickets);
+                    renderPagination();
+                }
+            })
+            .catch(() => showToast('Failed to load tickets', 'error'))
+            .finally(() => container.classList.remove('tickets-loading'));
+    }
+
+    function renderTickets(tickets) {
+        const grid = document.getElementById('ticketsGrid');
+        if (!grid) return;
+
+        grid.innerHTML = tickets.map(t => `
+            <div class="ticket-card">
+                <div class="ticket-card-header">
+                    <span class="ticket-status">Active</span>
+                </div>
+                <div class="ticket-card-body">
+                    <h3 class="ticket-event-name">${escapeHtml(t.eventTitle)}</h3>
+                    <div class="ticket-detail-row">
+                        <i class="bi bi-calendar3"></i>
+                        <span>${t.eventDate}</span>
+                    </div>
+                    <div class="ticket-info-row">
+                        <div class="ticket-info-item">
+                            <span class="info-label">Qty</span>
+                            <span class="info-value">${t.quantity}</span>
+                        </div>
+                        <div class="ticket-info-item">
+                            <span class="info-label">Total</span>
+                            <span class="info-value text-success">${t.totalPrice}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="ticket-card-footer">
+                    <button type="button" class="btn-ticket qr-toggle" 
+                            data-qr="${t.qrCodeDataUrl}" data-title="${escapeHtml(t.eventTitle)}">
+                        <i class="bi bi-qr-code"></i> QR
+                    </button>
+                    <a href="@Url.Action("DownloadTicketPdf")/${t.purchaseId}" class="btn-ticket btn-ticket-primary">
+                        <i class="bi bi-download"></i> PDF
+                    </a>
+                </div>
+            </div>
+        `).join('');
+
+        attachQrHandlers();
+    }
+
+    function renderPagination() {
+        const nav = document.getElementById('ticketsPagination');
+        if (!nav) return;
+
+        let html = `<button class="page-btn ${currentPage === 1 ? 'disabled' : ''}" data-page="${currentPage - 1}">
+            <i class="bi bi-chevron-left"></i>
+        </button>`;
+
+        for (let i = 1; i <= totalPages; i++) {
+            html += `<button class="page-btn ${currentPage === i ? 'active' : ''}" data-page="${i}">${i}</button>`;
+        }
+
+        html += `<button class="page-btn ${currentPage === totalPages ? 'disabled' : ''}" data-page="${currentPage + 1}">
+            <i class="bi bi-chevron-right"></i>
+        </button>`;
+
+        nav.innerHTML = html;
+        attachPaginationHandlers();
+    }
+
+    function attachPaginationHandlers() {
+        document.querySelectorAll('.page-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const page = parseInt(this.dataset.page);
+                if (!isNaN(page)) loadTicketsPage(page);
+            });
+        });
+    }
+    attachPaginationHandlers();
+
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    // Star Rating
+    document.querySelectorAll('.history-rating:not(.locked)').forEach(container => {
+        const eventId = container.dataset.eventId;
+        const stars = container.querySelectorAll('.rating-star');
+        const statusEl = container.closest('.rating-container')?.querySelector('.rating-status');
+        
+        stars.forEach(star => {
+            star.addEventListener('click', function() {
+                if (container.classList.contains('locked')) return;
+                
+                const rating = parseInt(this.dataset.value);
+                
+                fetch('@Url.Action("UpdateRating")', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: `eventId=${eventId}&rating=${rating}`
+                })
+                .then(r => r.json())
+                .then(data => {
+                    if (data.success) {
+                        stars.forEach((s, i) => s.classList.toggle('filled', i < rating));
+                        // Update status text
+                        if (statusEl) {
+                            statusEl.textContent = 'Your rating';
+                            statusEl.classList.remove('unrated');
+                            statusEl.classList.add('rated');
+                        }
+                        // Lock the rating so it can't be changed
+                        container.classList.add('locked');
+                        stars.forEach(s => s.removeAttribute('data-value'));
+                        showToast(data.message);
+                    } else {
+                        showToast(data.message, 'error');
+                    }
+                })
+                .catch(() => showToast('Failed to save rating', 'error'));
+            });
+            
+            star.addEventListener('mouseenter', function() {
+                if (container.classList.contains('locked')) return;
+                const val = parseInt(this.dataset.value);
+                stars.forEach((s, i) => {
+                    s.querySelector('i').style.color = i < val ? '#f59e0b' : '#e2e8f0';
+                });
+            });
+        });
+        
+        container.addEventListener('mouseleave', function() {
+            if (container.classList.contains('locked')) return;
+            stars.forEach(s => s.querySelector('i').style.color = '');
+        });
+    });
+})();
+</script>

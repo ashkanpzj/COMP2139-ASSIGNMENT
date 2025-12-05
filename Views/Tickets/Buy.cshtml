@@ -1,64 +1,333 @@
 ﻿@model Assignment1.Controllers.TicketsController.BuyTicketVm
 @{
-    ViewData["Title"] = "Buy Tickets";
+    ViewData["Title"] = "Add to Cart";
+    var isLowStock = Model.Available > 0 && Model.Available <= 10;
 }
 
-<h2 class="mb-3">Buy Tickets - @Model.EventTitle</h2>
+<div class="buy-tickets-container">
+    <h2 class="mb-3">Add Tickets to Cart</h2>
+    <h4 class="text-muted mb-4">@Model.EventTitle</h4>
 
-<div class="card">
-    <div class="card-body">
-        <form asp-action="Buy" method="post" class="row g-3">
-            <input type="hidden" asp-for="EventId" />
-            <input type="hidden" asp-for="IsGuest" />
-
-            <div class="col-12 col-md-4">
-                <label class="form-label">Unit Price</label>
-                <input class="form-control" value="@Model.UnitPrice.ToString("0.00")" readonly />
-            </div>
-
-            <div class="col-12 col-md-4">
-                <label class="form-label">Available</label>
-                <input class="form-control" value="@Model.Available" readonly />
-            </div>
-
-            <div class="col-12 col-md-4">
-                <label asp-for="Quantity" class="form-label"></label>
-                <input asp-for="Quantity" type="number" min="1" max="@Model.Available" class="form-control" />
-                <span asp-validation-for="Quantity" class="text-danger"></span>
-            </div>
-
-            @if (Model.IsGuest)
-            {
-                <div class="col-12"><hr /></div>
-                <div class="col-12"><h5>Guest Information</h5></div>
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <div class="row g-3">
+                <input type="hidden" id="eventId" value="@Model.EventId" />
+                <input type="hidden" id="unitPriceValue" value="@Model.UnitPrice" />
 
                 <div class="col-12 col-md-4">
-                    <label asp-for="GuestFirstName" class="form-label"></label>
-                    <input asp-for="GuestFirstName" class="form-control" />
-                    <span asp-validation-for="GuestFirstName" class="text-danger"></span>
+                    <label class="form-label fw-semibold">Unit Price</label>
+                    <div class="input-group">
+                        <span class="input-group-text">$</span>
+                        <input class="form-control fw-bold" value="@Model.UnitPrice.ToString("0.00")" readonly />
+                    </div>
                 </div>
 
                 <div class="col-12 col-md-4">
-                    <label asp-for="GuestLastName" class="form-label"></label>
-                    <input asp-for="GuestLastName" class="form-control" />
-                    <span asp-validation-for="GuestLastName" class="text-danger"></span>
+                    <label class="form-label fw-semibold">Available Tickets</label>
+                    <div class="position-relative">
+                        <input class="form-control @(isLowStock ? "border-warning" : "")" 
+                               value="@Model.Available" readonly id="availableDisplay" />
+                        @if (isLowStock)
+                        {
+                        <span class="low-stock-badge">Low Stock!</span>
+                        }
+                    </div>
                 </div>
 
                 <div class="col-12 col-md-4">
-                    <label asp-for="GuestEmail" class="form-label"></label>
-                    <input asp-for="GuestEmail" type="email" class="form-control" />
-                    <span asp-validation-for="GuestEmail" class="text-danger"></span>
+                    <label class="form-label fw-semibold">Quantity</label>
+                    <div class="quantity-control">
+                        <button type="button" class="qty-btn qty-minus" id="qtyMinus">-</button>
+                        <input type="number" min="1" max="@Model.Available" value="1"
+                               class="form-control text-center qty-input" id="qtyInput" />
+                        <button type="button" class="qty-btn qty-plus" id="qtyPlus">+</button>
+                    </div>
                 </div>
-            }
 
-            <div class="col-12 d-flex justify-content-end gap-2">
-                <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
-                <button type="submit" class="btn btn-primary">Confirm Purchase</button>
+                <!-- Low Stock Warning -->
+                <div class="col-12" id="stockWarning" style="display: none;">
+                    <div class="alert alert-warning d-flex align-items-center mb-0">
+                        <span id="stockWarningText">Only <strong id="remainingCount">@Model.Available</strong> tickets left!</span>
+                    </div>
+                </div>
+
+                <!-- Cart Summary -->
+                <div class="col-12">
+                    <div class="cart-summary">
+                        <div class="cart-row">
+                            <span>Tickets:</span>
+                            <span class="cart-badge" id="cartBadge">1</span>
+                        </div>
+                        <div class="cart-row cart-total">
+                            <span>Subtotal:</span>
+                            <span class="total-price" id="totalPrice">$@Model.UnitPrice.ToString("0.00")</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 d-flex justify-content-end gap-2 mt-4">
+                    <a asp-action="Index" class="btn btn-outline-secondary px-4">Cancel</a>
+                    <button type="button" class="btn btn-success btn-lg px-5" id="addToCartBtn">
+                        Add to Cart
+                    </button>
+                </div>
             </div>
-        </form>
+        </div>
     </div>
 </div>
 
+<!-- Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center py-4">
+                <div class="success-icon mb-3">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                </div>
+                <h4 class="fw-bold text-success mb-2">Added to Cart!</h4>
+                <p class="text-muted mb-4" id="successMessage">@Model.EventTitle has been added to your cart.</p>
+                <div class="d-flex justify-content-center gap-2">
+                    <a asp-action="Index" class="btn btn-outline-primary">Continue Shopping</a>
+                    <a asp-controller="Cart" asp-action="Index" class="btn btn-primary">View Cart</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .buy-tickets-container {
+        max-width: 700px;
+        margin: 0 auto;
+    }
+    
+    .quantity-control {
+        display: flex;
+        align-items: center;
+        gap: 0;
+    }
+    
+    .qty-btn {
+        width: 42px;
+        height: 42px;
+        border: 1px solid #dee2e6;
+        background: #f8f9fa;
+        font-size: 1.25rem;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.15s;
+    }
+    
+    .qty-btn:hover { background: #e9ecef; }
+    .qty-btn:active { background: #dee2e6; }
+    .qty-minus { border-radius: 0.375rem 0 0 0.375rem; }
+    .qty-plus { border-radius: 0 0.375rem 0.375rem 0; }
+    
+    .qty-input {
+        border-radius: 0;
+        border-left: 0;
+        border-right: 0;
+        width: 70px;
+        -moz-appearance: textfield;
+    }
+    
+    .qty-input::-webkit-outer-spin-button,
+    .qty-input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    
+    .low-stock-badge {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: #f59e0b;
+        color: #fff;
+        font-size: 0.7rem;
+        font-weight: 700;
+        padding: 2px 8px;
+        border-radius: 999px;
+        animation: pulse 1.5s infinite;
+    }
+    
+    @@keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.7; }
+    }
+    
+    .cart-summary {
+        background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+        border: 2px solid #e2e8f0;
+        border-radius: 1rem;
+        padding: 1.25rem 1.5rem;
+        margin-top: 1rem;
+    }
+    
+    .cart-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 0;
+    }
+    
+    .cart-row:not(:last-child) {
+        border-bottom: 1px dashed #cbd5e1;
+    }
+    
+    .cart-badge {
+        background: #6366f1;
+        color: white;
+        font-weight: 700;
+        padding: 0.25rem 0.75rem;
+        border-radius: 999px;
+        min-width: 32px;
+        text-align: center;
+        transition: transform 0.2s;
+    }
+    
+    .cart-badge.updated { transform: scale(1.2); }
+    
+    .cart-total {
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+    
+    .total-price {
+        font-size: 1.5rem;
+        font-weight: 800;
+        color: #059669;
+        transition: transform 0.2s;
+    }
+    
+    .total-price.updated { transform: scale(1.1); }
+    
+    #addToCartBtn {
+        transition: all 0.2s;
+    }
+    
+    #addToCartBtn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(34, 197, 94, 0.4);
+    }
+    
+    .success-icon {
+        width: 80px;
+        height: 80px;
+        background: #dcfce7;
+        color: #16a34a;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto;
+    }
+    
+    .success-icon svg {
+        width: 40px;
+        height: 40px;
+    }
+</style>
+
 @section Scripts{
-    <partial name="_ValidationScriptsPartial" />
+<script>
+(function() {
+    const qtyInput = document.getElementById('qtyInput');
+    const qtyMinus = document.getElementById('qtyMinus');
+    const qtyPlus = document.getElementById('qtyPlus');
+    const cartBadge = document.getElementById('cartBadge');
+    const totalPrice = document.getElementById('totalPrice');
+    const stockWarning = document.getElementById('stockWarning');
+    const remainingCount = document.getElementById('remainingCount');
+    const unitPrice = parseFloat(document.getElementById('unitPriceValue').value);
+    const available = parseInt(document.getElementById('availableDisplay').value);
+    const eventId = document.getElementById('eventId').value;
+    const addToCartBtn = document.getElementById('addToCartBtn');
+    
+    function updateCart() {
+        const qty = parseInt(qtyInput.value) || 1;
+        const total = (unitPrice * qty).toFixed(2);
+        const remaining = available - qty;
+        
+        cartBadge.textContent = qty;
+        cartBadge.classList.add('updated');
+        setTimeout(() => cartBadge.classList.remove('updated'), 200);
+        
+        totalPrice.textContent = '$' + total;
+        totalPrice.classList.add('updated');
+        setTimeout(() => totalPrice.classList.remove('updated'), 200);
+        
+        if (remaining <= 7 && remaining >= 0) {
+            stockWarning.style.display = 'block';
+            remainingCount.textContent = remaining;
+            stockWarning.querySelector('.alert').className = 
+                remaining <= 3 ? 'alert alert-danger d-flex align-items-center mb-0' :
+                                'alert alert-warning d-flex align-items-center mb-0';
+        } else {
+            stockWarning.style.display = 'none';
+        }
+    }
+    
+    qtyMinus.addEventListener('click', function() {
+        let val = parseInt(qtyInput.value) || 1;
+        if (val > 1) {
+            qtyInput.value = val - 1;
+            updateCart();
+        }
+    });
+    
+    qtyPlus.addEventListener('click', function() {
+        let val = parseInt(qtyInput.value) || 1;
+        if (val < available) {
+            qtyInput.value = val + 1;
+            updateCart();
+        }
+    });
+    
+    qtyInput.addEventListener('input', function() {
+        let val = parseInt(qtyInput.value);
+        if (isNaN(val) || val < 1) val = 1;
+        if (val > available) val = available;
+        qtyInput.value = val;
+        updateCart();
+    });
+    
+    updateCart();
+    
+    // Add to Cart
+    addToCartBtn.addEventListener('click', async function() {
+        const qty = parseInt(qtyInput.value) || 1;
+        const originalText = addToCartBtn.innerHTML;
+        addToCartBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Adding...';
+        addToCartBtn.disabled = true;
+        
+        try {
+            const response = await fetch('@Url.Action("Add", "Cart")', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                body: `eventId=${eventId}&quantity=${qty}`
+            });
+            
+            const data = await response.json();
+            
+            if (data.success) {
+                // Show success modal
+                const modal = new bootstrap.Modal(document.getElementById('successModal'));
+                modal.show();
+            } else {
+                alert(data.message || 'Failed to add to cart');
+                addToCartBtn.innerHTML = originalText;
+                addToCartBtn.disabled = false;
+            }
+        } catch (error) {
+            console.error('Add to cart failed:', error);
+            alert('Failed to add to cart. Please try again.');
+            addToCartBtn.innerHTML = originalText;
+            addToCartBtn.disabled = false;
+        }
+    });
+})();
+</script>
 }

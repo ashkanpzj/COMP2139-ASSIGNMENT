@@ -1,0 +1,386 @@
+@model Assignment1.ViewModels.ProfileViewModel
+@{
+    ViewData["Title"] = "My Profile";
+    var fallbackAvatar = "data:image/svg+xml;utf8," + Uri.EscapeDataString("<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><rect width='200' height='200' fill='#e2e8f0'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='64' fill='#475569'>:)</text></svg>");
+}
+
+<div class="profile-page">
+    <div class="profile-header mb-4">
+        <h1 class="fw-bold"><i class="bi bi-person-gear me-2"></i>My Profile</h1>
+        <p class="text-muted mb-0">Manage your personal information and preferences</p>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" style="position:fixed;top:20px;right:20px;z-index:9999;"></div>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="profile-card">
+                <form id="profileForm" enctype="multipart/form-data">
+                    <div class="row">
+                        <!-- Avatar Section -->
+                        <div class="col-md-4 text-center border-end-md">
+                            <div class="avatar-section">
+                                <div class="avatar-wrapper mb-3">
+                                    <img id="avatarPreview" 
+                                         src="@(!string.IsNullOrEmpty(Model.CurrentImageUrl) ? Model.CurrentImageUrl : fallbackAvatar)"
+                                         alt="Profile photo" class="avatar-img" />
+                                    <label for="profileImageInput" class="avatar-edit-btn">
+                                        <i class="bi bi-camera"></i>
+                                    </label>
+                                </div>
+                                <input type="file" name="Profile.ProfileImage" class="d-none" 
+                                       accept="image/*" id="profileImageInput" />
+                                <button type="button" class="btn btn-sm btn-outline-danger mt-2" id="removePhotoBtn">
+                                    <i class="bi bi-trash"></i> Remove Photo
+                                </button>
+                                <h5 class="mb-1 mt-3">@(Model.FullName ?? "User")</h5>
+                                <p class="text-muted small mb-0">@Model.UserEmail</p>
+                            </div>
+                        </div>
+
+                        <!-- Form Section -->
+                        <div class="col-md-8">
+                            <div class="profile-form-section">
+                                <h6 class="section-title mb-3">
+                                    <i class="bi bi-person me-2"></i>Personal Information
+                                </h6>
+
+                                <div class="mb-3">
+                                    <label for="profileFullName" class="form-label">Full Name</label>
+                                    <input type="text" name="Profile.FullName" class="form-control" 
+                                           id="profileFullName" value="@Model.FullName" 
+                                           placeholder="Enter your full name" />
+                                </div>
+
+                                <div class="mb-3">
+                                    <label for="profilePhone" class="form-label">Phone Number</label>
+                                    <input type="tel" name="Profile.PhoneNumber" class="form-control" 
+                                           id="profilePhone" value="@Model.PhoneNumber"
+                                           placeholder="(___) ___-____" maxlength="14" />
+                                </div>
+
+                                <div class="mb-4">
+                                    <label for="profileDob" class="form-label">Date of Birth</label>
+                                    <input type="date" name="Profile.DateOfBirth" class="form-control" 
+                                           id="profileDob" 
+                                           value="@(Model.DateOfBirth?.ToString("yyyy-MM-dd"))"
+                                           min="1900-01-01" max="@DateTime.Now.ToString("yyyy-MM-dd")" />
+                                </div>
+
+                                <div class="d-flex gap-2">
+                                    <button type="submit" class="btn btn-primary flex-grow-1" id="saveProfileBtn">
+                                        <i class="bi bi-check-lg me-1"></i>Save Changes
+                                    </button>
+                                    <a asp-action="Index" class="btn btn-outline-secondary">
+                                        <i class="bi bi-arrow-left me-1"></i>Back to Dashboard
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Account Security Section -->
+            <div class="profile-card mt-4">
+                <h6 class="section-title mb-3">
+                    <i class="bi bi-shield-lock me-2"></i>Account Security
+                </h6>
+                
+                <div class="security-item mb-3">
+                    <div class="security-info">
+                        <div class="security-icon">
+                            <i class="bi bi-envelope"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-0">Email Address</h6>
+                            <p class="text-muted small mb-0">@Model.UserEmail</p>
+                        </div>
+                    </div>
+                    <a asp-area="Identity" asp-page="/Account/Manage/Email" class="btn btn-outline-primary btn-sm">
+                        <i class="bi bi-pencil me-1"></i>Change
+                    </a>
+                </div>
+                
+                <div class="security-item">
+                    <div class="security-info">
+                        <div class="security-icon">
+                            <i class="bi bi-key"></i>
+                        </div>
+                        <div>
+                            <h6 class="mb-0">Password</h6>
+                            <p class="text-muted small mb-0">Last changed: Unknown</p>
+                        </div>
+                    </div>
+                    <a asp-area="Identity" asp-page="/Account/Manage/ChangePassword" class="btn btn-outline-primary btn-sm">
+                        <i class="bi bi-pencil me-1"></i>Change
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .profile-page {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .profile-card {
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 1rem;
+        padding: 2rem;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .avatar-section {
+        padding: 1rem 0;
+    }
+
+    .avatar-wrapper {
+        position: relative;
+        display: inline-block;
+    }
+
+    .avatar-img {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 4px solid #e2e8f0;
+        transition: border-color 0.2s;
+    }
+
+    .avatar-wrapper:hover .avatar-img {
+        border-color: #6366f1;
+    }
+
+    .avatar-edit-btn {
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #6366f1, #8b5cf6);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: transform 0.2s;
+        border: 3px solid white;
+    }
+
+    .avatar-edit-btn:hover {
+        transform: scale(1.1);
+    }
+
+    .section-title {
+        font-weight: 600;
+        color: #334155;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid #f1f5f9;
+    }
+
+    .profile-form-section {
+        padding: 1rem 0 1rem 1.5rem;
+    }
+
+    .border-end-md {
+        border-right: 1px solid #e2e8f0;
+    }
+
+    @@media (max-width: 767px) {
+        .border-end-md {
+            border-right: none;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-form-section {
+            padding: 1rem 0 0 0;
+        }
+    }
+
+    .security-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem;
+        background: #f8fafc;
+        border-radius: 0.75rem;
+        border: 1px solid #e2e8f0;
+    }
+
+    .security-info {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .security-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 0.625rem;
+        background: linear-gradient(135deg, #6366f1, #8b5cf6);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+    }
+
+    .security-item h6 {
+        font-weight: 600;
+        color: #1e293b;
+    }
+
+    @@media (max-width: 576px) {
+        .security-item {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .security-item .btn {
+            width: 100%;
+        }
+    }
+</style>
+
+@section Scripts {
+<script>
+(function() {
+    const profileForm = document.getElementById('profileForm');
+    const saveBtn = document.getElementById('saveProfileBtn');
+    const imageInput = document.getElementById('profileImageInput');
+    const avatarPreview = document.getElementById('avatarPreview');
+    const phoneInput = document.getElementById('profilePhone');
+    const removePhotoBtn = document.getElementById('removePhotoBtn');
+
+    // Toast function
+    function showToast(message, type = 'success') {
+        const container = document.getElementById('toastContainer');
+        const toast = document.createElement('div');
+        toast.style.cssText = `
+            display:flex;align-items:center;gap:0.5rem;
+            padding:0.75rem 1.25rem;margin-bottom:0.5rem;
+            background:${type === 'success' ? '#059669' : '#dc2626'};
+            color:white;border-radius:0.5rem;
+            box-shadow:0 4px 12px rgba(0,0,0,0.15);
+            animation:slideIn 0.3s ease-out;
+        `;
+        toast.innerHTML = `<span>${message}</span>`;
+        container.appendChild(toast);
+        setTimeout(() => {
+            toast.style.animation = 'slideOut 0.3s ease-out forwards';
+            setTimeout(() => toast.remove(), 300);
+        }, 2500);
+    }
+
+    // Image preview
+    imageInput?.addEventListener('change', function() {
+        if (this.files && this.files[0]) {
+            const reader = new FileReader();
+            reader.onload = e => avatarPreview.src = e.target.result;
+            reader.readAsDataURL(this.files[0]);
+        }
+    });
+
+    // Phone formatting
+    function formatPhoneNumber(value) {
+        const digits = value.replace(/\D/g, '');
+        const limited = digits.slice(0, 10);
+        if (limited.length === 0) return '';
+        if (limited.length <= 3) return `(${limited}`;
+        if (limited.length <= 6) return `(${limited.slice(0, 3)}) ${limited.slice(3)}`;
+        return `(${limited.slice(0, 3)}) ${limited.slice(3, 6)}-${limited.slice(6)}`;
+    }
+
+    if (phoneInput) {
+        if (phoneInput.value) {
+            phoneInput.value = formatPhoneNumber(phoneInput.value);
+        }
+        phoneInput.addEventListener('input', function() {
+            this.value = formatPhoneNumber(this.value);
+        });
+    }
+
+    // Form submission
+    profileForm?.addEventListener('submit', async function(e) {
+        e.preventDefault();
+
+        const originalText = saveBtn.innerHTML;
+        saveBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span>Saving...';
+        saveBtn.disabled = true;
+
+        const formData = new FormData();
+        formData.append('Profile.FullName', document.getElementById('profileFullName')?.value || '');
+        formData.append('Profile.PhoneNumber', phoneInput?.value.replace(/\D/g, '') || '');
+        formData.append('Profile.DateOfBirth', document.getElementById('profileDob')?.value || '');
+
+        if (imageInput?.files?.[0]) {
+            formData.append('Profile.ProfileImage', imageInput.files[0]);
+        }
+
+        try {
+            const response = await fetch('@Url.Action("UpdateProfile")', {
+                method: 'POST',
+                body: formData
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                showToast(data.message || 'Profile updated!');
+                if (data.imageUrl) {
+                    avatarPreview.src = data.imageUrl;
+                }
+            } else {
+                showToast(data.message || 'Failed to update profile', 'error');
+            }
+        } catch (error) {
+            console.error('Profile update error:', error);
+            showToast('Failed to update profile', 'error');
+        } finally {
+            saveBtn.innerHTML = originalText;
+            saveBtn.disabled = false;
+        }
+    });
+
+    removePhotoBtn?.addEventListener('click', async function() {
+        const formData = new FormData();
+        formData.append('Profile.RemoveImage', 'true');
+
+        const original = removePhotoBtn.innerHTML;
+        removePhotoBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-1"></span>Removing...';
+        removePhotoBtn.disabled = true;
+
+        try {
+            const response = await fetch('@Url.Action("UpdateProfile")', {
+                method: 'POST',
+                body: formData
+            });
+            const data = await response.json();
+            if (data.success) {
+                avatarPreview.src = '@fallbackAvatar';
+                showToast('Profile photo removed');
+            } else {
+                showToast(data.message || 'Failed to remove photo', 'error');
+            }
+        } catch {
+            showToast('Failed to remove photo', 'error');
+        } finally {
+            removePhotoBtn.innerHTML = original;
+            removePhotoBtn.disabled = false;
+        }
+    });
+})();
+</script>
+}
+

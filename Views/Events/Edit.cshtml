@@ -2,60 +2,188 @@
 
 @{
     ViewData["Title"] = "Edit Event";
+    var defaultImage = "data:image/svg+xml;utf8," + Uri.EscapeDataString("<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400'><rect width='400' height='400' fill='#f1f5f9'/><text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' font-size='48' fill='#94a3b8'>No Image</text></svg>");
 }
 
-<h2>Edit Event</h2>
+<div class="create-event-container">
+    <h2 class="mb-4"><i class="bi bi-pencil-square me-2"></i>Edit Event</h2>
 
-<form asp-action="Edit" method="post">
-    @Html.AntiForgeryToken()
-    <input type="hidden" asp-for="EventId" />
+    <form asp-action="Edit" method="post" enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="EventId" />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="image-upload-section">
+                    <label class="form-label fw-semibold">Event Image</label>
+                    <div class="image-preview-box @(string.IsNullOrEmpty(Model.ImageUrl) ? "" : "has-image")" id="imagePreviewBox">
+                        @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                        {
+                            <img src="@Model.ImageUrl" alt="Current image" />
+                        }
+                        else
+                        {
+                            <i class="bi bi-image"></i>
+                            <span>Click to upload image</span>
+                        }
+                    </div>
+                    <input type="file" name="eventImage" id="eventImageInput" 
+                           accept="image/*" class="d-none" />
+                    <small class="text-muted">Recommended: 400x400px, Max 2MB</small>
+                </div>
+            </div>
 
-    <div class="mb-3">
-        <label asp-for="Title" class="form-label"></label>
-        <input asp-for="Title" class="form-control" />
-        <span asp-validation-for="Title" class="text-danger"></span>
-    </div>
+            <div class="col-md-8">
+                <div class="mb-3">
+                    <label asp-for="Title" class="form-label fw-semibold"></label>
+                    <input asp-for="Title" class="form-control" />
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
 
-    <div class="mb-3">
-        <label asp-for="Date" class="form-label">Event Date & Time</label>
-        <input asp-for="Date"
-               type="datetime-local"
-               class="form-control"
-               value="@(Model.Date.ToLocalTime().ToString("yyyy-MM-ddTHH:mm"))"
-               step="60" />
-        <span asp-validation-for="Date" class="text-danger"></span>
-    </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Date" class="form-label fw-semibold">Event Date & Time</label>
+                        <input asp-for="Date"
+                               type="datetime-local"
+                               class="form-control"
+                               value="@(Model.Date.ToLocalTime().ToString("yyyy-MM-ddTHH:mm"))"
+                               max="2099-12-31T23:59"
+                               step="60" />
+                        <span asp-validation-for="Date" class="text-danger"></span>
+                    </div>
 
-    <div class="mb-3">
-        <label asp-for="Description" class="form-label"></label>
-        <textarea asp-for="Description" class="form-control"></textarea>
-        <span asp-validation-for="Description" class="text-danger"></span>
-    </div>
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Category" class="form-label fw-semibold"></label>
+                        <select asp-for="Category" class="form-select" asp-items="ViewBag.Categories"></select>
+                        <span asp-validation-for="Category" class="text-danger"></span>
+                    </div>
+                </div>
 
-    <div class="mb-3">
-        <label asp-for="Category" class="form-label"></label>
-        <select asp-for="Category" class="form-select" asp-items="ViewBag.Categories"></select>
-        <span asp-validation-for="Category" class="text-danger"></span>
-    </div>
+                <div class="mb-3">
+                    <label asp-for="Description" class="form-label fw-semibold"></label>
+                    <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
 
-    <div class="mb-3">
-        <label asp-for="Price" class="form-label">Price ($)</label>
-        <input asp-for="Price" class="form-control" />
-        <span asp-validation-for="Price" class="text-danger"></span>
-    </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="Price" class="form-label fw-semibold">Price ($)</label>
+                        <input asp-for="Price" class="form-control" />
+                        <span asp-validation-for="Price" class="text-danger"></span>
+                    </div>
 
-    <div class="mb-3">
-        <label asp-for="AvailableTickets" class="form-label">Available Tickets</label>
-        <input asp-for="AvailableTickets" class="form-control" />
-        <span asp-validation-for="AvailableTickets" class="text-danger"></span>
-    </div>
+                    <div class="col-md-6 mb-3">
+                        <label asp-for="AvailableTickets" class="form-label fw-semibold">Available Tickets</label>
+                        <input asp-for="AvailableTickets" class="form-control" />
+                        <span asp-validation-for="AvailableTickets" class="text-danger"></span>
+                    </div>
+                </div>
 
-    <button type="submit" class="btn btn-warning">Save Changes</button>
-    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
-</form>
+                <div class="d-flex gap-2 mt-3">
+                    <button type="submit" class="btn btn-warning px-4">
+                        <i class="bi bi-check-lg me-1"></i>Save Changes
+                    </button>
+                    <a asp-action="Index" class="btn btn-outline-secondary">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<style>
+    .create-event-container {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+
+    .image-upload-section {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .image-preview-box {
+        width: 100%;
+        aspect-ratio: 1;
+        border: 2px dashed #cbd5e1;
+        border-radius: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.2s;
+        background: #f8fafc;
+        overflow: hidden;
+    }
+
+    .image-preview-box:hover {
+        border-color: #6366f1;
+        background: #eef2ff;
+    }
+
+    .image-preview-box i {
+        font-size: 3rem;
+        color: #94a3b8;
+        margin-bottom: 0.5rem;
+    }
+
+    .image-preview-box span {
+        color: #64748b;
+        font-size: 0.9rem;
+    }
+
+    .image-preview-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .image-preview-box.has-image i,
+    .image-preview-box.has-image span {
+        display: none;
+    }
+</style>
 
 @section Scripts {
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+    <script>
+        const imageInput = document.getElementById('eventImageInput');
+        const previewBox = document.getElementById('imagePreviewBox');
+
+        previewBox.addEventListener('click', () => imageInput.click());
+
+        imageInput.addEventListener('change', function() {
+            if (this.files && this.files[0]) {
+                const reader = new FileReader();
+                reader.onload = e => {
+                    previewBox.innerHTML = `<img src="${e.target.result}" alt="Preview" />`;
+                    previewBox.classList.add('has-image');
+                };
+                reader.readAsDataURL(this.files[0]);
+            }
+        });
+
+        // Clear price and tickets fields on focus if value is 0 or empty
+        const priceInput = document.getElementById('Price');
+        const ticketsInput = document.getElementById('AvailableTickets');
+
+        [priceInput, ticketsInput].forEach(input => {
+            if (!input) return;
+            
+            input.addEventListener('focus', function() {
+                if (this.value === '' || this.value === '0' || this.value === '0.00') {
+                    this.value = '';
+                } else {
+                    this.select(); // Select all text for easy replacement
+                }
+            });
+
+            input.addEventListener('blur', function() {
+                if (this.value === '') {
+                    this.value = '0';
+                }
+            });
+        });
+    </script>
 }

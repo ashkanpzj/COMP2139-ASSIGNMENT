@@ -1,0 +1,24 @@
+@page
+@model Assignment1.Areas.Identity.Pages.Account.ConfirmEmailModel
+@{
+    ViewData["Title"] = "Email confirmation";
+}
+
+<div class="text-center my-5">
+    <h1 class="mb-3">@ViewData["Title"]</h1>
+    @if (Model.Successful)
+    {
+        <p>Your email address has been confirmed. You can now log in.</p>
+        <a class="btn btn-primary mt-3" asp-page="./Login">Continue to login</a>
+    }
+    else
+    {
+        <div class="alert alert-danger" role="alert">
+            <p class="mb-0">We couldn't confirm your email. Please double-check the link or request a new confirmation email.</p>
+        </div>
+        <a class="btn btn-outline-primary mt-3" asp-page="./Register">Return to registration</a>
+    }
+</div>
+
+
+

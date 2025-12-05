@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿using Assignment1.Authorization;
 using Assignment1.Data;
 using Assignment1.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Assignment1.Controllers
 {
+    [Authorize(Roles = RoleNames.Admin)]
     public class TicketController : Controller
     {
         private readonly ApplicationDbContext _context;

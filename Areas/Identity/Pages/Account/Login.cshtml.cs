@@ -1,22 +1,29 @@
 ﻿#nullable disable
 using System.ComponentModel.DataAnnotations;
+using Assignment1.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 
 namespace Assignment1.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class LoginModel : PageModel
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly UserManager<ApplicationUser> _userManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(
+            SignInManager<ApplicationUser> signInManager,
+            UserManager<ApplicationUser> userManager,
+            ILogger<LoginModel> logger)
         {
             _signInManager = signInManager;
+            _userManager = userManager;
             _logger = logger;
         }
 
@@ -33,8 +40,8 @@ namespace Assignment1.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [EmailAddress]
-            public string Email { get; set; }
+            [Display(Name = "Email or username")]
+            public string Identifier { get; set; } = string.Empty;
 
             [Required]
             [DataType(DataType.Password)]
@@ -64,12 +71,33 @@ namespace Assignment1.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
+                var lookup = Input.Identifier?.Trim() ?? "";
+                string username = lookup;
+                ApplicationUser user = null;
+
+                if (!string.IsNullOrEmpty(lookup))
+                {
+                    if (lookup.Contains("@", StringComparison.Ordinal))
+                    {
+                        var normalizedEmail = _userManager.NormalizeEmail(lookup);
+                        user = await _userManager.Users
+                            .FirstOrDefaultAsync(u => u.NormalizedEmail == normalizedEmail);
+                    }
+
+                    if (user == null)
+                        user = await _userManager.FindByNameAsync(lookup);
+
+                    username = user?.UserName ?? lookup;
+                }
+
                 var result = await _signInManager.PasswordSignInAsync(
-                    Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+                    username, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+
+                var ip = HttpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown";
 
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in.");
+                    _logger.LogInformation("User {Email} logged in successfully from IP {IP}", Input.Identifier, ip);
                     return LocalRedirect(returnUrl);
                 }
 
@@ -78,10 +106,18 @@ namespace Assignment1.Areas.Identity.Pages.Account
 
                 if (result.IsLockedOut)
                 {
-                    _logger.LogWarning("User account locked out.");
+                    _logger.LogWarning("User {Email} account locked out from IP {IP}", Input.Identifier, ip);
                     return RedirectToPage("./Lockout");
                 }
 
+                if (result.IsNotAllowed)
+                {
+                    _logger.LogWarning("User {Email} login not allowed (email not confirmed) from IP {IP}", Input.Identifier, ip);
+                    ModelState.AddModelError(string.Empty, "You must confirm your email before logging in.");
+                    return Page();
+                }
+
+                _logger.LogWarning("User {Email} failed login from IP {IP}", Input.Identifier, ip);
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");
             }
             

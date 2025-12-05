@@ -1,0 +1,777 @@
+@model Assignment1.Controllers.GuestController.GuestPurchaseLookupVm
+@{
+    ViewData["Title"] = "My Purchases";
+    var isLoggedInAsGuest = !string.IsNullOrEmpty(Model.Email) && Model.AutoLoad;
+}
+
+<div class="guest-purchases-container">
+    <h2 class="mb-4 text-center">
+        <i class="bi bi-receipt me-2"></i>My Purchases
+    </h2>
+    
+    @if (isLoggedInAsGuest)
+    {
+        <p class="text-center text-muted mb-4">
+            Logged in as <strong>@Model.GuestName</strong> (@Model.Email)
+        </p>
+    }
+    else
+    {
+        <p class="text-center text-muted mb-4">Enter your email address to view your ticket purchases</p>
+    }
+
+    <!-- Email Lookup Form -->
+    <div class="lookup-card mx-auto mb-4 @(isLoggedInAsGuest ? "d-none" : "")">
+        <form id="lookupForm" class="d-flex gap-2">
+            <input type="email" id="emailInput" name="Email" value="@Model.Email"
+                   class="form-control" placeholder="Enter your email address" required />
+            <button type="submit" class="btn btn-primary px-4" id="lookupBtn">
+                <span class="btn-text">Look Up</span>
+                <span class="btn-spinner d-none">
+                    <span class="spinner-border spinner-border-sm"></span>
+                </span>
+            </button>
+        </form>
+        <div id="errorMessage" class="alert alert-warning mt-3 d-none"></div>
+    </div>
+
+    <!-- Results Container -->
+    <div id="resultsContainer" class="@(Model.Found ? "" : "d-none")">
+        <div class="welcome-message text-center mb-4">
+            <h4>Welcome back, <span id="guestNameDisplay">@Model.GuestName</span></h4>
+        </div>
+
+        <div class="dashboard-grid">
+            <!-- Upcoming Tickets -->
+            <section class="dashboard-card">
+                <div class="card-header bg-transparent">
+                    <h5 class="mb-0">Upcoming Tickets</h5>
+                    <p class="text-muted small mb-0">Show your QR code at the venue</p>
+                </div>
+                <div class="card-body" id="upcomingTicketsContainer">
+                    @if (Model.UpcomingTickets.Any())
+                    {
+                        @await Html.PartialAsync("_GuestUpcomingTickets", Model)
+                    }
+                    else
+                    {
+                        <p class="text-muted mb-0">No upcoming events</p>
+                    }
+                </div>
+            </section>
+
+            <!-- Past Purchases -->
+            <section class="dashboard-card">
+                <div class="card-header bg-transparent">
+                    <h5 class="mb-0">Purchase History</h5>
+                    <p class="text-muted small mb-0">Rate your past experiences</p>
+                </div>
+                <div class="card-body" id="pastPurchasesContainer">
+                    @if (Model.PastPurchases.Any())
+                    {
+                        @await Html.PartialAsync("_GuestPastPurchases", Model)
+                    }
+                    else
+                    {
+                        <p class="text-muted mb-0">No past purchases</p>
+                    }
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<!-- QR Modal -->
+<div class="qr-modal" id="qrOverlay">
+    <div class="qr-modal-content">
+        <h5 id="qrModalTitle" class="mb-3">Ticket QR Code</h5>
+        <img id="qrModalImage" src="" alt="Ticket QR code" />
+        <button type="button" class="btn btn-secondary mt-3" id="qrCloseBtn">Close</button>
+    </div>
+</div>
+
+<!-- Toast Container -->
+<div id="toastContainer" style="position:fixed;top:20px;right:20px;z-index:9999;"></div>
+
+<style>
+    .guest-purchases-container {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .lookup-card {
+        max-width: 500px;
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 1rem;
+        padding: 1.5rem;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    }
+
+    .dashboard-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .dashboard-card {
+        border: 1px solid #e2e8f0;
+        border-radius: 1rem;
+        background: #fff;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        display: flex;
+        flex-direction: column;
+        height: 500px;
+    }
+
+    .dashboard-card .card-header {
+        border-bottom: 1px solid #eef2ff;
+        padding: 1.25rem 1.5rem;
+        flex-shrink: 0;
+    }
+
+    .dashboard-card .card-body {
+        padding: 1rem;
+        flex: 1;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+    }
+
+    /* Upcoming Tickets */
+    .tickets-list-guest {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        flex: 1;
+        overflow-y: auto;
+        padding-right: 0.5rem;
+        min-height: 0;
+    }
+
+    .tickets-list-guest::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .tickets-list-guest::-webkit-scrollbar-track {
+        background: #f1f5f9;
+        border-radius: 3px;
+    }
+
+    .tickets-list-guest::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 3px;
+    }
+
+    .ticket-card-guest {
+        background: white;
+        border: 1px solid #e2e8f0;
+        border-radius: 0.75rem;
+        overflow: hidden;
+        transition: all 0.2s;
+        flex-shrink: 0;
+    }
+
+    .ticket-card-guest:hover {
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        border-color: #c7d2fe;
+    }
+
+    .ticket-card-header-guest {
+        padding: 0.375rem 0.75rem;
+        background: linear-gradient(135deg, #6366f1, #8b5cf6);
+    }
+
+    .ticket-status-badge {
+        font-size: 0.6rem;
+        font-weight: 700;
+        color: white;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+
+    .ticket-card-body-guest {
+        padding: 0.75rem;
+    }
+
+    .ticket-title-guest {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #1e293b;
+        margin: 0 0 0.375rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .ticket-details-guest {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .ticket-detail {
+        display: flex;
+        align-items: center;
+        gap: 0.375rem;
+        font-size: 0.75rem;
+        color: #64748b;
+    }
+
+    .ticket-detail i {
+        color: #94a3b8;
+        font-size: 0.7rem;
+    }
+
+    .ticket-stats-guest {
+        display: flex;
+        gap: 1rem;
+        padding-top: 0.5rem;
+        border-top: 1px solid #e2e8f0;
+    }
+
+    .ticket-stat {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .ticket-stat .stat-label {
+        font-size: 0.6rem;
+        color: #94a3b8;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+    }
+
+    .ticket-stat .stat-value {
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: #1e293b;
+    }
+
+    .ticket-card-actions-guest {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+        padding: 0.75rem;
+        background: #f8fafc;
+        border-top: 1px solid #e2e8f0;
+    }
+
+    .btn-action {
+        padding: 0.5rem 0.625rem;
+        font-size: 0.75rem;
+        font-weight: 600;
+        border-radius: 0.375rem;
+        border: 1px solid #e2e8f0;
+        background: white;
+        color: #475569;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.375rem;
+        transition: all 0.15s;
+        text-decoration: none;
+    }
+
+    .btn-action:hover {
+        background: #6366f1;
+        color: white;
+        border-color: #6366f1;
+    }
+
+    .btn-action-primary {
+        background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+        color: white;
+        border: none;
+    }
+
+    .btn-action-primary:hover {
+        background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+        color: white;
+        box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+    }
+
+    .text-success {
+        color: #059669 !important;
+    }
+
+    .qr-modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.6);
+        z-index: 9999;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .qr-modal.active {
+        display: flex;
+    }
+
+    .qr-modal-content {
+        background: #fff;
+        border-radius: 1rem;
+        padding: 2rem;
+        text-align: center;
+        max-width: 300px;
+        animation: scaleIn 0.2s ease-out;
+    }
+
+    .qr-modal-content img {
+        max-width: 200px;
+        border-radius: 0.5rem;
+    }
+
+    /* Purchase History (match user dashboard) */
+    .history-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        flex: 1;
+        overflow-y: auto;
+        padding-right: 0.5rem;
+        min-height: 0;
+    }
+
+    .history-list::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .history-list::-webkit-scrollbar-track {
+        background: #f1f5f9;
+        border-radius: 3px;
+    }
+
+    .history-list::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 3px;
+    }
+
+    .history-list::-webkit-scrollbar-thumb:hover {
+        background: #94a3b8;
+    }
+
+    .history-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.875rem;
+        background: #fafbfc;
+        border-radius: 0.5rem;
+        border: 1px solid #e2e8f0;
+        flex-shrink: 0;
+    }
+
+    .history-info h4 {
+        font-size: 0.875rem;
+        font-weight: 600;
+        color: #1e293b;
+        margin: 0 0 0.125rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 260px;
+    }
+
+    .history-info p {
+        font-size: 0.75rem;
+        color: #64748b;
+        margin: 0 0 0.25rem;
+    }
+
+    .history-amount {
+        font-size: 0.75rem;
+        font-weight: 500;
+        color: #059669;
+    }
+
+    .rating-container {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 0.25rem;
+    }
+
+    .rating-status {
+        font-size: 0.65rem;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.3px;
+    }
+
+    .rating-status.rated {
+        color: #059669;
+    }
+
+    .rating-status.unrated {
+        color: #94a3b8;
+    }
+
+    .history-rating {
+        display: flex;
+        gap: 2px;
+    }
+
+    .rating-star {
+        font-size: 1rem;
+        color: #e2e8f0;
+        cursor: pointer;
+        transition: transform 0.1s;
+    }
+
+    .rating-star:hover {
+        transform: scale(1.2);
+    }
+
+    .rating-star.filled,
+    .rating-star:hover {
+        color: #f59e0b;
+    }
+
+    /* Locked rating (already rated) */
+    .history-rating.locked {
+        pointer-events: none;
+    }
+
+    .history-rating.locked .rating-star {
+        cursor: default;
+    }
+
+    .history-rating.locked .rating-star:hover {
+        transform: none;
+    }
+
+    /* Responsive adjustments */
+    @@media (max-width: 576px) {
+        .dashboard-card {
+            height: 400px;
+        }
+
+        .history-item {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.5rem;
+        }
+
+        .rating-container {
+            align-items: flex-start;
+        }
+    }
+
+    .toast-notification {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.75rem 1.25rem;
+        margin-bottom: 0.5rem;
+        color: white;
+        border-radius: 0.5rem;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        animation: slideIn 0.3s ease-out;
+    }
+
+    @@keyframes slideIn {
+        from { transform: translateX(100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+    }
+
+    @@keyframes scaleIn {
+        from { transform: scale(0.8); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+    }
+</style>
+
+@section Scripts {
+<script>
+(function() {
+    let currentEmail = '@Model.Email';
+
+    // Toast function
+    function showToast(message, type = 'success') {
+        const container = document.getElementById('toastContainer');
+        const toast = document.createElement('div');
+        toast.className = 'toast-notification';
+        toast.style.background = type === 'success' ? '#059669' : '#dc2626';
+        toast.innerHTML = `<span>${message}</span>`;
+        container.appendChild(toast);
+        setTimeout(() => {
+            toast.style.animation = 'slideOut 0.3s ease-out forwards';
+            setTimeout(() => toast.remove(), 300);
+        }, 2500);
+    }
+
+    // QR Modal
+    const qrOverlay = document.getElementById('qrOverlay');
+    const qrImg = document.getElementById('qrModalImage');
+    const qrTitle = document.getElementById('qrModalTitle');
+    const qrCloseBtn = document.getElementById('qrCloseBtn');
+
+    function openQrModal(qrCode, title) {
+        qrImg.src = qrCode;
+        qrTitle.textContent = title ? `${title} - QR Code` : 'Ticket QR Code';
+        qrOverlay.classList.add('active');
+    }
+
+    qrCloseBtn.addEventListener('click', () => qrOverlay.classList.remove('active'));
+    qrOverlay.addEventListener('click', e => { if (e.target === qrOverlay) qrOverlay.classList.remove('active'); });
+
+    // Attach QR button handlers
+    function attachQrHandlers() {
+        document.querySelectorAll('.qr-toggle').forEach(btn => {
+            btn.addEventListener('click', () => openQrModal(btn.dataset.qr, btn.dataset.title));
+        });
+    }
+
+    // Attach star rating handlers (align with dashboard)
+    function attachStarHandlers() {
+        document.querySelectorAll('.history-rating:not(.locked)').forEach(container => {
+            const eventId = container.dataset.eventId;
+            const stars = container.querySelectorAll('.rating-star');
+            const statusEl = container.closest('.rating-container')?.querySelector('.rating-status');
+            
+            stars.forEach(star => {
+                star.addEventListener('click', async function() {
+                    if (container.classList.contains('locked')) return;
+                    
+                    const rating = parseInt(this.dataset.value);
+                    
+                    const response = await fetch('@Url.Action("SubmitRating")', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                        body: `eventId=${eventId}&rating=${rating}&email=${encodeURIComponent(currentEmail)}`
+                    });
+
+                    const data = await response.json();
+                    if (data.success) {
+                        stars.forEach((s, i) => s.classList.toggle('filled', i < rating));
+                        // Update status text
+                        if (statusEl) {
+                            statusEl.textContent = 'Your rating';
+                            statusEl.classList.remove('unrated');
+                            statusEl.classList.add('rated');
+                        }
+                        // Lock the rating so it can't be changed
+                        container.classList.add('locked');
+                        stars.forEach(s => s.removeAttribute('data-value'));
+                        showToast('Rating saved!');
+                    } else {
+                        showToast(data.message || 'Failed to save rating', 'error');
+                    }
+                });
+
+                star.addEventListener('mouseenter', function() {
+                    if (container.classList.contains('locked')) return;
+                    const val = parseInt(this.dataset.value);
+                    stars.forEach((s, i) => {
+                        const icon = s.querySelector('i') || s;
+                        icon.style.color = i < val ? '#f59e0b' : '#e2e8f0';
+                    });
+                });
+            });
+
+            container.addEventListener('mouseleave', () => {
+                if (container.classList.contains('locked')) return;
+                stars.forEach(s => {
+                    const icon = s.querySelector('i') || s;
+                    icon.style.color = '';
+                });
+            });
+        });
+    }
+
+    // Lookup form
+    const lookupForm = document.getElementById('lookupForm');
+    const lookupBtn = document.getElementById('lookupBtn');
+    const btnText = lookupBtn.querySelector('.btn-text');
+    const btnSpinner = lookupBtn.querySelector('.btn-spinner');
+    const errorMessage = document.getElementById('errorMessage');
+    const resultsContainer = document.getElementById('resultsContainer');
+
+    lookupForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const email = document.getElementById('emailInput').value.trim();
+        if (!email) return;
+
+        // Show loading
+        btnText.classList.add('d-none');
+        btnSpinner.classList.remove('d-none');
+        lookupBtn.disabled = true;
+        errorMessage.classList.add('d-none');
+
+        try {
+            const response = await fetch('@Url.Action("MyPurchases")', {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                body: `Email=${encodeURIComponent(email)}`
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                currentEmail = email;
+                document.getElementById('guestNameDisplay').textContent = data.guestName;
+                
+                // Render upcoming tickets
+                renderUpcomingTickets(data.upcomingTickets);
+                
+                // Render past purchases
+                renderPastPurchases(data.pastPurchases);
+                
+                resultsContainer.classList.remove('d-none');
+                
+                // Attach handlers
+                attachQrHandlers();
+                attachStarHandlers();
+            } else {
+                errorMessage.textContent = data.message;
+                errorMessage.classList.remove('d-none');
+                resultsContainer.classList.add('d-none');
+            }
+        } catch (error) {
+            errorMessage.textContent = 'Network error. Please try again.';
+            errorMessage.classList.remove('d-none');
+        } finally {
+            btnText.classList.remove('d-none');
+            btnSpinner.classList.add('d-none');
+            lookupBtn.disabled = false;
+        }
+    });
+
+    function renderUpcomingTickets(tickets) {
+        const container = document.getElementById('upcomingTicketsContainer');
+        
+        if (!tickets || tickets.length === 0) {
+            container.innerHTML = '<p class="text-muted mb-0">No upcoming events</p>';
+            return;
+        }
+
+        let html = '<div class="tickets-list-guest">';
+        tickets.forEach(ticket => {
+            const eventDate = new Date(ticket.eventDate);
+            const dateStr = eventDate.toLocaleDateString('en-US', {
+                weekday: 'short', month: 'short', day: 'numeric', year: 'numeric'
+            });
+            const timeStr = eventDate.toLocaleTimeString('en-US', {
+                hour: 'numeric', minute: '2-digit'
+            });
+            
+            html += `
+                <div class="ticket-card-guest">
+                    <div class="ticket-card-header-guest">
+                        <span class="ticket-status-badge">Active</span>
+                    </div>
+                    <div class="ticket-card-body-guest">
+                        <h6 class="ticket-title-guest">${escapeHtml(ticket.eventTitle)}</h6>
+                        <div class="ticket-details-guest">
+                            <div class="ticket-detail">
+                                <i class="bi bi-calendar3"></i>
+                                <span>${dateStr}</span>
+                            </div>
+                            <div class="ticket-detail">
+                                <i class="bi bi-clock"></i>
+                                <span>${timeStr}</span>
+                            </div>
+                        </div>
+                        <div class="ticket-stats-guest">
+                            <div class="ticket-stat">
+                                <span class="stat-label">Qty</span>
+                                <span class="stat-value">${ticket.quantity}</span>
+                            </div>
+                            <div class="ticket-stat">
+                                <span class="stat-label">Total</span>
+                                <span class="stat-value text-success">$${ticket.totalPrice.toFixed(2)}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ticket-card-actions-guest">
+                        <button type="button" class="btn-action qr-toggle"
+                                data-qr="${ticket.qrCodeDataUrl}" data-title="${escapeHtml(ticket.eventTitle)}">
+                            <i class="bi bi-qr-code"></i> QR Code
+                        </button>
+                        <a href="@Url.Action("DownloadTicketPdf")?id=${ticket.purchaseId}&email=${encodeURIComponent(currentEmail)}" 
+                           class="btn-action btn-action-primary">
+                            <i class="bi bi-download"></i> PDF
+                        </a>
+                    </div>
+                </div>
+            `;
+        });
+        html += '</div>';
+        
+        container.innerHTML = html;
+    }
+
+    function renderPastPurchases(purchases) {
+        const container = document.getElementById('pastPurchasesContainer');
+        
+        if (!purchases || purchases.length === 0) {
+            container.innerHTML = '<p class="text-muted mb-0">No past purchases</p>';
+            return;
+        }
+
+        let html = '<div class="history-list">';
+        purchases.forEach(purchase => {
+            const date = new Date(purchase.eventDate).toLocaleDateString('en-US', {
+                month: 'short', day: 'numeric', year: 'numeric'
+            });
+            
+            const hasRating = purchase.rating && purchase.rating > 0;
+            let starsHtml = '';
+            for (let i = 1; i <= 5; i++) {
+                const filled = purchase.rating && purchase.rating >= i ? 'filled' : '';
+                const dataValue = hasRating ? '' : `data-value="${i}"`;
+                starsHtml += `<span class="rating-star ${filled}" ${dataValue}><i class="bi bi-star-fill"></i></span>`;
+            }
+            
+            const statusClass = hasRating ? 'rated' : 'unrated';
+            const statusText = hasRating ? 'Your rating' : 'Rate this event';
+            const lockedClass = hasRating ? 'locked' : '';
+            
+            html += `
+                <div class="history-item">
+                    <div class="history-info">
+                        <h4>${escapeHtml(purchase.eventTitle)}</h4>
+                        <p>${date}</p>
+                        <span class="history-amount">$${purchase.totalPrice.toFixed(2)} - ${purchase.quantity} ticket${purchase.quantity > 1 ? 's' : ''}</span>
+                    </div>
+                    <div class="rating-container">
+                        <span class="rating-status ${statusClass}">${statusText}</span>
+                        <div class="history-rating ${lockedClass}" data-event-id="${purchase.eventId}">
+                            ${starsHtml}
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        html += '</div>';
+        
+        container.innerHTML = html;
+    }
+
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    // Initial attach if data already loaded
+    attachQrHandlers();
+    attachStarHandlers();
+
+    // Auto-load if guest is logged in
+    @if (Model.AutoLoad && !string.IsNullOrEmpty(Model.Email))
+    {
+        @:// Trigger form submit on page load
+        @:setTimeout(() => lookupForm.dispatchEvent(new Event('submit')), 100);
+    }
+})();
+</script>
+}

@@ -1,5 +1,6 @@
 ﻿@{
 ViewData["Title"] = "Home";
+ViewBag.BodyClass = "home-no-scroll";
 }
 
 <div id="twoCols" class="two-columns">
@@ -20,17 +21,15 @@ ViewData["Title"] = "Home";
     html, body {
         margin: 0;
         padding: 0;
-        height: 100%;
         background: #fff;
         font-family: 'Segoe UI', sans-serif;
-        overflow: hidden;
     }
     
     .two-columns {
         display: flex;
         align-items: stretch;
         width: 100%;
-        height: calc(100vh - 100px);
+        height: calc(100vh - 80px);
         background: #fff;
         overflow: hidden;
     }
@@ -86,10 +85,10 @@ ViewData["Title"] = "Home";
     @@media (max-width: 768px) {
         .two-columns {
             flex-direction: column;
-            height: calc(100vh - 100px);
+            height: calc(100vh - 110px);
         }
         .col-pane { width: 100%; height: 50%; }
-        .has-bg .label { font-size: 10vw; letter-spacing: .15rem; }
+        .has-bg .label { font-size: 9vw; letter-spacing: .15rem; }
     }
 </style>
     

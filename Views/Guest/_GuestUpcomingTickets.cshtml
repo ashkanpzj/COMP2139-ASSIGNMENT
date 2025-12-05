@@ -1,0 +1,46 @@
+@model Assignment1.Controllers.GuestController.GuestPurchaseLookupVm
+
+<div class="tickets-list-guest">
+    @foreach (var ticket in Model.UpcomingTickets)
+    {
+        <div class="ticket-card-guest">
+            <div class="ticket-card-header-guest">
+                <span class="ticket-status-badge">Active</span>
+            </div>
+            <div class="ticket-card-body-guest">
+                <h6 class="ticket-title-guest">@ticket.EventTitle</h6>
+                <div class="ticket-details-guest">
+                    <div class="ticket-detail">
+                        <i class="bi bi-calendar3"></i>
+                        <span>@ticket.EventDate.ToLocalTime().ToString("ddd, MMM d, yyyy")</span>
+                    </div>
+                    <div class="ticket-detail">
+                        <i class="bi bi-clock"></i>
+                        <span>@ticket.EventDate.ToLocalTime().ToString("h:mm tt")</span>
+                    </div>
+                </div>
+                <div class="ticket-stats-guest">
+                    <div class="ticket-stat">
+                        <span class="stat-label">Qty</span>
+                        <span class="stat-value">@ticket.Quantity</span>
+                    </div>
+                    <div class="ticket-stat">
+                        <span class="stat-label">Total</span>
+                        <span class="stat-value text-success">@ticket.TotalPrice.ToString("C")</span>
+                    </div>
+                </div>
+            </div>
+            <div class="ticket-card-actions-guest">
+                <button type="button" class="btn-action qr-toggle"
+                        data-qr="@ticket.QrCodeDataUrl" data-title="@ticket.EventTitle">
+                    <i class="bi bi-qr-code"></i> QR Code
+                </button>
+                <a asp-action="DownloadTicketPdf" asp-route-id="@ticket.PurchaseId" asp-route-email="@Model.Email" 
+                   class="btn-action btn-action-primary">
+                    <i class="bi bi-download"></i> PDF
+                </a>
+            </div>
+        </div>
+    }
+</div>
+

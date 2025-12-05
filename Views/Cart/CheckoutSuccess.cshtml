@@ -1,0 +1,167 @@
+@{
+    ViewData["Title"] = "Purchase Complete";
+    var totalItems = ViewBag.TotalItems ?? 0;
+    var totalPrice = ViewBag.TotalPrice ?? "0.00";
+}
+
+<div class="checkout-success-container">
+    <div class="success-card text-center">
+        <div class="success-icon">&#10003;</div>
+        <h2 class="fw-bold mt-4 mb-2">Purchase Complete!</h2>
+        <p class="text-muted mb-4">
+            @if ((int)totalItems > 0)
+            {
+                <span>@totalItems ticket(s) purchased for <strong>$@totalPrice</strong></span>
+            }
+            else
+            {
+                <span>Your tickets have been purchased successfully.</span>
+            }
+        </p>
+        
+        <div class="d-flex justify-content-center gap-3 flex-wrap">
+            <a asp-controller="Tickets" asp-action="Index" class="btn btn-outline-secondary btn-lg">
+                Browse More Events
+            </a>
+            @if (User.Identity?.IsAuthenticated ?? false)
+            {
+                <a asp-controller="Dashboard" asp-action="Index" class="btn btn-primary btn-lg">
+                    View My Tickets
+                </a>
+            }
+            else
+            {
+                <a asp-controller="Guest" asp-action="MyPurchases" class="btn btn-primary btn-lg">
+                    View My Purchases
+                </a>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Purchase Confirmation Modal -->
+<div class="modal fade" id="purchaseConfirmModal" tabindex="-1" aria-labelledby="purchaseConfirmLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header border-0">
+                <h5 class="modal-title fw-bold" id="purchaseConfirmLabel">Purchase Confirmed</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                <div class="celebrate-icon mb-3">
+                    <i class="bi bi-stars"></i>
+                </div>
+                <p class="mb-1 fw-semibold">Your order was successful!</p>
+                <p class="text-muted">Download your tickets from your dashboard or receipt.</p>
+            </div>
+            <div class="modal-footer border-0 justify-content-center">
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Great!</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .checkout-success-container {
+        min-height: 60vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+    }
+
+    .success-card {
+        background: white;
+        border-radius: 1.5rem;
+        padding: 3rem;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        max-width: 500px;
+    }
+
+    .success-icon {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #059669, #10b981);
+        color: white;
+        font-size: 3rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        animation: scaleIn 0.5s ease-out;
+    }
+
+    @@keyframes scaleIn {
+        0% { transform: scale(0); }
+        50% { transform: scale(1.1); }
+        100% { transform: scale(1); }
+    }
+
+    .celebrate-icon {
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #6366f1, #8b5cf6);
+        color: #fff;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.8rem;
+        box-shadow: 0 10px 24px rgba(99, 102, 241, 0.25);
+    }
+</style>
+
+@section Scripts {
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Show modal after bootstrap ready
+        const modalEl = document.getElementById('purchaseConfirmModal');
+        const modal = new bootstrap.Modal(modalEl, { backdrop: 'static', keyboard: true });
+        setTimeout(() => modal.show(), 120);
+
+        const loadConfetti = (cb) => {
+            if (window.confetti) { cb(); return; }
+            const script = document.createElement('script');
+            script.src = "https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js";
+            script.onload = cb;
+            script.onerror = () => console.warn('Confetti script failed to load');
+            document.body.appendChild(script);
+        };
+
+        const launchConfetti = () => {
+            if (!window.confetti) return;
+            try {
+                // initial burst
+                window.confetti({ particleCount: 160, spread: 90, origin: { y: 0.6 } });
+
+                // side bursts
+                setTimeout(() => {
+                    window.confetti({ particleCount: 60, angle: 60, spread: 65, origin: { x: 0 } });
+                    window.confetti({ particleCount: 60, angle: 120, spread: 65, origin: { x: 1 } });
+                }, 200);
+
+                // cascading bursts for ~2s
+                const duration = 2000;
+                const end = Date.now() + duration;
+                const defaults = { startVelocity: 40, spread: 360, ticks: 90, gravity: 0.9, zIndex: 9999 };
+
+                (function frame() {
+                    const timeLeft = end - Date.now();
+                    if (timeLeft <= 0) return;
+                    const progress = timeLeft / duration;
+                    const count = Math.max(80 * progress, 25);
+                    window.confetti(Object.assign({}, defaults, {
+                        particleCount: count,
+                        origin: { x: Math.random(), y: Math.random() * 0.3 + 0.1 }
+                    }));
+                    requestAnimationFrame(frame);
+                })();
+            } catch (err) {
+                console.warn('Confetti failed to launch', err);
+            }
+        };
+
+        loadConfetti(launchConfetti);
+    });
+</script>
+}

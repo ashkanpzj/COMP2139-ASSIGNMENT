@@ -1,0 +1,352 @@
+@model Assignment1.Models.ShoppingCart
+@{
+    ViewData["Title"] = "Checkout";
+    var isGuest = ViewBag.IsGuest ?? true;
+    var guestEmail = ViewBag.GuestEmail as string;
+    var guestName = ViewBag.GuestName as string;
+    var nameParts = guestName?.Split(' ', 2) ?? Array.Empty<string>();
+    var guestFirstName = nameParts.Length > 0 ? nameParts[0] : "";
+    var guestLastName = nameParts.Length > 1 ? nameParts[1] : "";
+}
+
+<div class="checkout-container">
+    <h2 class="mb-4">Checkout</h2>
+
+    <div class="row">
+        <div class="col-lg-7">
+            <div class="checkout-section">
+                <h5 class="section-title">Order Details</h5>
+
+                <div class="order-items">
+                    @foreach (var item in Model.Items)
+                    {
+                        <div class="order-item">
+                            <div class="order-item-info">
+                                <strong>@item.EventTitle</strong>
+                                <small class="text-muted d-block">
+                                    @item.EventDate.ToLocalTime().ToString("MMM dd, yyyy h:mm tt")
+                                </small>
+                            </div>
+                            <div class="order-item-qty">
+                                @item.Quantity x $@item.UnitPrice.ToString("0.00")
+                            </div>
+                            <div class="order-item-total">
+                                $@item.TotalPrice.ToString("0.00")
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+            <div class="checkout-section mt-4">
+                @if (isGuest)
+                {
+                    <h5 class="section-title">Your Information</h5>
+                    <p class="text-muted mb-3">Please provide your details to complete the purchase.</p>
+
+                    <form id="checkoutForm">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label">First Name *</label>
+                                <input type="text" name="guestFirstName" id="guestFirstName" class="form-control" 
+                                       value="@guestFirstName" required />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Last Name *</label>
+                                <input type="text" name="guestLastName" id="guestLastName" class="form-control" 
+                                       value="@guestLastName" required />
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Email *</label>
+                                <input type="email" name="guestEmail" id="guestEmail" class="form-control" 
+                                       value="@guestEmail" required />
+                                <small class="text-muted">Your tickets will be sent to this email.</small>
+                            </div>
+                        </div>
+
+                        <button type="submit" id="submitBtn" class="btn btn-success btn-lg w-100 mt-4">
+                            <span class="btn-text">Complete Purchase</span>
+                            <span class="btn-spinner d-none">
+                                <span class="spinner-border spinner-border-sm me-2"></span>Processing...
+                            </span>
+                        </button>
+                    </form>
+                }
+                else
+                {
+                    <h5 class="section-title">Logged In As</h5>
+                    <p class="mb-0">
+                        <strong>@User.Identity?.Name</strong>
+                    </p>
+                    <small class="text-muted">Tickets will be added to your account.</small>
+
+                    <form id="checkoutForm">
+                        <button type="submit" id="submitBtn" class="btn btn-success btn-lg w-100 mt-4">
+                            <span class="btn-text">Complete Purchase</span>
+                            <span class="btn-spinner d-none">
+                                <span class="spinner-border spinner-border-sm me-2"></span>Processing...
+                            </span>
+                        </button>
+                    </form>
+                }
+            </div>
+        </div>
+
+        <div class="col-lg-5">
+            <div class="checkout-summary">
+                <h5 class="summary-title">Order Summary</h5>
+
+                <div class="summary-items">
+                    @foreach (var item in Model.Items)
+                    {
+                        <div class="summary-item">
+                            <span>@item.EventTitle (@item.Quantity)</span>
+                            <span>$@item.TotalPrice.ToString("0.00")</span>
+                        </div>
+                    }
+                </div>
+
+                <hr />
+
+                <div class="summary-row">
+                    <span>Subtotal</span>
+                    <span>$@Model.TotalPrice.ToString("0.00")</span>
+                </div>
+                <div class="summary-row">
+                    <span>Service Fee</span>
+                    <span class="text-success-light">FREE</span>
+                </div>
+
+                <hr />
+
+                <div class="summary-row summary-total">
+                    <span>Total</span>
+                    <span>$@Model.TotalPrice.ToString("0.00")</span>
+                </div>
+
+                <div class="secure-badge mt-4">
+                    Secure checkout - Your data is protected
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" data-bs-backdrop="static">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content success-modal-content">
+            <div class="modal-body text-center py-5">
+                <div class="success-icon">&#10003;</div>
+                <h3 class="fw-bold mt-3 mb-2">Purchase Complete!</h3>
+                <p class="text-muted mb-4">
+                    <span id="successItems"></span> ticket(s) purchased for <strong id="successTotal"></strong>
+                </p>
+                <div class="d-flex justify-content-center gap-3">
+                    <a asp-controller="Tickets" asp-action="Index" class="btn btn-outline-secondary">Browse More Events</a>
+                    @if (User.Identity?.IsAuthenticated ?? false)
+                    {
+                        <a asp-controller="Dashboard" asp-action="Index" class="btn btn-primary">View My Tickets</a>
+                    }
+                    else
+                    {
+                        <a asp-controller="Guest" asp-action="MyPurchases" class="btn btn-primary">View My Purchases</a>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Error Modal -->
+<div class="modal fade" id="errorModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-body text-center py-4">
+                <div class="error-icon">&#10007;</div>
+                <h4 class="fw-bold mt-3">Oops!</h4>
+                <p id="errorMessage" class="text-muted mb-4"></p>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Try Again</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .checkout-container {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .checkout-section {
+        background: #fff;
+        border: 1px solid #e2e8f0;
+        border-radius: 1rem;
+        padding: 1.5rem;
+    }
+
+    .section-title {
+        font-weight: 600;
+        margin-bottom: 1rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 2px solid #f1f5f9;
+    }
+
+    .order-items {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .order-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 0.75rem;
+        background: #f8fafc;
+        border-radius: 0.5rem;
+    }
+
+    .order-item-info { flex: 1; }
+    .order-item-qty { color: #64748b; font-size: 0.9rem; }
+    .order-item-total { font-weight: 600; color: #059669; }
+
+    .checkout-summary {
+        background: linear-gradient(135deg, #6366f1, #8b5cf6);
+        color: white;
+        border-radius: 1rem;
+        padding: 1.5rem;
+        position: sticky;
+        top: 1rem;
+    }
+
+    .checkout-summary .summary-title {
+        color: white;
+        border-bottom-color: rgba(255,255,255,0.2);
+    }
+
+    .checkout-summary hr { border-color: rgba(255,255,255,0.2); }
+
+    .summary-items {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .summary-item {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.9rem;
+        opacity: 0.9;
+    }
+
+    .summary-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.25rem 0;
+    }
+
+    .summary-total { font-size: 1.25rem; font-weight: 700; }
+    .text-success-light { color: #86efac; }
+
+    .secure-badge {
+        text-align: center;
+        font-size: 0.85rem;
+        opacity: 0.8;
+        padding: 0.75rem;
+        background: rgba(255,255,255,0.1);
+        border-radius: 0.5rem;
+    }
+
+    .success-modal-content {
+        border: none;
+        border-radius: 1rem;
+        overflow: hidden;
+    }
+
+    .success-icon {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #059669, #10b981);
+        color: white;
+        font-size: 2.5rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        animation: scaleIn 0.3s ease-out;
+    }
+
+    .error-icon {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #dc2626, #ef4444);
+        color: white;
+        font-size: 2.5rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    @@keyframes scaleIn {
+        from { transform: scale(0); }
+        to { transform: scale(1); }
+    }
+</style>
+
+@section Scripts {
+    <script>
+        const checkoutForm = document.getElementById('checkoutForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = submitBtn.querySelector('.btn-text');
+        const btnSpinner = submitBtn.querySelector('.btn-spinner');
+        const successModal = new bootstrap.Modal(document.getElementById('successModal'));
+        const errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+
+        checkoutForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            // Show loading state
+            btnText.classList.add('d-none');
+            btnSpinner.classList.remove('d-none');
+            submitBtn.disabled = true;
+
+            const formData = new FormData(this);
+
+            try {
+                const response = await fetch('@Url.Action("ProcessCheckout")', {
+                    method: 'POST',
+                    headers: { 'X-Requested-With': 'XMLHttpRequest' },
+                    body: new URLSearchParams(formData)
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    // Update navbar cart badge
+                    if (window.updateCartBadge) {
+                        window.updateCartBadge(0);
+                    }
+
+                    // Show success info
+                    document.getElementById('successItems').textContent = data.totalItems;
+                    document.getElementById('successTotal').textContent = '$' + data.totalPrice;
+
+                    successModal.show();
+                } else {
+                    document.getElementById('errorMessage').textContent = data.message || 'Something went wrong';
+                    errorModal.show();
+                }
+            } catch (error) {
+                document.getElementById('errorMessage').textContent = 'Network error. Please try again.';
+                errorModal.show();
+            } finally {
+                btnText.classList.remove('d-none');
+                btnSpinner.classList.add('d-none');
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+}

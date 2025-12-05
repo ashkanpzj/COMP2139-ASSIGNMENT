@@ -1,150 +1,358 @@
-﻿@model IEnumerable<Assignment1.Models.Event>
+﻿@model IEnumerable<Assignment1.ViewModels.EventCardViewModel>
+@using System.Security.Claims
 @{
 ViewData["Title"] = "Events";
 var categories = ViewBag.Categories as string[] ?? Array.Empty<string>();
-var lowTicketsAny = Model.Any(e => e.AvailableTickets > 0 && e.AvailableTickets < 5);
+var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+var isAdmin = User.IsInRole("Admin");
 }
 
-<h2 class="mb-4 text-center">Events</h2>
-
-<!-- فیلترها -->
-<form method="get" class="row g-3 align-items-end mb-4">
-    <div class="col-md-3">
-        <label for="search" class="form-label">Search</label>
-        <input type="text" id="search" name="search" value="@ViewBag.Search" class="form-control" placeholder="Search title or description..." />
+<!-- Hero Header -->
+<div class="page-hero">
+    <div class="hero-bg" style="background-image: url('@Url.Content("~/images/Events.jpg")');"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1 class="hero-title">Events</h1>
+        <p class="hero-subtitle">Discover amazing events happening near you</p>
     </div>
-
-    <div class="col-md-2">
-        <label for="category" class="form-label">Category</label>
-        <select id="category" name="category" class="form-select">
-            @foreach (var cat in categories)
-            {
-            <option value="@cat" selected="@(ViewBag.Category == cat)">@cat</option>
-            }
-        </select>
-    </div>
-
-    <div class="col-md-2">
-        <label for="startDate" class="form-label">Start Date</label>
-        <input type="date" id="startDate" name="startDate" value="@ViewBag.StartDate" class="form-control" />
-    </div>
-
-    <div class="col-md-2">
-        <label for="endDate" class="form-label">End Date</label>
-        <input type="date" id="endDate" name="endDate" value="@ViewBag.EndDate" class="form-control" />
-    </div>
-
-    <div class="col-md-2">
-        <label for="sort" class="form-label">Sort By</label>
-        <select id="sort" name="sort" class="form-select">
-            <option value="date" selected="@(ViewBag.Sort == "date")">Date</option>
-            <option value="alpha" selected="@(ViewBag.Sort == "alpha")">Alphabetical (A–Z)</option>
-            <option value="price" selected="@(ViewBag.Sort == "price")">Price</option>
-        </select>
-    </div>
-
-    <div class="col-md-1 d-grid">
-        <button type="submit" class="btn btn-primary">Filter</button>
-    </div>
-    <div class="col-md-1 d-grid">
-        <a asp-action="Index" class="btn btn-outline-secondary">Reset</a>
-    </div>
-</form>
-
-@if (User.Identity?.IsAuthenticated ?? false)
-{
-<div class="mb-3 text-end">
-    <a asp-action="Create" class="btn btn-success">+ Create Event</a>
 </div>
-}
 
-@if (lowTicketsAny)
-{
-<div class="alert alert-warning text-center fw-bold shadow-sm mb-3">
-    ⚠️ Some events are almost sold out! (Less than 5 tickets remaining)
-</div>
-}
+<div class="content-section">
+    <!-- Unified Search & Filter Bar -->
+    <div class="search-filter-bar" id="filterForm">
+        <div class="search-input-wrapper">
+            <i class="bi bi-search"></i>
+            <input type="text" id="search" value="@ViewBag.Search" 
+                   placeholder="Search events..." autocomplete="off" />
+            <div class="search-spinner d-none" id="searchSpinner">
+                <div class="spinner-border spinner-border-sm" role="status"></div>
+            </div>
+        </div>
+        
+        <div class="filter-divider"></div>
+        
+        <div class="filter-item">
+            <i class="bi bi-tag"></i>
+            <select id="category">
+                @foreach (var cat in categories)
+                {
+                <option value="@cat" selected="@(ViewBag.Category == cat)">@cat</option>
+                }
+            </select>
+        </div>
+        
+        <div class="filter-divider"></div>
+        
+        <div class="filter-item date-range">
+            <i class="bi bi-calendar3"></i>
+            <input type="date" id="startDate" value="@ViewBag.StartDate" max="2099-12-31" />
+            <span class="date-separator">to</span>
+            <input type="date" id="endDate" value="@ViewBag.EndDate" max="2099-12-31" />
+        </div>
+        
+        <div class="filter-divider"></div>
+        
+        <div class="filter-item">
+            <i class="bi bi-sort-down"></i>
+            <select id="sort">
+                <option value="date" selected="@(ViewBag.Sort == "date")">Date</option>
+                <option value="alpha" selected="@(ViewBag.Sort == "alpha")">A-Z</option>
+                <option value="price" selected="@(ViewBag.Sort == "price")">Price</option>
+                <option value="rating" selected="@(ViewBag.Sort == "rating")">Top Rated</option>
+            </select>
+        </div>
+        
+        <button type="button" id="resetBtn" class="reset-btn" title="Reset filters">
+            <i class="bi bi-x-lg"></i>
+        </button>
+    </div>
 
-@if (!Model.Any())
-{
-<div class="alert alert-info text-center">No events found.</div>
-}
-else
-{
-<div class="table-responsive">
-    <table class="table table-striped table-bordered align-middle shadow-sm">
-        <thead class="table-light">
-        <tr>
-            <th>Title</th>
-            <th>Date</th>
-            <th>Description</th>
-            <th>Category</th>
-            <th>Price ($)</th>
-            <th>Available</th>
-            @if (User.Identity?.IsAuthenticated ?? false)
-            {
-            <th class="text-center" style="width: 160px;">Actions</th>
-            }
-        </tr>
-        </thead>
-        <tbody>
-        @foreach (var e in Model)
+    <div class="mb-4 text-end">
+        @if (User.Identity?.IsAuthenticated ?? false)
         {
-        var isSoldOut = e.AvailableTickets <= 0;
-        var isLow = e.AvailableTickets > 0 && e.AvailableTickets < 5;
-
-        <tr class="@(isSoldOut ? "sold-out-row" : (isLow ? "low-tickets-row" : ""))">
-            <td>@e.Title</td>
-            <td>@e.Date.ToLocalTime().ToString("yyyy-MM-dd hh:mm tt")</td>
-            <td class="text-truncate" style="max-width: 360px;">@e.Description</td>
-            <td>@e.Category</td>
-            <td>@(e.Price?.ToString("0.00") ?? "-")</td>
-            <td>
-                @if (isSoldOut)
-                {
-                <span class="badge-outline-gray">Sold Out</span>
-                }
-                else if (isLow)
-                {
-                <span class="text-danger fw-bold">Only @e.AvailableTickets left</span>
-                }
-                else
-                {
-                @e.AvailableTickets
-                }
-            </td>
-
-            @if (User.Identity?.IsAuthenticated ?? false)
-            {
-            <td class="text-center">
-                <a asp-action="Edit" asp-route-id="@e.EventId" class="btn btn-sm btn-warning me-1">Edit</a>
-                <a asp-action="Delete" asp-route-id="@e.EventId" class="btn btn-sm btn-danger"
-                   onclick="return confirm('Are you sure you want to delete this event?')">Delete</a>
-            </td>
-            }
-        </tr>
+            <a asp-action="Create" class="btn btn-success">+ Create Event</a>
         }
-        </tbody>
-    </table>
+        else
+        {
+            <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-success">+ Create Event</a>
+        }
+    </div>
+
+    <!-- Results Container -->
+    <div id="eventsContainer">
+        @await Html.PartialAsync("_EventsPartial", Model)
+    </div>
 </div>
-}
 
 <style>
-    .low-tickets-row {
-        border: 2px solid #dc3545 !important;
-        background-color: #fff5f5 !important;
+    .page-hero {
+        position: relative;
+        height: 200px;
+        margin: -16px -12px 2rem -12px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     
-    .badge-outline-gray {
-        display: inline-block;
-        border: 1px solid #555;
-        color: #444;
+    .hero-bg {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+        filter: blur(2px);
+    }
+    
+    .hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(99, 102, 241, 0.85), rgba(139, 92, 246, 0.85));
+    }
+    
+    .hero-content {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        color: white;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin: 0;
+        text-transform: uppercase;
+        letter-spacing: 0.1rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem;
+        opacity: 0.9;
+        margin: 0.5rem 0 0;
+    }
+    
+    .content-section {
+        background: #fff;
+        border-radius: 1rem 1rem 0 0;
+        margin-top: -1rem;
+        position: relative;
+        padding: 1.5rem;
+        box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+    }
+
+    /* Unified Search & Filter Bar */
+    .search-filter-bar {
+        display: flex;
+        align-items: center;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 0.75rem;
+        padding: 0.5rem;
+        margin-bottom: 1.5rem;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+
+    .search-input-wrapper {
+        display: flex;
+        align-items: center;
+        flex: 1;
+        min-width: 200px;
+        background: white;
+        border-radius: 0.5rem;
+        padding: 0 1rem;
+        border: 1px solid #e2e8f0;
+    }
+
+    .search-input-wrapper i {
+        color: #94a3b8;
+        font-size: 1rem;
+    }
+
+    .search-input-wrapper input {
+        flex: 1;
+        border: none;
+        outline: none;
+        padding: 0.75rem 0.75rem;
+        font-size: 0.9rem;
         background: transparent;
-        border-radius: .375rem;
-        padding: .15rem .5rem;
-        font-size: .875rem;
-        font-weight: 600;
-        line-height: 1.2;
-        white-space: nowrap;
+    }
+
+    .search-input-wrapper input::placeholder {
+        color: #94a3b8;
+    }
+
+    .search-spinner {
+        color: #6366f1;
+    }
+
+    .filter-divider {
+        width: 1px;
+        height: 24px;
+        background: #e2e8f0;
+    }
+
+    .filter-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0 0.5rem;
+    }
+
+    .filter-item i {
+        color: #6366f1;
+        font-size: 0.9rem;
+    }
+
+    .filter-item select,
+    .filter-item input[type="date"] {
+        border: none;
+        background: transparent;
+        font-size: 0.85rem;
+        color: #475569;
+        cursor: pointer;
+        padding: 0.5rem 0;
+        outline: none;
+    }
+
+    .filter-item select {
+        min-width: 80px;
+    }
+
+    .filter-item input[type="date"] {
+        width: 120px;
+    }
+
+    .date-range {
+        gap: 0.25rem;
+    }
+
+    .date-separator {
+        color: #94a3b8;
+        font-size: 0.8rem;
+    }
+
+    .reset-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 0.5rem;
+        border: none;
+        background: #fee2e2;
+        color: #dc2626;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.15s;
+    }
+
+    .reset-btn:hover {
+        background: #dc2626;
+        color: white;
+    }
+
+    @@media (max-width: 768px) {
+        .search-filter-bar {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .search-input-wrapper {
+            min-width: 100%;
+        }
+
+        .filter-divider {
+            display: none;
+        }
+
+        .filter-item {
+            padding: 0.5rem;
+            background: white;
+            border-radius: 0.5rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .filter-item select,
+        .filter-item input[type="date"] {
+            flex: 1;
+        }
+
+        .reset-btn {
+            width: 100%;
+        }
+    }
+    
+    .fade-in {
+        animation: fadeIn 0.3s ease-in-out;
+    }
+    
+    @@keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    #eventsContainer {
+        min-height: 200px;
     }
 </style>
+
+@section Scripts {
+<script>
+(function() {
+    const searchInput = document.getElementById('search');
+    const categorySelect = document.getElementById('category');
+    const startDateInput = document.getElementById('startDate');
+    const endDateInput = document.getElementById('endDate');
+    const sortSelect = document.getElementById('sort');
+    const resetBtn = document.getElementById('resetBtn');
+    const container = document.getElementById('eventsContainer');
+    const spinner = document.getElementById('searchSpinner');
+    
+    let debounceTimer;
+    
+    function performSearch() {
+        const params = new URLSearchParams({
+            search: searchInput.value,
+            category: categorySelect.value,
+            startDate: startDateInput.value,
+            endDate: endDateInput.value,
+            sort: sortSelect.value
+        });
+        
+        spinner.classList.remove('d-none');
+        
+        fetch('@Url.Action("LiveSearch")?' + params.toString())
+            .then(response => response.text())
+            .then(html => {
+                container.innerHTML = html;
+                spinner.classList.add('d-none');
+            })
+            .catch(err => {
+                console.error('Search failed:', err);
+                spinner.classList.add('d-none');
+            });
+    }
+    
+    // Debounced search for text input
+    searchInput.addEventListener('input', function() {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(performSearch, 300);
+    });
+    
+    // Instant search for dropdowns and date inputs
+    categorySelect.addEventListener('change', performSearch);
+    startDateInput.addEventListener('change', performSearch);
+    endDateInput.addEventListener('change', performSearch);
+    sortSelect.addEventListener('change', performSearch);
+    
+    // Reset button
+    resetBtn.addEventListener('click', function() {
+        searchInput.value = '';
+        categorySelect.value = 'All';
+        startDateInput.value = '';
+        endDateInput.value = '';
+        sortSelect.value = 'date';
+        performSearch();
+    });
+})();
+</script>
+}

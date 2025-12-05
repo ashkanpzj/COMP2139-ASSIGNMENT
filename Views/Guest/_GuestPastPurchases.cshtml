@@ -1,0 +1,41 @@
+@model Assignment1.Controllers.GuestController.GuestPurchaseLookupVm
+
+<div class="history-list">
+    @foreach (var purchase in Model.PastPurchases)
+    {
+        <div class="history-item">
+            <div class="history-info">
+                <h4>@purchase.EventTitle</h4>
+                <p>@purchase.EventDate.ToLocalTime().ToString("MMM d, yyyy")</p>
+                <span class="history-amount">@purchase.TotalPrice.ToString("C") - @purchase.Quantity tickets</span>
+            </div>
+            <div class="rating-container">
+                @if (purchase.Rating.HasValue)
+                {
+                    <span class="rating-status rated">Your rating</span>
+                    <div class="history-rating locked" data-event-id="@purchase.EventId">
+                        @for (int i = 1; i <= 5; i++)
+                        {
+                            <span class="rating-star @(purchase.Rating >= i ? "filled" : "")">
+                                <i class="bi bi-star-fill"></i>
+                            </span>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <span class="rating-status unrated">Rate this event</span>
+                    <div class="history-rating" data-event-id="@purchase.EventId">
+                        @for (int i = 1; i <= 5; i++)
+                        {
+                            <span class="rating-star" data-value="@i">
+                                <i class="bi bi-star-fill"></i>
+                            </span>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    }
+</div>
+

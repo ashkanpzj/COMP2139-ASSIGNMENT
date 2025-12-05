@@ -1,0 +1,261 @@
+@{
+    ViewData["Title"] = "My Analytics";
+}
+
+<div class="analytics-header mb-4">
+    <h2 class="fw-bold">Analytics Dashboard</h2>
+    <p class="text-muted">Track your event performance and sales metrics</p>
+</div>
+
+<div class="row g-4">
+    <!-- Chart 1: Sales by Category -->
+    <div class="col-md-6">
+        <div class="analytics-card h-100">
+            <h5 class="card-title">Ticket Sales by Category</h5>
+            <div class="chart-container">
+                <canvas id="categoryChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chart 2: Revenue by Month -->
+    <div class="col-md-6">
+        <div class="analytics-card h-100">
+            <h5 class="card-title">Revenue by Month</h5>
+            <div class="chart-container">
+                <canvas id="revenueChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Top 5 Best-Selling Events Table -->
+<div class="row mt-4">
+    <div class="col-12">
+        <div class="analytics-card">
+            <h5 class="card-title">Top 5 Best-Selling Events</h5>
+            <div class="table-responsive">
+                <table class="table table-hover align-middle mb-0" id="topEventsTable">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Event</th>
+                            <th class="text-center">Tickets Sold</th>
+                            <th class="text-end">Revenue</th>
+                        </tr>
+                    </thead>
+                    <tbody id="topEventsBody">
+                        <tr>
+                            <td colspan="4" class="text-center text-muted py-4">
+                                <div class="spinner-border spinner-border-sm me-2" role="status"></div>
+                                Loading data...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+<style>
+    .analytics-header {
+        border-bottom: 2px solid #e2e8f0;
+        padding-bottom: 1rem;
+    }
+    .analytics-card {
+        background: #fff;
+        border-radius: 1rem;
+        padding: 1.5rem;
+        box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+        border: 1px solid #e2e8f0;
+    }
+    .analytics-card .card-title {
+        font-weight: 600;
+        color: #1e293b;
+        margin-bottom: 1.25rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid #f1f5f9;
+    }
+    .chart-container {
+        position: relative;
+        height: 300px;
+    }
+    #topEventsTable th {
+        background: #f8fafc;
+        font-weight: 600;
+        color: #475569;
+        border-bottom: 2px solid #e2e8f0;
+    }
+    #topEventsTable td {
+        padding: 1rem 0.75rem;
+    }
+    .rank-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        border-radius: 50%;
+        font-weight: 700;
+        font-size: 0.875rem;
+    }
+    .rank-1 { background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #fff; }
+    .rank-2 { background: linear-gradient(135deg, #94a3b8, #64748b); color: #fff; }
+    .rank-3 { background: linear-gradient(135deg, #fb923c, #ea580c); color: #fff; }
+    .rank-default { background: #e2e8f0; color: #475569; }
+    .revenue-amount {
+        font-weight: 600;
+        color: #059669;
+    }
+</style>
+}
+
+@section Scripts {
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script>
+    const categoryColors = [
+        '#6366f1', '#8b5cf6', '#ec4899', '#f43f5e', 
+        '#f97316', '#eab308', '#22c55e', '#14b8a6'
+    ];
+
+    async function loadCategoryChart() {
+        try {
+            const response = await fetch('@Url.Action("GetSalesByCategory")');
+            const data = await response.json();
+            
+            const ctx = document.getElementById('categoryChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: data.map(d => d.category),
+                    datasets: [{
+                        data: data.map(d => d.ticketsSold),
+                        backgroundColor: categoryColors.slice(0, data.length),
+                        borderWidth: 2,
+                        borderColor: '#fff'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 20,
+                                usePointStyle: true,
+                                font: { size: 12 }
+                            }
+                        }
+                    }
+                }
+            });
+        } catch (e) {
+            console.error('Failed to load category chart:', e);
+        }
+    }
+
+    async function loadRevenueChart() {
+        try {
+            const response = await fetch('@Url.Action("GetRevenueByMonth")');
+            const data = await response.json();
+            
+            const ctx = document.getElementById('revenueChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: data.map(d => d.label),
+                    datasets: [{
+                        label: 'Revenue ($)',
+                        data: data.map(d => d.revenue),
+                        backgroundColor: 'rgba(99, 102, 241, 0.8)',
+                        borderColor: '#6366f1',
+                        borderWidth: 1,
+                        borderRadius: 6,
+                        barThickness: 24
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: value => '$' + value.toLocaleString()
+                            },
+                            grid: { color: '#f1f5f9' }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+        } catch (e) {
+            console.error('Failed to load revenue chart:', e);
+        }
+    }
+
+    async function loadTopEvents() {
+        try {
+            const response = await fetch('@Url.Action("GetTopSellingEvents")');
+            const data = await response.json();
+            
+            const tbody = document.getElementById('topEventsBody');
+            
+            if (data.length === 0) {
+                tbody.innerHTML = `
+                    <tr>
+                        <td colspan="4" class="text-center text-muted py-4">
+                            No sales data available yet.
+                        </td>
+                    </tr>`;
+                return;
+            }
+            
+            tbody.innerHTML = data.map((event, index) => {
+                const rank = index + 1;
+                const rankClass = rank <= 3 ? `rank-${rank}` : 'rank-default';
+                return `
+                    <tr>
+                        <td><span class="rank-badge ${rankClass}">${rank}</span></td>
+                        <td class="fw-medium">${escapeHtml(event.eventTitle)}</td>
+                        <td class="text-center">${event.ticketsSold.toLocaleString()}</td>
+                        <td class="text-end revenue-amount">$${event.totalRevenue.toFixed(2)}</td>
+                    </tr>
+                `;
+            }).join('');
+        } catch (e) {
+            console.error('Failed to load top events:', e);
+            document.getElementById('topEventsBody').innerHTML = `
+                <tr>
+                    <td colspan="4" class="text-center text-danger py-4">
+                        Failed to load data. Please try again.
+                    </td>
+                </tr>`;
+        }
+    }
+
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    // Load all data on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        loadCategoryChart();
+        loadRevenueChart();
+        loadTopEvents();
+    });
+</script>
+}
+
+
+

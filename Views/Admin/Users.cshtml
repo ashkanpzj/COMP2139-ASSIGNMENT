@@ -1,0 +1,74 @@
+@model Assignment1.ViewModels.AdminUsersVm
+@{
+    ViewData["Title"] = "Manage Users";
+}
+
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="fw-bold mb-0">Users</h2>
+        @if (TempData["StatusMessage"] is string msg)
+        {
+            <span class="text-muted">@msg</span>
+        }
+    </div>
+
+    <div class="table-responsive shadow-sm border rounded-3">
+        <table class="table align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Email</th>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Roles</th>
+                    <th>Status</th>
+                    <th class="text-end">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var u in Model.Users)
+                {
+                    <tr>
+                        <td class="fw-semibold">@u.Email</td>
+                        <td>@(string.IsNullOrWhiteSpace(u.FullName) ? "-" : u.FullName)</td>
+                        <td>@(string.IsNullOrWhiteSpace(u.PhoneNumber) ? "-" : u.PhoneNumber)</td>
+                        <td>@(u.Roles.Length > 0 ? string.Join(", ", u.Roles) : "None")</td>
+                        <td>
+                            @if (u.EmailConfirmed)
+                            {
+                                <span class="badge bg-success">Confirmed</span>
+                            }
+                            else
+                            {
+                                <span class="badge bg-warning text-dark">Unconfirmed</span>
+                            }
+                        </td>
+                        <td class="text-end">
+                            <div class="d-flex justify-content-end gap-2">
+                                @if (!u.EmailConfirmed)
+                                {
+                                    <form asp-action="ConfirmEmail" method="post" class="d-inline">
+                                        <input type="hidden" name="userId" value="@u.Id" />
+                                        <button type="submit" class="btn btn-sm btn-outline-primary">Confirm Email</button>
+                                    </form>
+                                }
+                                @if (!u.Roles.Contains("Admin"))
+                                {
+                                    <form asp-action="MakeAdmin" method="post" class="d-inline">
+                                        <input type="hidden" name="userId" value="@u.Id" />
+                                        <button type="submit" class="btn btn-sm btn-outline-success">Make Admin</button>
+                                    </form>
+                                }
+                                <form asp-action="DeleteUser" method="post" class="d-inline" onsubmit="return confirm('Delete user @u.Email?');">
+                                    <input type="hidden" name="userId" value="@u.Id" />
+                                    <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+

@@ -1,0 +1,1345 @@
+@model IEnumerable<Assignment1.ViewModels.EventCardViewModel>
+@using System.Security.Claims
+@{
+    var currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+    var isAdmin = User.IsInRole("Admin");
+    var lowTicketsAny = Model.Any(e => e.IsLowStock);
+}
+
+@if (lowTicketsAny)
+{
+<div class="low-stock-banner fade-in">
+    <div class="banner-glow"></div>
+    <div class="banner-content">
+        <div class="banner-icon">
+            <i class="bi bi-fire"></i>
+        </div>
+        <div class="banner-text">
+            <span class="banner-title">Hot Events</span>
+            <span class="banner-subtitle">Some events are almost sold out - grab your tickets now!</span>
+        </div>
+        <div class="banner-pulse"></div>
+    </div>
+</div>
+}
+
+@if (!Model.Any())
+{
+<div class="empty-state fade-in">
+    <i class="bi bi-calendar-x"></i>
+    <h5>No events found</h5>
+    <p class="text-muted">Try adjusting your search or filters</p>
+</div>
+}
+else
+{
+<div class="product-grid fade-in">
+    @foreach (var e in Model)
+    {
+        <div class="product-card @(e.IsPastEvent ? "past-event" : "") @(e.IsSoldOut ? "sold-out" : "") @(e.IsLowStock ? "low-stock" : "")" 
+             data-event-id="@e.EventId"
+             data-title="@e.Title"
+             data-date="@e.Date.ToLocalTime().ToString("dddd, MMMM dd, yyyy")"
+             data-time="@e.Date.ToLocalTime().ToString("h:mm tt")"
+             data-category="@e.Category"
+             data-description="@(e.Description ?? "No description available.")"
+             data-price="@(e.Price?.ToString("0.00") ?? "Free")"
+             data-available="@e.AvailableTickets"
+             data-image="@e.ImageUrl"
+             data-rating="@e.AverageRating.ToString("0.0")"
+             data-ratings-count="@e.TotalRatings"
+             data-past="@e.IsPastEvent.ToString().ToLower()">
+            <div class="product-image clickable-card">
+                @if (!string.IsNullOrEmpty(e.ImageUrl))
+                {
+                    <img src="@e.ImageUrl" alt="@e.Title" loading="lazy" />
+                }
+                else
+                {
+                    <div class="no-image-placeholder">
+                        <i class="bi bi-calendar-event"></i>
+                    </div>
+                }
+                @if (e.IsPastEvent)
+                {
+                    <span class="stock-badge past">Event Ended</span>
+                }
+                else if (e.IsLowStock)
+                {
+                    <span class="stock-badge low">Only @e.AvailableTickets left</span>
+                }
+                else if (e.IsSoldOut)
+                {
+                    <span class="stock-badge sold-out">Sold Out</span>
+                }
+            </div>
+            
+            <div class="product-info clickable-card">
+                @if (e.TotalRatings > 0)
+                {
+                    <div class="product-rating">
+                        @for (int i = 1; i <= 5; i++)
+                        {
+                            <span class="star @(i <= Math.Round(e.AverageRating) ? "filled" : "")">★</span>
+                        }
+                        <span class="rating-count">(@e.TotalRatings)</span>
+                    </div>
+                }
+                
+                <span class="product-category">@e.Category</span>
+                <h3 class="product-title">@e.Title</h3>
+                <p class="product-date">
+                    <i class="bi bi-calendar3 me-1"></i>@e.Date.ToLocalTime().ToString("MMM dd, yyyy")
+                </p>
+                <p class="product-price">$@(e.Price?.ToString("0") ?? "Free")</p>
+                
+                @if (User.Identity?.IsAuthenticated ?? false)
+                {
+                    @if (isAdmin || e.CreatedByUserId == currentUserId)
+                    {
+                        <div class="product-actions" onclick="event.stopPropagation();">
+                            <a asp-action="Edit" asp-route-id="@e.EventId" class="btn btn-sm btn-outline-primary">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <button type="button" class="btn btn-sm btn-outline-danger delete-event-btn" 
+                                    data-event-id="@e.EventId" data-event-title="@e.Title">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    }
+</div>
+
+<!-- Event Details Modal -->
+<div class="event-modal" id="eventDetailsModal">
+    <div class="event-modal-content">
+        <button type="button" class="modal-close-btn" id="closeModalBtn">&times;</button>
+        <div class="modal-image" id="modalImage">
+            <div class="no-image-placeholder">
+                <i class="bi bi-calendar-event"></i>
+            </div>
+        </div>
+        <div class="modal-details">
+            <div class="modal-rating" id="modalRating"></div>
+            <span class="modal-category" id="modalCategory"></span>
+            <h2 class="modal-title" id="modalTitle"></h2>
+            
+            <div class="modal-info-grid">
+                <div class="modal-info-item">
+                    <i class="bi bi-calendar3"></i>
+                    <div>
+                        <span class="info-label">Date</span>
+                        <span class="info-value" id="modalDate"></span>
+                    </div>
+                </div>
+                <div class="modal-info-item">
+                    <i class="bi bi-clock"></i>
+                    <div>
+                        <span class="info-label">Time</span>
+                        <span class="info-value" id="modalTime"></span>
+                    </div>
+                </div>
+                <div class="modal-info-item">
+                    <i class="bi bi-currency-dollar"></i>
+                    <div>
+                        <span class="info-label">Price</span>
+                        <span class="info-value" id="modalPrice"></span>
+                    </div>
+                </div>
+                <div class="modal-info-item">
+                    <i class="bi bi-ticket-perforated"></i>
+                    <div>
+                        <span class="info-label">Available</span>
+                        <span class="info-value" id="modalAvailable"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="modal-description">
+                <h6>Description</h6>
+                <p id="modalDescription"></p>
+            </div>
+            
+            <a href="#" class="btn btn-primary w-100" id="modalBuyBtn">
+                <i class="bi bi-cart-plus me-2"></i>Get Tickets
+            </a>
+
+            <!-- Comments Section -->
+            <div class="comments-section">
+                <div class="comments-header">
+                    <h6><i class="bi bi-chat-dots me-2"></i>Comments</h6>
+                    <span class="comment-count" id="commentCount">0</span>
+                </div>
+                
+                <!-- Add Comment Form -->
+                <div class="add-comment-form">
+                    <div class="comment-input-wrapper">
+                        <textarea id="commentInput" placeholder="Write a comment..." maxlength="1000"></textarea>
+                        <div class="comment-input-footer">
+                            <span class="char-count"><span id="charCount">0</span>/1000</span>
+                            <button type="button" class="btn-send-comment" id="sendCommentBtn">
+                                <i class="bi bi-send-fill"></i>
+                            </button>
+                        </div>
+                    </div>
+                    @if (!(User.Identity?.IsAuthenticated ?? false))
+                    {
+                        <input type="text" id="guestNameInput" class="guest-name-input" 
+                               placeholder="Your name (optional)" maxlength="50" />
+                    }
+                </div>
+
+                <!-- Comments List -->
+                <div class="comments-list" id="commentsList">
+                    <div class="comments-loading" id="commentsLoading">
+                        <div class="spinner-border spinner-border-sm text-primary"></div>
+                        <span>Loading comments...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Low Stock Banner */
+    .low-stock-banner {
+        position: relative;
+        background: linear-gradient(135deg, #ff6b35 0%, #f7931e 50%, #ff4757 100%);
+        border-radius: 1rem;
+        padding: 1rem 1.5rem;
+        margin-bottom: 1.5rem;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
+    }
+
+    .banner-glow {
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 60%);
+        animation: bannerGlow 3s ease-in-out infinite;
+    }
+
+    @@keyframes bannerGlow {
+        0%, 100% { transform: translate(0, 0); }
+        50% { transform: translate(10%, 10%); }
+    }
+
+    .banner-content {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        z-index: 1;
+    }
+
+    .banner-icon {
+        width: 48px;
+        height: 48px;
+        background: rgba(255,255,255,0.2);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        animation: iconPulse 1.5s ease-in-out infinite;
+    }
+
+    .banner-icon i {
+        font-size: 1.5rem;
+        color: white;
+        animation: fireFlicker 0.5s ease-in-out infinite alternate;
+    }
+
+    @@keyframes iconPulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+    }
+
+    @@keyframes fireFlicker {
+        0% { transform: scale(1) rotate(-3deg); }
+        100% { transform: scale(1.05) rotate(3deg); }
+    }
+
+    .banner-text {
+        display: flex;
+        flex-direction: column;
+        color: white;
+    }
+
+    .banner-title {
+        font-size: 1.1rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .banner-subtitle {
+        font-size: 0.9rem;
+        opacity: 0.95;
+    }
+
+    .banner-pulse {
+        position: absolute;
+        right: 1.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 12px;
+        height: 12px;
+        background: white;
+        border-radius: 50%;
+        animation: pulseDot 1.5s ease-in-out infinite;
+    }
+
+    .banner-pulse::before {
+        content: '';
+        position: absolute;
+        inset: -4px;
+        border: 2px solid rgba(255,255,255,0.5);
+        border-radius: 50%;
+        animation: pulseRing 1.5s ease-in-out infinite;
+    }
+
+    @@keyframes pulseDot {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.6; }
+    }
+
+    @@keyframes pulseRing {
+        0% { transform: scale(1); opacity: 1; }
+        100% { transform: scale(2); opacity: 0; }
+    }
+
+    @@media (max-width: 576px) {
+        .banner-content {
+            flex-direction: column;
+            text-align: center;
+        }
+        .banner-pulse { display: none; }
+    }
+
+    .product-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1.25rem;
+    }
+
+    @@media (max-width: 1200px) {
+        .product-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    @@media (max-width: 900px) {
+        .product-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @@media (max-width: 576px) {
+        .product-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    .product-card {
+        background: #fff;
+        border-radius: 0.75rem;
+        overflow: hidden;
+        transition: transform 0.2s, box-shadow 0.2s;
+        position: relative;
+        cursor: pointer;
+        border: 1px solid #e2e8f0;
+    }
+
+    .product-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+    }
+
+    .product-card.sold-out {
+        opacity: 0.7;
+    }
+
+    .product-card.past-event {
+        opacity: 0.7;
+        filter: grayscale(80%);
+    }
+
+    .product-card.past-event:hover {
+        filter: grayscale(40%);
+        opacity: 0.85;
+    }
+
+    .product-card.past-event .product-image img {
+        filter: grayscale(100%);
+    }
+
+    .product-card.past-event:hover .product-image img {
+        transform: none;
+    }
+
+    .product-card.past-event .no-image-placeholder {
+        background: linear-gradient(135deg, #9ca3af, #d1d5db);
+    }
+
+    .product-card.past-event .product-category {
+        color: #9ca3af;
+    }
+
+    .product-card.past-event .product-title,
+    .product-card.past-event .product-price {
+        color: #6b7280;
+    }
+
+    .product-card.low-stock .product-image {
+        border: 2px solid #f97316;
+        border-radius: 0.5rem 0.5rem 0 0;
+    }
+
+    .product-image {
+        position: relative;
+        aspect-ratio: 1;
+        overflow: hidden;
+        background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+    }
+
+    .product-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s;
+    }
+
+    .product-card:hover .product-image img {
+        transform: scale(1.05);
+    }
+
+    .no-image-placeholder {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+    }
+
+    .no-image-placeholder i {
+        font-size: 4rem;
+        color: #94a3b8;
+    }
+
+    .stock-badge {
+        position: absolute;
+        top: 0.75rem;
+        left: 0.75rem;
+        padding: 0.35rem 0.85rem;
+        border-radius: 2rem;
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        z-index: 2;
+        letter-spacing: 0.5px;
+    }
+
+    .stock-badge.low {
+        background: linear-gradient(135deg, #ff6b35, #ff4757);
+        color: white;
+        box-shadow: 0 2px 10px rgba(255, 71, 87, 0.4);
+        animation: lowStockPulse 2s ease-in-out infinite;
+    }
+
+    .stock-badge.low::before {
+        content: '';
+        position: absolute;
+        inset: -2px;
+        background: linear-gradient(135deg, #ff6b35, #ff4757);
+        border-radius: 2rem;
+        z-index: -1;
+        animation: lowStockGlow 2s ease-in-out infinite;
+        opacity: 0.5;
+    }
+
+    @@keyframes lowStockPulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.05); }
+    }
+
+    @@keyframes lowStockGlow {
+        0%, 100% { transform: scale(1); opacity: 0.5; }
+        50% { transform: scale(1.2); opacity: 0; }
+    }
+
+    .stock-badge.sold-out {
+        background: linear-gradient(135deg, #475569, #64748b);
+        color: white;
+    }
+
+    .stock-badge.past {
+        background: linear-gradient(135deg, #6b7280, #9ca3af);
+        color: white;
+    }
+
+    .product-info {
+        padding: 1rem;
+    }
+
+    .product-rating {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+        margin-bottom: 0.5rem;
+    }
+
+    .product-rating .star {
+        color: #e2e8f0;
+        font-size: 0.9rem;
+    }
+
+    .product-rating .star.filled {
+        color: #f59e0b;
+    }
+
+    .rating-count {
+        font-size: 0.75rem;
+        color: #64748b;
+        margin-left: 0.25rem;
+    }
+
+    .product-category {
+        display: inline-block;
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: #f97316;
+        letter-spacing: 0.5px;
+        margin-bottom: 0.25rem;
+    }
+
+    .product-title {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #1e293b;
+        margin: 0 0 0.25rem;
+        line-height: 1.3;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .product-date {
+        font-size: 0.8rem;
+        color: #64748b;
+        margin: 0 0 0.5rem;
+    }
+
+    .product-price {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin: 0;
+    }
+
+    .product-actions {
+        display: flex;
+        gap: 0.5rem;
+        margin-top: 0.75rem;
+        padding-top: 0.75rem;
+        border-top: 1px solid #f1f5f9;
+    }
+
+    .empty-state {
+        text-align: center;
+        padding: 4rem 2rem;
+        color: #64748b;
+    }
+
+    .empty-state i {
+        font-size: 4rem;
+        opacity: 0.3;
+        margin-bottom: 1rem;
+        display: block;
+    }
+
+    .empty-state h5 {
+        color: #334155;
+    }
+
+    /* Event Details Modal */
+    .event-modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.6);
+        z-index: 9999;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        backdrop-filter: blur(4px);
+    }
+
+    .event-modal.active {
+        display: flex;
+    }
+
+    .event-modal-content {
+        background: white;
+        border-radius: 1rem;
+        max-width: 600px;
+        width: 100%;
+        max-height: 90vh;
+        overflow-y: auto;
+        position: relative;
+        animation: modalSlideIn 0.3s ease-out;
+    }
+
+    @@keyframes modalSlideIn {
+        from { transform: translateY(20px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+
+    .modal-close-btn {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: none;
+        background: rgba(0,0,0,0.5);
+        color: white;
+        font-size: 1.5rem;
+        cursor: pointer;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        line-height: 1;
+    }
+
+    .modal-close-btn:hover {
+        background: rgba(0,0,0,0.7);
+    }
+
+    .modal-image {
+        width: 100%;
+        aspect-ratio: 16/9;
+        overflow: hidden;
+        background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+    }
+
+    .modal-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .modal-image .no-image-placeholder {
+        aspect-ratio: 16/9;
+    }
+
+    .modal-image .no-image-placeholder i {
+        font-size: 5rem;
+    }
+
+    .modal-details {
+        padding: 1.5rem;
+    }
+
+    .modal-rating {
+        display: flex;
+        align-items: center;
+        gap: 2px;
+        margin-bottom: 0.5rem;
+    }
+
+    .modal-rating .star {
+        color: #e2e8f0;
+        font-size: 1.1rem;
+    }
+
+    .modal-rating .star.filled {
+        color: #f59e0b;
+    }
+
+    .modal-rating .rating-text {
+        font-size: 0.85rem;
+        color: #64748b;
+        margin-left: 0.5rem;
+    }
+
+    .modal-category {
+        display: inline-block;
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        color: #f97316;
+        letter-spacing: 0.5px;
+        margin-bottom: 0.25rem;
+    }
+
+    .modal-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #1e293b;
+        margin: 0 0 1rem;
+    }
+
+    .modal-info-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .modal-info-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+
+    .modal-info-item i {
+        font-size: 1.25rem;
+        color: #6366f1;
+        margin-top: 0.1rem;
+    }
+
+    .modal-info-item .info-label {
+        display: block;
+        font-size: 0.75rem;
+        color: #64748b;
+        text-transform: uppercase;
+    }
+
+    .modal-info-item .info-value {
+        display: block;
+        font-size: 1rem;
+        font-weight: 600;
+        color: #1e293b;
+    }
+
+    .modal-description {
+        margin-bottom: 1.5rem;
+        padding: 1rem;
+        background: #f8fafc;
+        border-radius: 0.5rem;
+    }
+
+    .modal-description h6 {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        color: #64748b;
+        margin: 0 0 0.5rem;
+    }
+
+    .modal-description p {
+        color: #334155;
+        margin: 0;
+        line-height: 1.6;
+    }
+
+    /* Comments Section */
+    .comments-section {
+        margin-top: 1.5rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid #e2e8f0;
+    }
+
+    .comments-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+    }
+
+    .comments-header h6 {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: #1e293b;
+        margin: 0;
+    }
+
+    .comment-count {
+        background: #f1f5f9;
+        color: #64748b;
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 0.25rem 0.625rem;
+        border-radius: 1rem;
+    }
+
+    .add-comment-form {
+        margin-bottom: 1rem;
+    }
+
+    .comment-input-wrapper {
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 0.75rem;
+        overflow: hidden;
+        transition: border-color 0.15s;
+    }
+
+    .comment-input-wrapper:focus-within {
+        border-color: #6366f1;
+    }
+
+    .comment-input-wrapper textarea {
+        width: 100%;
+        border: none;
+        background: transparent;
+        padding: 0.875rem;
+        font-size: 0.9rem;
+        resize: none;
+        min-height: 80px;
+        outline: none;
+    }
+
+    .comment-input-wrapper textarea::placeholder {
+        color: #94a3b8;
+    }
+
+    .comment-input-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.5rem 0.875rem;
+        background: #f1f5f9;
+    }
+
+    .char-count {
+        font-size: 0.75rem;
+        color: #94a3b8;
+    }
+
+    .btn-send-comment {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: none;
+        background: linear-gradient(135deg, #6366f1, #8b5cf6);
+        color: white;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .btn-send-comment:hover {
+        transform: scale(1.1);
+        box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+    }
+
+    .btn-send-comment:disabled {
+        background: #cbd5e1;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+    }
+
+    .guest-name-input {
+        width: 100%;
+        margin-top: 0.5rem;
+        padding: 0.625rem 0.875rem;
+        border: 1px solid #e2e8f0;
+        border-radius: 0.5rem;
+        font-size: 0.85rem;
+        outline: none;
+        transition: border-color 0.15s;
+    }
+
+    .guest-name-input:focus {
+        border-color: #6366f1;
+    }
+
+    .comments-list {
+        max-height: 300px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .comments-list::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .comments-list::-webkit-scrollbar-track {
+        background: #f1f5f9;
+        border-radius: 3px;
+    }
+
+    .comments-list::-webkit-scrollbar-thumb {
+        background: #cbd5e1;
+        border-radius: 3px;
+    }
+
+    .comments-loading {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 1.5rem;
+        color: #64748b;
+        font-size: 0.85rem;
+    }
+
+    .comment-item {
+        display: flex;
+        gap: 0.75rem;
+        padding: 0.875rem;
+        background: #fafbfc;
+        border-radius: 0.75rem;
+        border: 1px solid #e2e8f0;
+        animation: commentSlideIn 0.3s ease-out;
+    }
+
+    @@keyframes commentSlideIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .comment-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #6366f1, #8b5cf6);
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        font-size: 0.9rem;
+        flex-shrink: 0;
+    }
+
+    .comment-body {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .comment-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 0.25rem;
+    }
+
+    .comment-author {
+        font-weight: 600;
+        font-size: 0.85rem;
+        color: #1e293b;
+    }
+
+    .comment-time {
+        font-size: 0.7rem;
+        color: #94a3b8;
+    }
+
+    .comment-content {
+        font-size: 0.875rem;
+        color: #475569;
+        line-height: 1.5;
+        word-break: break-word;
+    }
+
+    .comment-actions {
+        margin-top: 0.5rem;
+    }
+
+    .btn-delete-comment {
+        background: none;
+        border: none;
+        color: #ef4444;
+        font-size: 0.75rem;
+        cursor: pointer;
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.25rem;
+        transition: background 0.15s;
+    }
+
+    .btn-delete-comment:hover {
+        background: #fee2e2;
+    }
+
+    .no-comments {
+        text-align: center;
+        padding: 1.5rem;
+        color: #94a3b8;
+        font-size: 0.85rem;
+    }
+
+    .no-comments i {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+        display: block;
+        opacity: 0.5;
+    }
+</style>
+
+<script>
+(function() {
+    function showToast(message, type = 'success') {
+        if (window.showToast) {
+            window.showToast(message, type);
+            return;
+        }
+        
+        let container = document.getElementById('toastContainer');
+        if (!container) {
+            container = document.createElement('div');
+            container.id = 'toastContainer';
+            container.style.cssText = 'position:fixed;top:20px;right:20px;z-index:9999;';
+            document.body.appendChild(container);
+        }
+
+        const toast = document.createElement('div');
+        toast.style.cssText = `
+            display:flex;align-items:center;gap:0.5rem;
+            padding:0.75rem 1.25rem;margin-bottom:0.5rem;
+            background:${type === 'success' ? '#059669' : '#dc2626'};
+            color:white;border-radius:0.5rem;
+            box-shadow:0 4px 12px rgba(0,0,0,0.15);
+            animation:slideIn 0.3s ease-out;
+        `;
+        toast.innerHTML = `<span>${message}</span>`;
+        container.appendChild(toast);
+
+        setTimeout(() => {
+            toast.style.animation = 'slideOut 0.3s ease-out forwards';
+            setTimeout(() => toast.remove(), 300);
+        }, 2500);
+    }
+
+    // Event Details Modal
+    const modal = document.getElementById('eventDetailsModal');
+    const closeBtn = document.getElementById('closeModalBtn');
+    let currentEventId = null;
+
+    function openModal(card) {
+        const data = card.dataset;
+        const isPastEvent = data.past === 'true';
+        
+        currentEventId = data.eventId;
+        
+        // Set image
+        const modalImageContainer = document.getElementById('modalImage');
+        if (data.image) {
+            modalImageContainer.innerHTML = `<img src="${data.image}" alt="${data.title}" />`;
+        } else {
+            modalImageContainer.innerHTML = '<div class="no-image-placeholder"><i class="bi bi-calendar-event"></i></div>';
+        }
+        
+        // Set rating
+        const ratingContainer = document.getElementById('modalRating');
+        const rating = parseFloat(data.rating) || 0;
+        const ratingsCount = parseInt(data.ratingsCount) || 0;
+        if (ratingsCount > 0) {
+            let starsHtml = '';
+            for (let i = 1; i <= 5; i++) {
+                starsHtml += `<span class="star ${i <= Math.round(rating) ? 'filled' : ''}">★</span>`;
+            }
+            starsHtml += `<span class="rating-text">${rating.toFixed(1)} (${ratingsCount} reviews)</span>`;
+            ratingContainer.innerHTML = starsHtml;
+            ratingContainer.style.display = 'flex';
+        } else {
+            ratingContainer.style.display = 'none';
+        }
+        
+        // Set other details
+        document.getElementById('modalCategory').textContent = data.category;
+        document.getElementById('modalTitle').textContent = data.title;
+        document.getElementById('modalDate').textContent = data.date;
+        document.getElementById('modalTime').textContent = data.time;
+        document.getElementById('modalPrice').textContent = data.price === 'Free' ? 'Free' : '$' + data.price;
+        document.getElementById('modalAvailable').textContent = data.available + ' tickets';
+        document.getElementById('modalDescription').textContent = data.description;
+        
+        // Set buy button - disable for past events
+        const buyBtn = document.getElementById('modalBuyBtn');
+        if (isPastEvent) {
+            buyBtn.classList.add('disabled');
+            buyBtn.style.pointerEvents = 'none';
+            buyBtn.style.opacity = '0.5';
+            buyBtn.innerHTML = '<i class="bi bi-clock-history me-2"></i>Event Ended';
+        } else {
+            buyBtn.classList.remove('disabled');
+            buyBtn.style.pointerEvents = '';
+            buyBtn.style.opacity = '';
+            buyBtn.href = `@Url.Action("Index", "Tickets")?eventId=${data.eventId}`;
+            buyBtn.innerHTML = '<i class="bi bi-cart-plus me-2"></i>Get Tickets';
+        }
+        
+        // Reset and load comments
+        document.getElementById('commentInput').value = '';
+        document.getElementById('charCount').textContent = '0';
+        loadComments(currentEventId);
+        
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+        currentEventId = null;
+    }
+
+    // Comments functionality
+    async function loadComments(eventId) {
+        const listEl = document.getElementById('commentsList');
+        const loadingEl = document.getElementById('commentsLoading');
+        const countEl = document.getElementById('commentCount');
+        
+        listEl.innerHTML = '';
+        listEl.appendChild(loadingEl);
+        loadingEl.style.display = 'flex';
+
+        try {
+            const response = await fetch(`@Url.Action("GetComments")?eventId=${eventId}`);
+            const data = await response.json();
+
+            loadingEl.style.display = 'none';
+            countEl.textContent = data.comments?.length || 0;
+
+            if (!data.comments || data.comments.length === 0) {
+                listEl.innerHTML = `
+                    <div class="no-comments">
+                        <i class="bi bi-chat-dots"></i>
+                        <p>No comments yet. Be the first to comment!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            listEl.innerHTML = data.comments.map(c => createCommentHtml(c)).join('');
+            attachDeleteHandlers();
+        } catch (error) {
+            loadingEl.style.display = 'none';
+            listEl.innerHTML = '<div class="no-comments">Failed to load comments</div>';
+        }
+    }
+
+    function createCommentHtml(comment) {
+        const initial = (comment.displayName || 'A').charAt(0).toUpperCase();
+        const deleteBtn = comment.isOwner 
+            ? `<div class="comment-actions">
+                   <button class="btn-delete-comment" data-comment-id="${comment.id}">
+                       <i class="bi bi-trash me-1"></i>Delete
+                   </button>
+               </div>` 
+            : '';
+        
+        return `
+            <div class="comment-item" data-comment-id="${comment.id}">
+                <div class="comment-avatar">${initial}</div>
+                <div class="comment-body">
+                    <div class="comment-header">
+                        <span class="comment-author">${escapeHtml(comment.displayName)}</span>
+                        <span class="comment-time">${comment.createdAt}</span>
+                    </div>
+                    <div class="comment-content">${escapeHtml(comment.content)}</div>
+                    ${deleteBtn}
+                </div>
+            </div>
+        `;
+    }
+
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text || '';
+        return div.innerHTML;
+    }
+
+    // Character counter
+    const commentInput = document.getElementById('commentInput');
+    const charCount = document.getElementById('charCount');
+    
+    commentInput?.addEventListener('input', function() {
+        charCount.textContent = this.value.length;
+    });
+
+    // Send comment
+    const sendBtn = document.getElementById('sendCommentBtn');
+    sendBtn?.addEventListener('click', async function() {
+        const content = commentInput.value.trim();
+        if (!content || !currentEventId) return;
+
+        const guestNameInput = document.getElementById('guestNameInput');
+        const guestName = guestNameInput?.value.trim() || '';
+
+        this.disabled = true;
+        const originalHtml = this.innerHTML;
+        this.innerHTML = '<span class="spinner-border spinner-border-sm"></span>';
+
+        try {
+            const response = await fetch('@Url.Action("AddComment")', {
+                method: 'POST',
+                headers: { 
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                body: `eventId=${currentEventId}&content=${encodeURIComponent(content)}&guestName=${encodeURIComponent(guestName)}`
+            });
+
+            const data = await response.json();
+
+            if (data.success) {
+                commentInput.value = '';
+                charCount.textContent = '0';
+                if (guestNameInput) guestNameInput.value = '';
+                
+                // Add new comment to top
+                const listEl = document.getElementById('commentsList');
+                const noComments = listEl.querySelector('.no-comments');
+                if (noComments) noComments.remove();
+                
+                const newCommentHtml = createCommentHtml(data.comment);
+                listEl.insertAdjacentHTML('afterbegin', newCommentHtml);
+                
+                // Update count
+                const countEl = document.getElementById('commentCount');
+                countEl.textContent = parseInt(countEl.textContent) + 1;
+                
+                attachDeleteHandlers();
+                showToast('Comment posted!');
+            } else {
+                showToast(data.message || 'Failed to post comment', 'error');
+            }
+        } catch (error) {
+            showToast('Network error', 'error');
+        } finally {
+            this.disabled = false;
+            this.innerHTML = originalHtml;
+        }
+    });
+
+    // Allow Enter+Ctrl/Cmd to submit
+    commentInput?.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && (e.ctrlKey || e.metaKey)) {
+            e.preventDefault();
+            sendBtn.click();
+        }
+    });
+
+    function attachDeleteHandlers() {
+        document.querySelectorAll('.btn-delete-comment').forEach(btn => {
+            btn.addEventListener('click', async function() {
+                if (!confirm('Delete this comment?')) return;
+
+                const commentId = this.dataset.commentId;
+                this.disabled = true;
+
+                try {
+                    const response = await fetch('@Url.Action("DeleteComment")', {
+                        method: 'POST',
+                        headers: { 
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                            'X-Requested-With': 'XMLHttpRequest'
+                        },
+                        body: `commentId=${commentId}`
+                    });
+
+                    const data = await response.json();
+
+                    if (data.success) {
+                        const commentEl = document.querySelector(`.comment-item[data-comment-id="${commentId}"]`);
+                        commentEl.style.transition = 'opacity 0.3s, transform 0.3s';
+                        commentEl.style.opacity = '0';
+                        commentEl.style.transform = 'translateX(-20px)';
+                        setTimeout(() => {
+                            commentEl.remove();
+                            const countEl = document.getElementById('commentCount');
+                            const newCount = Math.max(0, parseInt(countEl.textContent) - 1);
+                            countEl.textContent = newCount;
+                            
+                            if (newCount === 0) {
+                                document.getElementById('commentsList').innerHTML = `
+                                    <div class="no-comments">
+                                        <i class="bi bi-chat-dots"></i>
+                                        <p>No comments yet. Be the first to comment!</p>
+                                    </div>
+                                `;
+                            }
+                        }, 300);
+                        showToast('Comment deleted');
+                    } else {
+                        showToast(data.message || 'Failed to delete', 'error');
+                        this.disabled = false;
+                    }
+                } catch (error) {
+                    showToast('Network error', 'error');
+                    this.disabled = false;
+                }
+            });
+        });
+    }
+
+    // Click on card to open modal
+    document.querySelectorAll('.product-card .clickable-card').forEach(el => {
+        el.addEventListener('click', function(e) {
+            if (e.target.closest('.product-actions')) return;
+            openModal(this.closest('.product-card'));
+        });
+    });
+
+    closeBtn?.addEventListener('click', closeModal);
+    modal?.addEventListener('click', function(e) {
+        if (e.target === modal) closeModal();
+    });
+
+    // Close on escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modal?.classList.contains('active')) {
+            closeModal();
+        }
+    });
+
+    // Delete event handler
+    document.querySelectorAll('.delete-event-btn').forEach(btn => {
+        btn.addEventListener('click', async function(e) {
+            e.stopPropagation();
+            const eventId = this.dataset.eventId;
+            const eventTitle = this.dataset.eventTitle;
+
+            if (!confirm(`Are you sure you want to delete "${eventTitle}"?`)) return;
+
+            this.disabled = true;
+
+            try {
+                const response = await fetch(`@Url.Action("Delete")/${eventId}`, {
+                    method: 'POST',
+                    headers: { 'X-Requested-With': 'XMLHttpRequest' }
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    const card = document.querySelector(`.product-card[data-event-id="${eventId}"]`);
+                    card.style.transition = 'opacity 0.3s, transform 0.3s';
+                    card.style.opacity = '0';
+                    card.style.transform = 'scale(0.9)';
+                    setTimeout(() => card.remove(), 300);
+                    showToast('Event deleted successfully');
+                } else {
+                    showToast(data.message || 'Failed to delete event', 'error');
+                    this.disabled = false;
+                }
+            } catch (error) {
+                showToast('Network error', 'error');
+                this.disabled = false;
+            }
+        });
+    });
+})();
+</script>
+}

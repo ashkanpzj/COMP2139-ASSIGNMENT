@@ -1,159 +1,533 @@
-﻿@model IEnumerable<Assignment1.Models.Event>
+﻿@model IEnumerable<Assignment1.ViewModels.EventCardViewModel>
 @{
     ViewData["Title"] = "Tickets";
     var categories = ViewBag.Categories as string[] ?? Array.Empty<string>();
-    var sortKey = ((string)ViewBag.Sort ?? "date").ToLower();
-
-    // نمایش: اول رویدادهای کم‌بلیت، بعد بر اساس sort
-    IEnumerable<Assignment1.Models.Event> sortedModel =
-        sortKey switch
-        {
-            "alpha" => Model.OrderBy(e => e.AvailableTickets < 5 && e.AvailableTickets > 0 ? 0 : 1).ThenBy(e => e.Title),
-            "price" => Model.OrderBy(e => e.AvailableTickets < 5 && e.AvailableTickets > 0 ? 0 : 1).ThenBy(e => e.Price ?? 0m),
-            _       => Model.OrderBy(e => e.AvailableTickets < 5 && e.AvailableTickets > 0 ? 0 : 1).ThenBy(e => e.Date)
-        };
-
-    var lowTickets = sortedModel.Where(e => e.AvailableTickets < 5 && e.AvailableTickets > 0).ToList();
 }
 
-<h2 class="mb-4 text-center">Buy Tickets</h2>
-
-<form method="get" class="row g-3 align-items-end mb-4">
-    <!-- Search -->
-    <div class="col-md-3">
-        <label for="search" class="form-label">Search</label>
-        <input type="text" name="search" id="search" value="@ViewBag.Search" class="form-control" placeholder="Search events..." />
+<!-- Hero Header -->
+<div class="page-hero">
+    <div class="hero-bg" style="background-image: url('@Url.Content("~/images/Ticket.jpg")');"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+        <h1 class="hero-title">Tickets</h1>
+        <p class="hero-subtitle">Get your tickets for upcoming events</p>
     </div>
+</div>
 
-    <!-- Category -->
-    <div class="col-md-2">
-        <label for="category" class="form-label">Category</label>
-        <select name="category" id="category" class="form-select">
-            @foreach (var cat in categories)
-            {
-                <option value="@cat" selected="@(ViewBag.Category == cat)">@cat</option>
-            }
-        </select>
-    </div>
-
-    <!-- Start Date -->
-    <div class="col-md-2">
-        <label for="startDate" class="form-label">Start Date</label>
-        <input type="date" name="startDate" id="startDate" value="@ViewBag.StartDate" class="form-control" />
-    </div>
-
-    <!-- End Date -->
-    <div class="col-md-2">
-        <label for="endDate" class="form-label">End Date</label>
-        <input type="date" name="endDate" id="endDate" value="@ViewBag.EndDate" class="form-control" />
-    </div>
-
-    <!-- Sort -->
-    <div class="col-md-2">
-        <label for="sort" class="form-label">Sort By</label>
-        <select name="sort" id="sort" class="form-select">
-            <option value="date"  selected="@(ViewBag.Sort == "date")">Date</option>
-            <option value="alpha" selected="@(ViewBag.Sort == "alpha")">Alphabetical (A–Z)</option>
-            <option value="price" selected="@(ViewBag.Sort == "price")">Price</option>
-        </select>
-    </div>
-
-    <!-- Buttons -->
-    <div class="col-md-1 d-grid">
-        <button type="submit" class="btn btn-primary">Filter</button>
-    </div>
-    <div class="col-md-1 d-grid">
-        <a asp-action="Index" class="btn btn-outline-secondary">Reset</a>
-    </div>
-</form>
-
-@if (lowTickets.Any())
-{
-    <div class="alert alert-warning text-center fw-bold shadow-sm mb-3">
-        ⚠️ Some events are almost sold out! (Less than 5 tickets remaining)
-    </div>
-}
-
-@if (!sortedModel.Any())
-{
-    <div class="alert alert-info text-center">No events found.</div>
-}
-else
-{
-    <div class="table-responsive">
-        <table class="table table-striped table-bordered align-middle shadow-sm">
-            <thead class="table-light">
-                <tr>
-                    <th>Title</th>
-                    <th>Date</th>
-                    <th>Description</th>
-                    <th>Category</th>
-                    <th>Price ($)</th>
-                    <th>Available</th>
-                    <th class="text-center" style="width: 120px;">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var e in sortedModel)
+<div class="content-section">
+    <!-- Unified Search & Filter Bar -->
+    <div class="search-filter-bar" id="filterForm">
+        <div class="search-input-wrapper">
+            <i class="bi bi-search"></i>
+            <input type="text" id="search" value="@ViewBag.Search" 
+                   placeholder="Search tickets..." autocomplete="off" />
+            <div class="search-spinner d-none" id="searchSpinner">
+                <div class="spinner-border spinner-border-sm" role="status"></div>
+            </div>
+        </div>
+        
+        <div class="filter-divider"></div>
+        
+        <div class="filter-item">
+            <i class="bi bi-tag"></i>
+            <select id="category">
+                @foreach (var cat in categories)
                 {
-                    var isLow = e.AvailableTickets < 5 && e.AvailableTickets > 0;
-                    var isSoldOut = e.AvailableTickets <= 0;
-
-                    <!-- ✅ دیگه کل سطر برای Sold Out قرمز نمی‌شه -->
-                    <tr class="@(isLow ? "low-tickets-row" : "")">
-                        <td>@e.Title</td>
-                        <td>@e.Date.ToLocalTime().ToString("yyyy-MM-dd hh:mm tt")</td>
-                        <td class="text-truncate" style="max-width: 360px;">@e.Description</td>
-                        <td>@e.Category</td>
-                        <td>@(e.Price?.ToString("0.00") ?? "-")</td>
-                        <td class="@(isLow ? "text-danger fw-bold" : "")">
-                            @if (isSoldOut)
-                            {
-                                <!-- ✅ فقط برچسب Sold Out قاب خاکستری داشته باشه -->
-                                <span class="badge-outline-gray">Sold Out</span>
-                            }
-                            else
-                            {
-                                @(isLow ? $"Only {e.AvailableTickets} left" : e.AvailableTickets.ToString())
-                            }
-                        </td>
-                        <td class="text-center">
-                            @if (isSoldOut)
-                            {
-                                <button class="btn btn-sm btn-secondary" disabled>Sold Out</button>
-                            }
-                            else
-                            {
-                                <!-- ✅ دکمه Buy سبز می‌مونه -->
-                                <a asp-action="Buy" asp-route-id="@e.EventId" class="btn btn-sm btn-success">Buy</a>
-                            }
-                        </td>
-                    </tr>
+                <option value="@cat" selected="@(ViewBag.Category == cat)">@cat</option>
                 }
-            </tbody>
-        </table>
+            </select>
+        </div>
+        
+        <div class="filter-divider"></div>
+        
+        <div class="filter-item date-range">
+            <i class="bi bi-calendar3"></i>
+            <input type="date" id="startDate" value="@ViewBag.StartDate" max="2099-12-31" />
+            <span class="date-separator">to</span>
+            <input type="date" id="endDate" value="@ViewBag.EndDate" max="2099-12-31" />
+        </div>
+        
+        <div class="filter-divider"></div>
+        
+        <div class="filter-item">
+            <i class="bi bi-sort-down"></i>
+            <select id="sort">
+                <option value="date" selected="@(ViewBag.Sort == "date")">Date</option>
+                <option value="alpha" selected="@(ViewBag.Sort == "alpha")">A-Z</option>
+                <option value="price" selected="@(ViewBag.Sort == "price")">Price</option>
+                <option value="rating" selected="@(ViewBag.Sort == "rating")">Top Rated</option>
+            </select>
+        </div>
+        
+        <button type="button" id="resetBtn" class="reset-btn" title="Reset filters">
+            <i class="bi bi-x-lg"></i>
+        </button>
     </div>
-}
+
+    <!-- Results Container -->
+    <div id="ticketsContainer">
+        @await Html.PartialAsync("_TicketsPartial", Model)
+    </div>
+</div>
 
 <style>
-    /* ردیف رویدادهای کم‌بلیت (فقط کم‌ بلیت‌ها؛ نه sold out) */
-    .low-tickets-row {
-        border-top: 2px solid #dc3545 !important;
-        border-bottom: 2px solid #dc3545 !important;
-        background-color: #fff5f5 !important;
+    .page-hero {
+        position: relative;
+        height: 200px;
+        margin: -16px -12px 2rem -12px;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .hero-bg {
+        position: absolute;
+        inset: 0;
+        background-size: cover;
+        background-position: center;
+        filter: blur(2px);
+    }
+    
+    .hero-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, rgba(249, 115, 22, 0.85), rgba(234, 88, 12, 0.85));
+    }
+    
+    .hero-content {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        color: white;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin: 0;
+        text-transform: uppercase;
+        letter-spacing: 0.1rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem;
+        opacity: 0.9;
+        margin: 0.5rem 0 0;
+    }
+    
+    .content-section {
+        background: #fff;
+        border-radius: 1rem 1rem 0 0;
+        margin-top: -1rem;
+        position: relative;
+        padding: 1.5rem;
+        box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
     }
 
-    /* برچسب Sold Out با قاب خاکستری */
-    .badge-outline-gray {
-        display: inline-block;
-        border: 1px solid #6c757d;
-        color: #6c757d;
+    /* Unified Search & Filter Bar */
+    .search-filter-bar {
+        display: flex;
+        align-items: center;
+        background: #f8fafc;
+        border: 1px solid #e2e8f0;
+        border-radius: 0.75rem;
+        padding: 0.5rem;
+        margin-bottom: 1.5rem;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+
+    .search-input-wrapper {
+        display: flex;
+        align-items: center;
+        flex: 1;
+        min-width: 200px;
+        background: white;
+        border-radius: 0.5rem;
+        padding: 0 1rem;
+        border: 1px solid #e2e8f0;
+    }
+
+    .search-input-wrapper i {
+        color: #94a3b8;
+        font-size: 1rem;
+    }
+
+    .search-input-wrapper input {
+        flex: 1;
+        border: none;
+        outline: none;
+        padding: 0.75rem 0.75rem;
+        font-size: 0.9rem;
         background: transparent;
-        border-radius: .375rem;
-        padding: .15rem .5rem;
-        font-size: .875rem;
-        font-weight: 600;
-        line-height: 1.2;
-        white-space: nowrap;
+    }
+
+    .search-input-wrapper input::placeholder {
+        color: #94a3b8;
+    }
+
+    .search-spinner {
+        color: #f97316;
+    }
+
+    .filter-divider {
+        width: 1px;
+        height: 24px;
+        background: #e2e8f0;
+    }
+
+    .filter-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0 0.5rem;
+    }
+
+    .filter-item i {
+        color: #f97316;
+        font-size: 0.9rem;
+    }
+
+    .filter-item select,
+    .filter-item input[type="date"] {
+        border: none;
+        background: transparent;
+        font-size: 0.85rem;
+        color: #475569;
+        cursor: pointer;
+        padding: 0.5rem 0;
+        outline: none;
+    }
+
+    .filter-item select {
+        min-width: 80px;
+    }
+
+    .filter-item input[type="date"] {
+        width: 120px;
+    }
+
+    .date-range {
+        gap: 0.25rem;
+    }
+
+    .date-separator {
+        color: #94a3b8;
+        font-size: 0.8rem;
+    }
+
+    .reset-btn {
+        width: 36px;
+        height: 36px;
+        border-radius: 0.5rem;
+        border: none;
+        background: #fee2e2;
+        color: #dc2626;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.15s;
+    }
+
+    .reset-btn:hover {
+        background: #dc2626;
+        color: white;
+    }
+
+    @@media (max-width: 768px) {
+        .search-filter-bar {
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .search-input-wrapper {
+            min-width: 100%;
+        }
+
+        .filter-divider {
+            display: none;
+        }
+
+        .filter-item {
+            padding: 0.5rem;
+            background: white;
+            border-radius: 0.5rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .filter-item select,
+        .filter-item input[type="date"] {
+            flex: 1;
+        }
+
+        .reset-btn {
+            width: 100%;
+        }
+    }
+    
+    .fade-in {
+        animation: fadeIn 0.3s ease-in-out;
+    }
+    
+    @@keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    
+    #ticketsContainer {
+        min-height: 200px;
+    }
+    
+    /* Highlight animation for selected event */
+    .product-card.highlighted {
+        box-shadow: 0 0 0 3px #f97316, 0 12px 24px rgba(249, 115, 22, 0.3);
+        z-index: 10;
+    }
+    
+    @@keyframes highlightPulse {
+        0% { box-shadow: 0 0 0 3px #f97316, 0 12px 24px rgba(249, 115, 22, 0.3); }
+        50% { box-shadow: 0 0 0 6px rgba(249, 115, 22, 0.5), 0 12px 24px rgba(249, 115, 22, 0.4); }
+        100% { box-shadow: 0 0 0 3px transparent, 0 12px 24px rgba(0, 0, 0, 0.1); }
     }
 </style>
+
+@section Scripts {
+<script>
+(function() {
+    const searchInput = document.getElementById('search');
+    const categorySelect = document.getElementById('category');
+    const startDateInput = document.getElementById('startDate');
+    const endDateInput = document.getElementById('endDate');
+    const sortSelect = document.getElementById('sort');
+    const resetBtn = document.getElementById('resetBtn');
+    const container = document.getElementById('ticketsContainer');
+    const spinner = document.getElementById('searchSpinner');
+    const highlightEventId = @(ViewBag.HighlightEventId ?? "null");
+    
+    let debounceTimer;
+    
+    // Scroll to and highlight specific event on page load
+    if (highlightEventId) {
+        setTimeout(() => scrollToAndHighlight(highlightEventId), 500);
+    }
+    
+    function scrollToAndHighlight(eventId) {
+        const card = document.querySelector(`.product-card[data-event-id="${eventId}"]`);
+        if (card) {
+            // Scroll into view with offset for header
+            const rect = card.getBoundingClientRect();
+            const scrollTop = window.pageYOffset + rect.top - 120;
+            window.scrollTo({ top: scrollTop, behavior: 'smooth' });
+            
+            // Add highlight effect
+            card.classList.add('highlighted');
+            card.style.animation = 'highlightPulse 2s ease-out';
+            
+            // Auto-open the modal for this event
+            setTimeout(() => {
+                card.click();
+            }, 800);
+            
+            // Remove highlight after animation
+            setTimeout(() => {
+                card.classList.remove('highlighted');
+                card.style.animation = '';
+            }, 3000);
+        }
+    }
+    
+    function performSearch() {
+        const params = new URLSearchParams({
+            search: searchInput.value,
+            category: categorySelect.value,
+            startDate: startDateInput.value,
+            endDate: endDateInput.value,
+            sort: sortSelect.value
+        });
+        
+        spinner.classList.remove('d-none');
+        
+        fetch('@Url.Action("LiveSearch")?' + params.toString())
+            .then(response => response.text())
+            .then(html => {
+                container.innerHTML = html;
+                spinner.classList.add('d-none');
+                attachHandlers();
+            })
+            .catch(err => {
+                console.error('Search failed:', err);
+                spinner.classList.add('d-none');
+            });
+    }
+    
+    // Debounced search for text input
+    searchInput.addEventListener('input', function() {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(performSearch, 300);
+    });
+    
+    // Instant search for dropdowns and date inputs
+    categorySelect.addEventListener('change', performSearch);
+    startDateInput.addEventListener('change', performSearch);
+    endDateInput.addEventListener('change', performSearch);
+    sortSelect.addEventListener('change', performSearch);
+    
+    // Reset button
+    resetBtn.addEventListener('click', function() {
+        searchInput.value = '';
+        categorySelect.value = 'All';
+        startDateInput.value = '';
+        endDateInput.value = '';
+        sortSelect.value = 'date';
+        performSearch();
+    });
+    
+    function attachHandlers() {
+        // Quantity minus buttons
+        document.querySelectorAll('.qty-minus').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const eventId = this.dataset.eventId;
+                const input = document.getElementById('qty-' + eventId);
+                let val = parseInt(input.value) || 1;
+                if (val > 1) {
+                    input.value = val - 1;
+                }
+            });
+        });
+        
+        // Quantity plus buttons
+        document.querySelectorAll('.qty-plus').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const eventId = this.dataset.eventId;
+                const max = parseInt(this.dataset.max);
+                const input = document.getElementById('qty-' + eventId);
+                let val = parseInt(input.value) || 1;
+                if (val < max) {
+                    input.value = val + 1;
+                }
+            });
+        });
+        
+        // Add to Cart buttons
+        document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const eventId = this.dataset.eventId;
+                const eventTitle = this.dataset.title;
+                const input = document.getElementById('qty-' + eventId);
+                const quantity = parseInt(input.value) || 1;
+                const originalText = this.innerHTML;
+                
+                this.innerHTML = '...';
+                this.disabled = true;
+                
+                fetch('@Url.Action("Add", "Cart")', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: `eventId=${eventId}&quantity=${quantity}`
+                })
+                .then(r => r.json())
+                .then(data => {
+                    if (data.success) {
+                        this.innerHTML = 'Added';
+                        this.classList.remove('btn-success');
+                        this.classList.add('btn-primary');
+                        
+                        // Update navbar cart badge
+                        updateNavCartBadge(data.cartCount);
+                        
+                        // Show toast notification
+                        showToast(`${quantity} ticket(s) added to cart!`);
+                        
+                        // Reset quantity to 1
+                        input.value = 1;
+                        
+                        setTimeout(() => {
+                            this.innerHTML = originalText;
+                            this.classList.remove('btn-primary');
+                            this.classList.add('btn-success');
+                            this.disabled = false;
+                        }, 1000);
+                    } else {
+                        this.innerHTML = 'Error';
+                        this.classList.remove('btn-success');
+                        this.classList.add('btn-danger');
+                        showToast(data.message, 'error');
+                        setTimeout(() => {
+                            this.innerHTML = originalText;
+                            this.classList.remove('btn-danger');
+                            this.classList.add('btn-success');
+                            this.disabled = false;
+                        }, 1500);
+                    }
+                })
+                .catch(err => {
+                    console.error('Add to cart failed:', err);
+                    this.innerHTML = originalText;
+                    this.disabled = false;
+                });
+            });
+        });
+    }
+    
+    function updateNavCartBadge(count) {
+        const cartLink = document.querySelector('a[href*="Cart"]');
+        if (cartLink) {
+            let badge = cartLink.querySelector('.badge');
+            if (count > 0) {
+                if (!badge) {
+                    badge = document.createElement('span');
+                    badge.className = 'badge bg-primary ms-1';
+                    cartLink.appendChild(badge);
+                }
+                badge.textContent = count;
+            } else if (badge) {
+                badge.remove();
+            }
+        }
+    }
+    
+    function showToast(message, type = 'success') {
+        let toastContainer = document.getElementById('toastContainer');
+        if (!toastContainer) {
+            toastContainer = document.createElement('div');
+            toastContainer.id = 'toastContainer';
+            toastContainer.style.cssText = 'position:fixed;top:20px;right:20px;z-index:9999;';
+            document.body.appendChild(toastContainer);
+        }
+        
+        const toast = document.createElement('div');
+        toast.innerHTML = `<span>${message}</span>`;
+        toast.style.cssText = `
+            display:flex;align-items:center;gap:0.5rem;
+            padding:0.75rem 1.25rem;margin-bottom:0.5rem;
+            background:${type === 'success' ? '#059669' : '#dc2626'};
+            color:white;border-radius:0.5rem;
+            box-shadow:0 4px 12px rgba(0,0,0,0.15);
+            animation:slideIn 0.3s ease-out;
+        `;
+        
+        toastContainer.appendChild(toast);
+        
+        setTimeout(() => {
+            toast.style.animation = 'slideOut 0.3s ease-out forwards';
+            setTimeout(() => toast.remove(), 300);
+        }, 2500);
+    }
+    
+    // Initial attachment
+    attachHandlers();
+})();
+</script>
+<style>
+    @@keyframes slideIn {
+        from { transform: translateX(100%); opacity: 0; }
+        to { transform: translateX(0); opacity: 1; }
+    }
+    @@keyframes slideOut {
+        from { transform: translateX(0); opacity: 1; }
+        to { transform: translateX(100%); opacity: 0; }
+    }
+</style>
+}

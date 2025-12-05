@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Assignment1.Models
@@ -25,5 +26,16 @@ namespace Assignment1.Models
 
         [StringLength(100)]
         public string? Category { get; set; }
+
+        [StringLength(500)]
+        [Display(Name = "Event Image")]
+        public string? ImageUrl { get; set; }
+
+        [StringLength(450)]
+        public string? CreatedByUserId { get; set; }
+        public ApplicationUser? CreatedByUser { get; set; }
+
+        public ICollection<TicketPurchase> Purchases { get; set; } = new List<TicketPurchase>();
+        public ICollection<EventRating> Ratings { get; set; } = new List<EventRating>();
     }
 }
