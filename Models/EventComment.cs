@@ -32,3 +32,6 @@ public class EventComment
     public string DisplayName => User?.FullName ?? GuestName ?? "Anonymous";
 }
 
+
+
+

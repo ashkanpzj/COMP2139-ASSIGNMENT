@@ -47,6 +47,7 @@
                                 @if (!u.EmailConfirmed)
                                 {
                                     <form asp-action="ConfirmEmail" method="post" class="d-inline">
+                                        @Html.AntiForgeryToken()
                                         <input type="hidden" name="userId" value="@u.Id" />
                                         <button type="submit" class="btn btn-sm btn-outline-primary">Confirm Email</button>
                                     </form>
@@ -54,11 +55,13 @@
                                 @if (!u.Roles.Contains("Admin"))
                                 {
                                     <form asp-action="MakeAdmin" method="post" class="d-inline">
+                                        @Html.AntiForgeryToken()
                                         <input type="hidden" name="userId" value="@u.Id" />
                                         <button type="submit" class="btn btn-sm btn-outline-success">Make Admin</button>
                                     </form>
                                 }
                                 <form asp-action="DeleteUser" method="post" class="d-inline" onsubmit="return confirm('Delete user @u.Email?');">
+                                    @Html.AntiForgeryToken()
                                     <input type="hidden" name="userId" value="@u.Id" />
                                     <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
                                 </form>

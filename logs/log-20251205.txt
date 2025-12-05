@@ -28439,3 +28439,963 @@ END, e."Date", e."EventId"
 2025-12-05 05:47:28.455 -05:00 [INF] HTTP GET / responded 200 in 7.1972 ms
 2025-12-05 05:47:28.458 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/ - 200 null text/html; charset=utf-8 12.1558ms
 2025-12-05 05:47:31.035 -05:00 [INF] Application is shutting down...
+2025-12-05 14:45:51.249 -05:00 [INF] User profile is available. Using 'C:\Users\ashka\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-12-05 14:45:53.886 -05:00 [INF] Executed DbCommand (243ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-12-05 14:45:54.283 -05:00 [INF] Executed DbCommand (196ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-12-05 14:45:54.495 -05:00 [INF] Executed DbCommand (124ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-12-05 14:45:54.613 -05:00 [INF] Executed DbCommand (89ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."DateOfBirth", a."Email", a."EmailConfirmed", a."FullName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."ProfilePictureUrl", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-12-05 14:45:54.733 -05:00 [INF] Executed DbCommand (86ms) [Parameters=[@__normalizedRoleName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedRoleName_0
+LIMIT 2
+2025-12-05 14:45:54.843 -05:00 [INF] Executed DbCommand (89ms) [Parameters=[@__p_0='?', @__p_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."UserId", a."RoleId"
+FROM "AspNetUserRoles" AS a
+WHERE a."UserId" = @__p_0 AND a."RoleId" = @__p_1
+LIMIT 1
+2025-12-05 14:45:54.942 -05:00 [INF] Executed DbCommand (85ms) [Parameters=[@__normalizedRoleName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedRoleName_0
+LIMIT 2
+2025-12-05 14:45:55.032 -05:00 [INF] Executed DbCommand (85ms) [Parameters=[@__p_0='?', @__p_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."UserId", a."RoleId"
+FROM "AspNetUserRoles" AS a
+WHERE a."UserId" = @__p_0 AND a."RoleId" = @__p_1
+LIMIT 1
+2025-12-05 14:45:55.125 -05:00 [INF] Executed DbCommand (90ms) [Parameters=[@__normalizedRoleName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedRoleName_0
+LIMIT 2
+2025-12-05 14:45:55.217 -05:00 [INF] Executed DbCommand (88ms) [Parameters=[@__p_0='?', @__p_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."UserId", a."RoleId"
+FROM "AspNetUserRoles" AS a
+WHERE a."UserId" = @__p_0 AND a."RoleId" = @__p_1
+LIMIT 1
+2025-12-05 14:45:55.223 -05:00 [INF] Starting application
+2025-12-05 14:45:55.274 -05:00 [INF] Now listening on: http://localhost:5084
+2025-12-05 14:45:55.276 -05:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-05 14:45:55.277 -05:00 [INF] Hosting environment: Development
+2025-12-05 14:45:55.278 -05:00 [INF] Content root path: C:\Users\ashka\OneDrive\Desktop\jafar\COMP2139-ASSIGNMENT-1
+2025-12-05 14:45:56.244 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/ - null null
+2025-12-05 14:45:56.331 -05:00 [WRN] Failed to determine the https port for redirect.
+2025-12-05 14:45:56.408 -05:00 [INF] Executing endpoint 'Assignment1.Controllers.HomeController.Index (Assignment1)'
+2025-12-05 14:45:56.418 -05:00 [INF] Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Assignment1.Controllers.HomeController (Assignment1).
+2025-12-05 14:45:56.529 -05:00 [INF] Executing action method Assignment1.Controllers.HomeController.Index (Assignment1) - Validation state: "Valid"
+2025-12-05 14:45:56.542 -05:00 [INF] Executed action method Assignment1.Controllers.HomeController.Index (Assignment1), returned result Microsoft.AspNetCore.Mvc.ViewResult in 1.5099ms.
+2025-12-05 14:45:56.555 -05:00 [INF] Executing ViewResult, running view Index.
+2025-12-05 14:45:56.895 -05:00 [INF] Executed ViewResult - view Index executed in 342.1264ms.
+2025-12-05 14:45:56.899 -05:00 [INF] Executed action Assignment1.Controllers.HomeController.Index (Assignment1) in 426.1666ms
+2025-12-05 14:45:56.907 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/lib/bootstrap/dist/css/bootstrap.min.css - null null
+2025-12-05 14:45:56.911 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/css/site.css?v=9G1QJVx0ZIOX3jcAGmBJKGiOUe5r_DA7ZRGgBYfugv4 - null null
+2025-12-05 14:45:56.916 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/lib/jquery/dist/jquery.min.js - null null
+2025-12-05 14:45:56.918 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/lib/bootstrap/dist/js/bootstrap.bundle.min.js - null null
+2025-12-05 14:45:56.918 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/Assignment1.styles.css?v=7lHnFlCJZb7Y0QPMGCN-wfjKjS-3UNek5lyeWY7qRqM - null null
+2025-12-05 14:45:56.921 -05:00 [INF] Executed endpoint 'Assignment1.Controllers.HomeController.Index (Assignment1)'
+2025-12-05 14:45:56.957 -05:00 [INF] Sending file. Request path: '/lib/bootstrap/dist/css/bootstrap.min.css'. Physical path: 'C:\Users\ashka\OneDrive\Desktop\jafar\COMP2139-ASSIGNMENT-1\wwwroot\lib\bootstrap\dist\css\bootstrap.min.css'
+2025-12-05 14:45:56.957 -05:00 [INF] Sending file. Request path: '/css/site.css'. Physical path: 'C:\Users\ashka\OneDrive\Desktop\jafar\COMP2139-ASSIGNMENT-1\wwwroot\css\site.css'
+2025-12-05 14:45:56.963 -05:00 [INF] Sending file. Request path: '/lib/jquery/dist/jquery.min.js'. Physical path: 'C:\Users\ashka\OneDrive\Desktop\jafar\COMP2139-ASSIGNMENT-1\wwwroot\lib\jquery\dist\jquery.min.js'
+2025-12-05 14:45:56.966 -05:00 [INF] Sending file. Request path: '/lib/bootstrap/dist/js/bootstrap.bundle.min.js'. Physical path: 'C:\Users\ashka\OneDrive\Desktop\jafar\COMP2139-ASSIGNMENT-1\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js'
+2025-12-05 14:45:56.968 -05:00 [INF] Sending file. Request path: '/Assignment1.styles.css'. Physical path: 'C:\Users\ashka\OneDrive\Desktop\jafar\COMP2139-ASSIGNMENT-1\obj\Debug\net9.0\scopedcss\bundle\Assignment1.styles.css'
+2025-12-05 14:45:57.000 -05:00 [INF] HTTP GET /Assignment1.styles.css responded 200 in 33.0571 ms
+2025-12-05 14:45:56.988 -05:00 [INF] HTTP GET /lib/bootstrap/dist/css/bootstrap.min.css responded 200 in 65.4986 ms
+2025-12-05 14:45:56.991 -05:00 [INF] HTTP GET /css/site.css responded 200 in 35.5753 ms
+2025-12-05 14:45:56.997 -05:00 [INF] HTTP GET /lib/jquery/dist/jquery.min.js responded 200 in 37.7520 ms
+2025-12-05 14:45:56.997 -05:00 [INF] HTTP GET /lib/bootstrap/dist/js/bootstrap.bundle.min.js responded 200 in 32.7422 ms
+2025-12-05 14:45:56.970 -05:00 [INF] HTTP GET / responded 200 in 638.9907 ms
+2025-12-05 14:45:57.011 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/Assignment1.styles.css?v=7lHnFlCJZb7Y0QPMGCN-wfjKjS-3UNek5lyeWY7qRqM - 200 1129 text/css 92.9511ms
+2025-12-05 14:45:57.016 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/lib/bootstrap/dist/css/bootstrap.min.css - 200 232808 text/css 108.8049ms
+2025-12-05 14:45:57.018 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/css/site.css?v=9G1QJVx0ZIOX3jcAGmBJKGiOUe5r_DA7ZRGgBYfugv4 - 200 7401 text/css 106.5858ms
+2025-12-05 14:45:57.019 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/lib/jquery/dist/jquery.min.js - 200 87535 text/javascript 102.961ms
+2025-12-05 14:45:57.020 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/lib/bootstrap/dist/js/bootstrap.bundle.min.js - 200 80727 text/javascript 102.2171ms
+2025-12-05 14:45:57.029 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/ - 200 null text/html; charset=utf-8 786.7406ms
+2025-12-05 14:45:57.051 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/images/Ticket.jpg - null null
+2025-12-05 14:45:57.056 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/js/site.js?v=12TvawF91DhvTy28hqozziyVgr6ofAOcoQFw-ygfB9k - null null
+2025-12-05 14:45:57.075 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/images/Events.jpg - null null
+2025-12-05 14:45:57.082 -05:00 [INF] Sending file. Request path: '/images/Ticket.jpg'. Physical path: 'C:\Users\ashka\OneDrive\Desktop\jafar\COMP2139-ASSIGNMENT-1\wwwroot\images\Ticket.jpg'
+2025-12-05 14:45:57.084 -05:00 [INF] Sending file. Request path: '/js/site.js'. Physical path: 'C:\Users\ashka\OneDrive\Desktop\jafar\COMP2139-ASSIGNMENT-1\wwwroot\js\site.js'
+2025-12-05 14:45:57.089 -05:00 [INF] HTTP GET /images/Ticket.jpg responded 200 in 10.4881 ms
+2025-12-05 14:45:57.091 -05:00 [INF] HTTP GET /js/site.js responded 200 in 8.3080 ms
+2025-12-05 14:45:57.094 -05:00 [INF] Sending file. Request path: '/images/Events.jpg'. Physical path: 'C:\Users\ashka\OneDrive\Desktop\jafar\COMP2139-ASSIGNMENT-1\wwwroot\images\Events.jpg'
+2025-12-05 14:45:57.102 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/images/Ticket.jpg - 200 58154 image/jpeg 50.7102ms
+2025-12-05 14:45:57.106 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/js/site.js?v=12TvawF91DhvTy28hqozziyVgr6ofAOcoQFw-ygfB9k - 200 1228 text/javascript 49.5899ms
+2025-12-05 14:45:57.106 -05:00 [INF] HTTP GET /images/Events.jpg responded 200 in 17.9733 ms
+2025-12-05 14:45:57.187 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/images/Events.jpg - 200 199019 image/jpeg 111.8669ms
+2025-12-05 14:46:00.023 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/Identity/Account/Register - null null
+2025-12-05 14:46:00.029 -05:00 [INF] Executing endpoint '/Account/Register'
+2025-12-05 14:46:00.052 -05:00 [INF] Route matched with {page = "/Account/Register", area = "Identity", action = "", controller = ""}. Executing page /Account/Register
+2025-12-05 14:46:00.074 -05:00 [INF] Executing handler method Assignment1.Areas.Identity.Pages.Account.RegisterModel.OnGetAsync - ModelState is "Valid"
+2025-12-05 14:46:00.078 -05:00 [INF] Executed handler method OnGetAsync, returned result .
+2025-12-05 14:46:00.082 -05:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2025-12-05 14:46:00.083 -05:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2025-12-05 14:46:00.147 -05:00 [INF] Executed page /Account/Register in 93.3048ms
+2025-12-05 14:46:00.154 -05:00 [INF] Executed endpoint '/Account/Register'
+2025-12-05 14:46:00.155 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js - null null
+2025-12-05 14:46:00.155 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/lib/jquery-validation/dist/jquery.validate.min.js - null null
+2025-12-05 14:46:00.158 -05:00 [INF] HTTP GET /Identity/Account/Register responded 200 in 132.9139 ms
+2025-12-05 14:46:00.161 -05:00 [INF] The file /lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js was not modified
+2025-12-05 14:46:00.163 -05:00 [INF] The file /lib/jquery-validation/dist/jquery.validate.min.js was not modified
+2025-12-05 14:46:00.164 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/Identity/Account/Register - 200 null text/html; charset=utf-8 141.618ms
+2025-12-05 14:46:00.166 -05:00 [INF] HTTP GET /lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js responded 304 in 5.7769 ms
+2025-12-05 14:46:00.166 -05:00 [INF] HTTP GET /lib/jquery-validation/dist/jquery.validate.min.js responded 304 in 3.4980 ms
+2025-12-05 14:46:00.170 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js - 304 null text/javascript 15.3422ms
+2025-12-05 14:46:00.173 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/lib/jquery-validation/dist/jquery.validate.min.js - 304 null text/javascript 17.9852ms
+2025-12-05 14:46:03.748 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/ - null null
+2025-12-05 14:46:03.754 -05:00 [INF] Executing endpoint 'Assignment1.Controllers.HomeController.Index (Assignment1)'
+2025-12-05 14:46:03.755 -05:00 [INF] Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Assignment1.Controllers.HomeController (Assignment1).
+2025-12-05 14:46:03.758 -05:00 [INF] Executing action method Assignment1.Controllers.HomeController.Index (Assignment1) - Validation state: "Valid"
+2025-12-05 14:46:03.759 -05:00 [INF] Executed action method Assignment1.Controllers.HomeController.Index (Assignment1), returned result Microsoft.AspNetCore.Mvc.ViewResult in 0.0313ms.
+2025-12-05 14:46:03.761 -05:00 [INF] Executing ViewResult, running view Index.
+2025-12-05 14:46:03.775 -05:00 [INF] Executed ViewResult - view Index executed in 14.0658ms.
+2025-12-05 14:46:03.779 -05:00 [INF] Executed action Assignment1.Controllers.HomeController.Index (Assignment1) in 21.3445ms
+2025-12-05 14:46:03.780 -05:00 [INF] Executed endpoint 'Assignment1.Controllers.HomeController.Index (Assignment1)'
+2025-12-05 14:46:03.781 -05:00 [INF] HTTP GET / responded 200 in 31.4962 ms
+2025-12-05 14:46:03.782 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/ - 200 null text/html; charset=utf-8 34.3142ms
+2025-12-05 14:46:35.475 -05:00 [INF] Application is shutting down...
+2025-12-05 14:46:40.265 -05:00 [INF] User profile is available. Using 'C:\Users\ashka\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-12-05 14:46:41.911 -05:00 [INF] Executed DbCommand (120ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-12-05 14:46:42.064 -05:00 [INF] Executed DbCommand (98ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-12-05 14:46:42.292 -05:00 [INF] Executed DbCommand (225ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-12-05 14:46:42.449 -05:00 [INF] Executed DbCommand (147ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."DateOfBirth", a."Email", a."EmailConfirmed", a."FullName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."ProfilePictureUrl", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-12-05 14:46:42.638 -05:00 [INF] Executed DbCommand (118ms) [Parameters=[@__normalizedRoleName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedRoleName_0
+LIMIT 2
+2025-12-05 14:46:42.753 -05:00 [INF] Executed DbCommand (88ms) [Parameters=[@__p_0='?', @__p_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."UserId", a."RoleId"
+FROM "AspNetUserRoles" AS a
+WHERE a."UserId" = @__p_0 AND a."RoleId" = @__p_1
+LIMIT 1
+2025-12-05 14:46:42.869 -05:00 [INF] Executed DbCommand (87ms) [Parameters=[@__normalizedRoleName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedRoleName_0
+LIMIT 2
+2025-12-05 14:46:42.964 -05:00 [INF] Executed DbCommand (90ms) [Parameters=[@__p_0='?', @__p_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."UserId", a."RoleId"
+FROM "AspNetUserRoles" AS a
+WHERE a."UserId" = @__p_0 AND a."RoleId" = @__p_1
+LIMIT 1
+2025-12-05 14:46:43.055 -05:00 [INF] Executed DbCommand (88ms) [Parameters=[@__normalizedRoleName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedRoleName_0
+LIMIT 2
+2025-12-05 14:46:43.146 -05:00 [INF] Executed DbCommand (87ms) [Parameters=[@__p_0='?', @__p_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."UserId", a."RoleId"
+FROM "AspNetUserRoles" AS a
+WHERE a."UserId" = @__p_0 AND a."RoleId" = @__p_1
+LIMIT 1
+2025-12-05 14:46:43.151 -05:00 [INF] Starting application
+2025-12-05 14:46:43.187 -05:00 [INF] Now listening on: http://localhost:5084
+2025-12-05 14:46:43.189 -05:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-05 14:46:43.190 -05:00 [INF] Hosting environment: Development
+2025-12-05 14:46:43.191 -05:00 [INF] Content root path: C:\Users\ashka\OneDrive\Desktop\jafar\COMP2139-ASSIGNMENT-1
+2025-12-05 14:46:43.458 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/ - null null
+2025-12-05 14:46:43.489 -05:00 [WRN] Failed to determine the https port for redirect.
+2025-12-05 14:46:43.527 -05:00 [INF] Executing endpoint 'Assignment1.Controllers.HomeController.Index (Assignment1)'
+2025-12-05 14:46:43.534 -05:00 [INF] Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Assignment1.Controllers.HomeController (Assignment1).
+2025-12-05 14:46:43.539 -05:00 [INF] Executing action method Assignment1.Controllers.HomeController.Index (Assignment1) - Validation state: "Valid"
+2025-12-05 14:46:43.543 -05:00 [INF] Executed action method Assignment1.Controllers.HomeController.Index (Assignment1), returned result Microsoft.AspNetCore.Mvc.ViewResult in 1.1612ms.
+2025-12-05 14:46:43.554 -05:00 [INF] Executing ViewResult, running view Index.
+2025-12-05 14:46:43.665 -05:00 [INF] Executed ViewResult - view Index executed in 113.418ms.
+2025-12-05 14:46:43.666 -05:00 [INF] Executed action Assignment1.Controllers.HomeController.Index (Assignment1) in 131.5247ms
+2025-12-05 14:46:43.667 -05:00 [INF] Executed endpoint 'Assignment1.Controllers.HomeController.Index (Assignment1)'
+2025-12-05 14:46:43.669 -05:00 [INF] HTTP GET / responded 200 in 180.0241 ms
+2025-12-05 14:46:43.671 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/css/site.css?v=9G1QJVx0ZIOX3jcAGmBJKGiOUe5r_DA7ZRGgBYfugv4 - null null
+2025-12-05 14:46:43.677 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/ - 200 null text/html; charset=utf-8 223.0986ms
+2025-12-05 14:46:43.682 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/js/site.js?v=12TvawF91DhvTy28hqozziyVgr6ofAOcoQFw-ygfB9k - null null
+2025-12-05 14:46:43.686 -05:00 [INF] The file /css/site.css was not modified
+2025-12-05 14:46:43.688 -05:00 [INF] The file /js/site.js was not modified
+2025-12-05 14:46:43.690 -05:00 [INF] HTTP GET /js/site.js responded 304 in 2.8494 ms
+2025-12-05 14:46:43.689 -05:00 [INF] HTTP GET /css/site.css responded 304 in 9.3653 ms
+2025-12-05 14:46:43.692 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/js/site.js?v=12TvawF91DhvTy28hqozziyVgr6ofAOcoQFw-ygfB9k - 304 null text/javascript 9.4661ms
+2025-12-05 14:46:43.694 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/css/site.css?v=9G1QJVx0ZIOX3jcAGmBJKGiOUe5r_DA7ZRGgBYfugv4 - 304 null text/css 23.1037ms
+2025-12-05 14:46:45.709 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/Identity/Account/Login - null null
+2025-12-05 14:46:45.714 -05:00 [INF] Executing endpoint '/Account/Login'
+2025-12-05 14:46:45.726 -05:00 [INF] Route matched with {page = "/Account/Login", area = "Identity", action = "", controller = ""}. Executing page /Account/Login
+2025-12-05 14:46:45.736 -05:00 [INF] Executing handler method Assignment1.Areas.Identity.Pages.Account.LoginModel.OnGetAsync - ModelState is "Valid"
+2025-12-05 14:46:45.743 -05:00 [INF] AuthenticationScheme: Identity.External signed out.
+2025-12-05 14:46:45.746 -05:00 [INF] Executed handler method OnGetAsync, returned result .
+2025-12-05 14:46:45.750 -05:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2025-12-05 14:46:45.751 -05:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2025-12-05 14:46:45.796 -05:00 [INF] Executed page /Account/Login in 68.7759ms
+2025-12-05 14:46:45.797 -05:00 [INF] Executed endpoint '/Account/Login'
+2025-12-05 14:46:45.798 -05:00 [INF] HTTP GET /Identity/Account/Login responded 200 in 86.2424 ms
+2025-12-05 14:46:45.799 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/Identity/Account/Login - 200 null text/html; charset=utf-8 89.8549ms
+2025-12-05 14:46:49.604 -05:00 [INF] Request starting HTTP/1.1 POST http://localhost:5084/Identity/Account/Login - application/x-www-form-urlencoded 272
+2025-12-05 14:46:49.614 -05:00 [INF] Executing endpoint '/Account/Login'
+2025-12-05 14:46:49.614 -05:00 [INF] Route matched with {page = "/Account/Login", area = "Identity", action = "", controller = ""}. Executing page /Account/Login
+2025-12-05 14:46:49.635 -05:00 [INF] Executing handler method Assignment1.Areas.Identity.Pages.Account.LoginModel.OnPostAsync - ModelState is "Valid"
+2025-12-05 14:46:49.775 -05:00 [INF] Executed DbCommand (102ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."DateOfBirth", a."Email", a."EmailConfirmed", a."FullName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."ProfilePictureUrl", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 1
+2025-12-05 14:46:49.885 -05:00 [INF] Executed DbCommand (96ms) [Parameters=[@__normalizedUserName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."DateOfBirth", a."Email", a."EmailConfirmed", a."FullName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."ProfilePictureUrl", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedUserName" = @__normalizedUserName_0
+LIMIT 1
+2025-12-05 14:46:50.205 -05:00 [INF] Executed DbCommand (88ms) [Parameters=[@__user_Id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ClaimType", a."ClaimValue", a."UserId"
+FROM "AspNetUserClaims" AS a
+WHERE a."UserId" = @__user_Id_0
+2025-12-05 14:46:50.353 -05:00 [INF] Executed DbCommand (96ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-12-05 14:46:50.452 -05:00 [INF] Executed DbCommand (86ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-12-05 14:46:50.549 -05:00 [INF] Executed DbCommand (86ms) [Parameters=[@__role_Id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."ClaimType", a."ClaimValue"
+FROM "AspNetRoleClaims" AS a
+WHERE a."RoleId" = @__role_Id_0
+2025-12-05 14:46:50.646 -05:00 [INF] Executed DbCommand (86ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-12-05 14:46:50.736 -05:00 [INF] Executed DbCommand (85ms) [Parameters=[@__role_Id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."ClaimType", a."ClaimValue"
+FROM "AspNetRoleClaims" AS a
+WHERE a."RoleId" = @__role_Id_0
+2025-12-05 14:46:50.830 -05:00 [INF] Executed DbCommand (91ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-12-05 14:46:50.934 -05:00 [INF] Executed DbCommand (97ms) [Parameters=[@__role_Id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."ClaimType", a."ClaimValue"
+FROM "AspNetRoleClaims" AS a
+WHERE a."RoleId" = @__role_Id_0
+2025-12-05 14:46:50.944 -05:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2025-12-05 14:46:50.958 -05:00 [INF] User admin@eventhub.local logged in successfully from IP ::1
+2025-12-05 14:46:50.964 -05:00 [INF] Executed handler method OnPostAsync, returned result Microsoft.AspNetCore.Mvc.LocalRedirectResult.
+2025-12-05 14:46:50.969 -05:00 [INF] Executing LocalRedirectResult, redirecting to /.
+2025-12-05 14:46:50.970 -05:00 [INF] Executed page /Account/Login in 1354.9186ms
+2025-12-05 14:46:50.971 -05:00 [INF] Executed endpoint '/Account/Login'
+2025-12-05 14:46:50.977 -05:00 [INF] HTTP POST /Identity/Account/Login responded 302 in 1370.0899 ms
+2025-12-05 14:46:50.982 -05:00 [INF] Request finished HTTP/1.1 POST http://localhost:5084/Identity/Account/Login - 302 0 null 1378.7864ms
+2025-12-05 14:46:50.984 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/ - null null
+2025-12-05 14:46:50.987 -05:00 [INF] Executing endpoint 'Assignment1.Controllers.HomeController.Index (Assignment1)'
+2025-12-05 14:46:50.988 -05:00 [INF] Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Assignment1.Controllers.HomeController (Assignment1).
+2025-12-05 14:46:50.991 -05:00 [INF] Executing action method Assignment1.Controllers.HomeController.Index (Assignment1) - Validation state: "Valid"
+2025-12-05 14:46:50.992 -05:00 [INF] Executed action method Assignment1.Controllers.HomeController.Index (Assignment1), returned result Microsoft.AspNetCore.Mvc.ViewResult in 0.0348ms.
+2025-12-05 14:46:50.992 -05:00 [INF] Executing ViewResult, running view Index.
+2025-12-05 14:46:50.999 -05:00 [INF] Executed ViewResult - view Index executed in 6.2206ms.
+2025-12-05 14:46:51.000 -05:00 [INF] Executed action Assignment1.Controllers.HomeController.Index (Assignment1) in 9.4009ms
+2025-12-05 14:46:51.001 -05:00 [INF] Executed endpoint 'Assignment1.Controllers.HomeController.Index (Assignment1)'
+2025-12-05 14:46:51.002 -05:00 [INF] HTTP GET / responded 200 in 16.8667 ms
+2025-12-05 14:46:51.008 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/ - 200 null text/html; charset=utf-8 24.46ms
+2025-12-05 14:46:57.168 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/Admin/Users - null null
+2025-12-05 14:46:57.177 -05:00 [INF] Executing endpoint 'Assignment1.Controllers.AdminController.Users (Assignment1)'
+2025-12-05 14:46:57.179 -05:00 [INF] Route matched with {action = "Users", controller = "Admin", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Users() on controller Assignment1.Controllers.AdminController (Assignment1).
+2025-12-05 14:46:57.181 -05:00 [INF] Executing action method Assignment1.Controllers.AdminController.Users (Assignment1) - Validation state: "Valid"
+2025-12-05 14:46:57.281 -05:00 [INF] Executed DbCommand (86ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."DateOfBirth", a."Email", a."EmailConfirmed", a."FullName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."ProfilePictureUrl", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+2025-12-05 14:46:57.390 -05:00 [INF] Executed DbCommand (87ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-12-05 14:46:57.487 -05:00 [INF] Executed DbCommand (89ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-12-05 14:46:57.595 -05:00 [INF] Executed DbCommand (101ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-12-05 14:46:57.687 -05:00 [INF] Executed DbCommand (86ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-12-05 14:46:57.781 -05:00 [INF] Executed DbCommand (89ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-12-05 14:46:57.872 -05:00 [INF] Executed DbCommand (87ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-12-05 14:46:57.895 -05:00 [INF] Executed action method Assignment1.Controllers.AdminController.Users (Assignment1), returned result Microsoft.AspNetCore.Mvc.ViewResult in 713.6369ms.
+2025-12-05 14:46:57.901 -05:00 [INF] Executing ViewResult, running view Users.
+2025-12-05 14:46:57.915 -05:00 [INF] Executed ViewResult - view Users executed in 15.1428ms.
+2025-12-05 14:46:57.917 -05:00 [INF] Executed action Assignment1.Controllers.AdminController.Users (Assignment1) in 736.4264ms
+2025-12-05 14:46:57.918 -05:00 [INF] Executed endpoint 'Assignment1.Controllers.AdminController.Users (Assignment1)'
+2025-12-05 14:46:57.919 -05:00 [INF] HTTP GET /Admin/Users responded 200 in 748.6222 ms
+2025-12-05 14:46:57.924 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/Admin/Users - 200 null text/html; charset=utf-8 756.2399ms
+2025-12-05 14:47:08.347 -05:00 [INF] Request starting HTTP/1.1 POST http://localhost:5084/Admin/DeleteUser - application/x-www-form-urlencoded 269
+2025-12-05 14:47:08.352 -05:00 [INF] Executing endpoint 'Assignment1.Controllers.AdminController.DeleteUser (Assignment1)'
+2025-12-05 14:47:08.355 -05:00 [INF] Route matched with {action = "DeleteUser", controller = "Admin", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] DeleteUser(System.String) on controller Assignment1.Controllers.AdminController (Assignment1).
+2025-12-05 14:47:08.358 -05:00 [INF] Executing action method Assignment1.Controllers.AdminController.DeleteUser (Assignment1) - Validation state: "Valid"
+2025-12-05 14:47:08.470 -05:00 [INF] Executed DbCommand (105ms) [Parameters=[@__p_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."DateOfBirth", a."Email", a."EmailConfirmed", a."FullName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."ProfilePictureUrl", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."Id" = @__p_0
+LIMIT 1
+2025-12-05 14:47:08.703 -05:00 [INF] Executed DbCommand (91ms) [Parameters=[@p0='?', @p1='?'], CommandType='"Text"', CommandTimeout='30']
+DELETE FROM "AspNetUsers"
+WHERE "Id" = @p0 AND "ConcurrencyStamp" = @p1;
+2025-12-05 14:47:08.721 -05:00 [INF] Executed action method Assignment1.Controllers.AdminController.DeleteUser (Assignment1), returned result Microsoft.AspNetCore.Mvc.RedirectToActionResult in 362.2255ms.
+2025-12-05 14:47:08.724 -05:00 [INF] Executing RedirectResult, redirecting to /Admin/Users.
+2025-12-05 14:47:08.726 -05:00 [INF] Executed action Assignment1.Controllers.AdminController.DeleteUser (Assignment1) in 369.1253ms
+2025-12-05 14:47:08.727 -05:00 [INF] Executed endpoint 'Assignment1.Controllers.AdminController.DeleteUser (Assignment1)'
+2025-12-05 14:47:08.728 -05:00 [INF] HTTP POST /Admin/DeleteUser responded 302 in 379.3174 ms
+2025-12-05 14:47:08.730 -05:00 [INF] Request finished HTTP/1.1 POST http://localhost:5084/Admin/DeleteUser - 302 0 null 383.0378ms
+2025-12-05 14:47:08.740 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/Admin/Users - null null
+2025-12-05 14:47:08.745 -05:00 [INF] Executing endpoint 'Assignment1.Controllers.AdminController.Users (Assignment1)'
+2025-12-05 14:47:08.745 -05:00 [INF] Route matched with {action = "Users", controller = "Admin", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Users() on controller Assignment1.Controllers.AdminController (Assignment1).
+2025-12-05 14:47:08.747 -05:00 [INF] Executing action method Assignment1.Controllers.AdminController.Users (Assignment1) - Validation state: "Valid"
+2025-12-05 14:47:08.836 -05:00 [INF] Executed DbCommand (87ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."DateOfBirth", a."Email", a."EmailConfirmed", a."FullName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."ProfilePictureUrl", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+2025-12-05 14:47:08.930 -05:00 [INF] Executed DbCommand (86ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-12-05 14:47:09.017 -05:00 [INF] Executed DbCommand (85ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-12-05 14:47:09.120 -05:00 [INF] Executed DbCommand (101ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-12-05 14:47:09.208 -05:00 [INF] Executed DbCommand (84ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-12-05 14:47:09.298 -05:00 [INF] Executed DbCommand (86ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-12-05 14:47:09.302 -05:00 [INF] Executed action method Assignment1.Controllers.AdminController.Users (Assignment1), returned result Microsoft.AspNetCore.Mvc.ViewResult in 554.3415ms.
+2025-12-05 14:47:09.305 -05:00 [INF] Executing ViewResult, running view Users.
+2025-12-05 14:47:09.313 -05:00 [INF] Executed ViewResult - view Users executed in 8.7954ms.
+2025-12-05 14:47:09.320 -05:00 [INF] Executed action Assignment1.Controllers.AdminController.Users (Assignment1) in 572.4925ms
+2025-12-05 14:47:09.324 -05:00 [INF] Executed endpoint 'Assignment1.Controllers.AdminController.Users (Assignment1)'
+2025-12-05 14:47:09.326 -05:00 [INF] HTTP GET /Admin/Users responded 200 in 583.4006 ms
+2025-12-05 14:47:09.327 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/Admin/Users - 200 null text/html; charset=utf-8 587.0884ms
+2025-12-05 14:50:57.804 -05:00 [INF] Application is shutting down...
+2025-12-05 14:51:03.117 -05:00 [INF] User profile is available. Using 'C:\Users\ashka\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-12-05 14:51:04.872 -05:00 [INF] Executed DbCommand (122ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-12-05 14:51:05.007 -05:00 [INF] Executed DbCommand (88ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-12-05 14:51:05.097 -05:00 [INF] Executed DbCommand (88ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-12-05 14:51:05.211 -05:00 [INF] Executed DbCommand (105ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."DateOfBirth", a."Email", a."EmailConfirmed", a."FullName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."ProfilePictureUrl", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-12-05 14:51:05.397 -05:00 [INF] Executed DbCommand (159ms) [Parameters=[@__normalizedRoleName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedRoleName_0
+LIMIT 2
+2025-12-05 14:51:05.524 -05:00 [INF] Executed DbCommand (109ms) [Parameters=[@__p_0='?', @__p_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."UserId", a."RoleId"
+FROM "AspNetUserRoles" AS a
+WHERE a."UserId" = @__p_0 AND a."RoleId" = @__p_1
+LIMIT 1
+2025-12-05 14:51:05.661 -05:00 [INF] Executed DbCommand (120ms) [Parameters=[@__normalizedRoleName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedRoleName_0
+LIMIT 2
+2025-12-05 14:51:05.771 -05:00 [INF] Executed DbCommand (106ms) [Parameters=[@__p_0='?', @__p_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."UserId", a."RoleId"
+FROM "AspNetUserRoles" AS a
+WHERE a."UserId" = @__p_0 AND a."RoleId" = @__p_1
+LIMIT 1
+2025-12-05 14:51:05.880 -05:00 [INF] Executed DbCommand (106ms) [Parameters=[@__normalizedRoleName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedRoleName_0
+LIMIT 2
+2025-12-05 14:51:05.988 -05:00 [INF] Executed DbCommand (106ms) [Parameters=[@__p_0='?', @__p_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."UserId", a."RoleId"
+FROM "AspNetUserRoles" AS a
+WHERE a."UserId" = @__p_0 AND a."RoleId" = @__p_1
+LIMIT 1
+2025-12-05 14:51:05.993 -05:00 [INF] Starting application
+2025-12-05 14:51:06.041 -05:00 [INF] Now listening on: http://localhost:5084
+2025-12-05 14:51:06.044 -05:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-05 14:51:06.045 -05:00 [INF] Hosting environment: Development
+2025-12-05 14:51:06.045 -05:00 [INF] Content root path: C:\Users\ashka\OneDrive\Desktop\jafar\COMP2139-ASSIGNMENT-1
+2025-12-05 14:51:06.289 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/ - null null
+2025-12-05 14:51:06.313 -05:00 [WRN] Failed to determine the https port for redirect.
+2025-12-05 14:51:06.371 -05:00 [INF] Executing endpoint 'Assignment1.Controllers.HomeController.Index (Assignment1)'
+2025-12-05 14:51:06.393 -05:00 [INF] Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Assignment1.Controllers.HomeController (Assignment1).
+2025-12-05 14:51:06.405 -05:00 [INF] Executing action method Assignment1.Controllers.HomeController.Index (Assignment1) - Validation state: "Valid"
+2025-12-05 14:51:06.419 -05:00 [INF] Executed action method Assignment1.Controllers.HomeController.Index (Assignment1), returned result Microsoft.AspNetCore.Mvc.ViewResult in 1.3734ms.
+2025-12-05 14:51:06.445 -05:00 [INF] Executing ViewResult, running view Index.
+2025-12-05 14:51:06.580 -05:00 [INF] Executed ViewResult - view Index executed in 137.8842ms.
+2025-12-05 14:51:06.581 -05:00 [INF] Executed action Assignment1.Controllers.HomeController.Index (Assignment1) in 184.2781ms
+2025-12-05 14:51:06.582 -05:00 [INF] Executed endpoint 'Assignment1.Controllers.HomeController.Index (Assignment1)'
+2025-12-05 14:51:06.585 -05:00 [INF] HTTP GET / responded 200 in 272.1006 ms
+2025-12-05 14:51:06.587 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/css/site.css?v=9G1QJVx0ZIOX3jcAGmBJKGiOUe5r_DA7ZRGgBYfugv4 - null null
+2025-12-05 14:51:06.589 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/js/site.js?v=12TvawF91DhvTy28hqozziyVgr6ofAOcoQFw-ygfB9k - null null
+2025-12-05 14:51:06.595 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/ - 200 null text/html; charset=utf-8 306.8875ms
+2025-12-05 14:51:06.595 -05:00 [INF] The file /css/site.css was not modified
+2025-12-05 14:51:06.636 -05:00 [INF] HTTP GET /css/site.css responded 304 in 44.7683 ms
+2025-12-05 14:51:06.597 -05:00 [INF] The file /js/site.js was not modified
+2025-12-05 14:51:06.667 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/css/site.css?v=9G1QJVx0ZIOX3jcAGmBJKGiOUe5r_DA7ZRGgBYfugv4 - 304 null text/css 79.531ms
+2025-12-05 14:51:06.668 -05:00 [INF] HTTP GET /js/site.js responded 304 in 71.6193 ms
+2025-12-05 14:51:06.671 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/js/site.js?v=12TvawF91DhvTy28hqozziyVgr6ofAOcoQFw-ygfB9k - 304 null text/javascript 82.6378ms
+2025-12-05 14:51:07.949 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/Identity/Account/Login - null null
+2025-12-05 14:51:07.956 -05:00 [INF] Executing endpoint '/Account/Login'
+2025-12-05 14:51:07.976 -05:00 [INF] Route matched with {page = "/Account/Login", area = "Identity", action = "", controller = ""}. Executing page /Account/Login
+2025-12-05 14:51:07.996 -05:00 [INF] Executing handler method Assignment1.Areas.Identity.Pages.Account.LoginModel.OnGetAsync - ModelState is "Valid"
+2025-12-05 14:51:08.003 -05:00 [INF] AuthenticationScheme: Identity.External signed out.
+2025-12-05 14:51:08.008 -05:00 [INF] Executed handler method OnGetAsync, returned result .
+2025-12-05 14:51:08.014 -05:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2025-12-05 14:51:08.016 -05:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2025-12-05 14:51:08.079 -05:00 [INF] Executed page /Account/Login in 100.5464ms
+2025-12-05 14:51:08.080 -05:00 [INF] Executed endpoint '/Account/Login'
+2025-12-05 14:51:08.082 -05:00 [INF] HTTP GET /Identity/Account/Login responded 200 in 130.7341 ms
+2025-12-05 14:51:08.085 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/Identity/Account/Login - 200 null text/html; charset=utf-8 135.0564ms
+2025-12-05 14:51:09.773 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/Identity/Account/Register - null null
+2025-12-05 14:51:09.784 -05:00 [INF] Executing endpoint '/Account/Register'
+2025-12-05 14:51:09.796 -05:00 [INF] Route matched with {page = "/Account/Register", area = "Identity", action = "", controller = ""}. Executing page /Account/Register
+2025-12-05 14:51:09.808 -05:00 [INF] Executing handler method Assignment1.Areas.Identity.Pages.Account.RegisterModel.OnGetAsync - ModelState is "Valid"
+2025-12-05 14:51:09.810 -05:00 [INF] Executed handler method OnGetAsync, returned result .
+2025-12-05 14:51:09.811 -05:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2025-12-05 14:51:09.813 -05:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2025-12-05 14:51:09.852 -05:00 [INF] Executed page /Account/Register in 54.4231ms
+2025-12-05 14:51:09.853 -05:00 [INF] Executed endpoint '/Account/Register'
+2025-12-05 14:51:09.853 -05:00 [INF] HTTP GET /Identity/Account/Register responded 200 in 75.9655 ms
+2025-12-05 14:51:09.854 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/Identity/Account/Register - 200 null text/html; charset=utf-8 80.8944ms
+2025-12-05 14:51:25.584 -05:00 [INF] Request starting HTTP/1.1 POST http://localhost:5084/Identity/Account/Register - application/x-www-form-urlencoded 439
+2025-12-05 14:51:25.587 -05:00 [INF] Executing endpoint '/Account/Register'
+2025-12-05 14:51:25.587 -05:00 [INF] Route matched with {page = "/Account/Register", area = "Identity", action = "", controller = ""}. Executing page /Account/Register
+2025-12-05 14:51:25.603 -05:00 [INF] Executing handler method Assignment1.Areas.Identity.Pages.Account.RegisterModel.OnPostAsync - ModelState is "Valid"
+2025-12-05 14:51:25.791 -05:00 [INF] Executed DbCommand (143ms) [Parameters=[@__normalizedUserName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."DateOfBirth", a."Email", a."EmailConfirmed", a."FullName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."ProfilePictureUrl", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedUserName" = @__normalizedUserName_0
+LIMIT 1
+2025-12-05 14:51:25.806 -05:00 [INF] Executed handler method OnPostAsync, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2025-12-05 14:51:25.814 -05:00 [INF] Executed page /Account/Register in 226.2723ms
+2025-12-05 14:51:25.816 -05:00 [INF] Executed endpoint '/Account/Register'
+2025-12-05 14:51:25.817 -05:00 [INF] HTTP POST /Identity/Account/Register responded 200 in 230.9073 ms
+2025-12-05 14:51:25.822 -05:00 [INF] Request finished HTTP/1.1 POST http://localhost:5084/Identity/Account/Register - 200 null text/html; charset=utf-8 238.4692ms
+2025-12-05 14:51:40.023 -05:00 [INF] Request starting HTTP/1.1 POST http://localhost:5084/Identity/Account/Register - application/x-www-form-urlencoded 440
+2025-12-05 14:51:40.026 -05:00 [INF] Executing endpoint '/Account/Register'
+2025-12-05 14:51:40.026 -05:00 [INF] Route matched with {page = "/Account/Register", area = "Identity", action = "", controller = ""}. Executing page /Account/Register
+2025-12-05 14:51:40.029 -05:00 [INF] Executing handler method Assignment1.Areas.Identity.Pages.Account.RegisterModel.OnPostAsync - ModelState is "Valid"
+2025-12-05 14:51:40.125 -05:00 [INF] Executed DbCommand (88ms) [Parameters=[@__normalizedUserName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."DateOfBirth", a."Email", a."EmailConfirmed", a."FullName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."ProfilePictureUrl", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedUserName" = @__normalizedUserName_0
+LIMIT 1
+2025-12-05 14:51:40.400 -05:00 [INF] Executed DbCommand (144ms) [Parameters=[@__normalizedUserName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."DateOfBirth", a."Email", a."EmailConfirmed", a."FullName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."ProfilePictureUrl", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedUserName" = @__normalizedUserName_0
+LIMIT 1
+2025-12-05 14:51:40.498 -05:00 [INF] Executed DbCommand (87ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."DateOfBirth", a."Email", a."EmailConfirmed", a."FullName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."ProfilePictureUrl", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-12-05 14:51:40.505 -05:00 [INF] Executed handler method OnPostAsync, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2025-12-05 14:51:40.512 -05:00 [INF] Executed page /Account/Register in 484.6252ms
+2025-12-05 14:51:40.513 -05:00 [INF] Executed endpoint '/Account/Register'
+2025-12-05 14:51:40.514 -05:00 [INF] HTTP POST /Identity/Account/Register responded 200 in 488.1456 ms
+2025-12-05 14:51:40.515 -05:00 [INF] Request finished HTTP/1.1 POST http://localhost:5084/Identity/Account/Register - 200 null text/html; charset=utf-8 491.8242ms
+2025-12-05 14:51:56.271 -05:00 [INF] Request starting HTTP/1.1 POST http://localhost:5084/Identity/Account/Register - application/x-www-form-urlencoded 431
+2025-12-05 14:51:56.273 -05:00 [INF] Executing endpoint '/Account/Register'
+2025-12-05 14:51:56.274 -05:00 [INF] Route matched with {page = "/Account/Register", area = "Identity", action = "", controller = ""}. Executing page /Account/Register
+2025-12-05 14:51:56.276 -05:00 [INF] Executing handler method Assignment1.Areas.Identity.Pages.Account.RegisterModel.OnPostAsync - ModelState is "Valid"
+2025-12-05 14:51:56.406 -05:00 [INF] Executed DbCommand (127ms) [Parameters=[@__normalizedUserName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."DateOfBirth", a."Email", a."EmailConfirmed", a."FullName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."ProfilePictureUrl", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedUserName" = @__normalizedUserName_0
+LIMIT 1
+2025-12-05 14:51:56.655 -05:00 [INF] Executed DbCommand (136ms) [Parameters=[@__normalizedUserName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."DateOfBirth", a."Email", a."EmailConfirmed", a."FullName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."ProfilePictureUrl", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedUserName" = @__normalizedUserName_0
+LIMIT 1
+2025-12-05 14:51:56.754 -05:00 [INF] Executed DbCommand (91ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."DateOfBirth", a."Email", a."EmailConfirmed", a."FullName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."ProfilePictureUrl", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-12-05 14:51:56.923 -05:00 [INF] Executed DbCommand (95ms) [Parameters=[@p0='?', @p1='?' (DbType = Int32), @p2='?', @p3='?' (DbType = DateTime), @p4='?', @p5='?' (DbType = Boolean), @p6='?', @p7='?' (DbType = Boolean), @p8='?' (DbType = DateTime), @p9='?', @p10='?', @p11='?', @p12='?', @p13='?' (DbType = Boolean), @p14='?', @p15='?', @p16='?' (DbType = Boolean), @p17='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "AspNetUsers" ("Id", "AccessFailedCount", "ConcurrencyStamp", "DateOfBirth", "Email", "EmailConfirmed", "FullName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "ProfilePictureUrl", "SecurityStamp", "TwoFactorEnabled", "UserName")
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14, @p15, @p16, @p17);
+2025-12-05 14:51:56.935 -05:00 [INF] User created a new account with password.
+2025-12-05 14:51:57.050 -05:00 [INF] Executed DbCommand (113ms) [Parameters=[@__normalizedRoleName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedRoleName_0
+LIMIT 2
+2025-12-05 14:51:57.163 -05:00 [INF] Executed DbCommand (99ms) [Parameters=[@__p_0='?', @__p_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."UserId", a."RoleId"
+FROM "AspNetUserRoles" AS a
+WHERE a."UserId" = @__p_0 AND a."RoleId" = @__p_1
+LIMIT 1
+2025-12-05 14:51:57.325 -05:00 [INF] Executed DbCommand (153ms) [Parameters=[@__normalizedRoleName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedRoleName_0
+LIMIT 2
+2025-12-05 14:51:57.422 -05:00 [INF] Executed DbCommand (86ms) [Parameters=[@__normalizedUserName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."DateOfBirth", a."Email", a."EmailConfirmed", a."FullName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."ProfilePictureUrl", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedUserName" = @__normalizedUserName_0
+LIMIT 1
+2025-12-05 14:51:57.510 -05:00 [INF] Executed DbCommand (85ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."DateOfBirth", a."Email", a."EmailConfirmed", a."FullName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."ProfilePictureUrl", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-12-05 14:51:57.637 -05:00 [INF] Executed DbCommand (101ms) [Parameters=[@p0='?', @p1='?', @p19='?', @p2='?' (DbType = Int32), @p3='?', @p20='?', @p4='?' (DbType = DateTime), @p5='?', @p6='?' (DbType = Boolean), @p7='?', @p8='?' (DbType = Boolean), @p9='?' (DbType = DateTime), @p10='?', @p11='?', @p12='?', @p13='?', @p14='?' (DbType = Boolean), @p15='?', @p16='?', @p17='?' (DbType = Boolean), @p18='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "AspNetUserRoles" ("RoleId", "UserId")
+VALUES (@p0, @p1);
+UPDATE "AspNetUsers" SET "AccessFailedCount" = @p2, "ConcurrencyStamp" = @p3, "DateOfBirth" = @p4, "Email" = @p5, "EmailConfirmed" = @p6, "FullName" = @p7, "LockoutEnabled" = @p8, "LockoutEnd" = @p9, "NormalizedEmail" = @p10, "NormalizedUserName" = @p11, "PasswordHash" = @p12, "PhoneNumber" = @p13, "PhoneNumberConfirmed" = @p14, "ProfilePictureUrl" = @p15, "SecurityStamp" = @p16, "TwoFactorEnabled" = @p17, "UserName" = @p18
+WHERE "Id" = @p19 AND "ConcurrencyStamp" = @p20;
+2025-12-05 14:51:59.428 -05:00 [INF] Email sent to asd123@gmail.com
+2025-12-05 14:51:59.433 -05:00 [INF] Executed handler method OnPostAsync, returned result Microsoft.AspNetCore.Mvc.RedirectToPageResult.
+2025-12-05 14:51:59.444 -05:00 [INF] Executing RedirectToPageResult, redirecting to RegisterConfirmation.
+2025-12-05 14:51:59.448 -05:00 [INF] Executed page /Account/Register in 3173.3855ms
+2025-12-05 14:51:59.451 -05:00 [INF] Executed endpoint '/Account/Register'
+2025-12-05 14:51:59.452 -05:00 [INF] HTTP POST /Identity/Account/Register responded 302 in 3179.2874 ms
+2025-12-05 14:51:59.455 -05:00 [INF] Request finished HTTP/1.1 POST http://localhost:5084/Identity/Account/Register - 302 0 null 3183.411ms
+2025-12-05 14:51:59.465 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/Identity/Account/RegisterConfirmation?email=asd123@gmail.com&returnUrl=%2F - null null
+2025-12-05 14:51:59.468 -05:00 [INF] Executing endpoint '/Account/RegisterConfirmation'
+2025-12-05 14:51:59.480 -05:00 [INF] Route matched with {page = "/Account/RegisterConfirmation", area = "Identity", action = "", controller = ""}. Executing page /Account/RegisterConfirmation
+2025-12-05 14:51:59.494 -05:00 [INF] Executing handler method Assignment1.Areas.Identity.Pages.Account.RegisterConfirmationModel.OnGetAsync - ModelState is "Valid"
+2025-12-05 14:51:59.608 -05:00 [INF] Executed DbCommand (104ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."DateOfBirth", a."Email", a."EmailConfirmed", a."FullName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."ProfilePictureUrl", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 1
+2025-12-05 14:51:59.615 -05:00 [INF] Executed handler method OnGetAsync, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2025-12-05 14:51:59.620 -05:00 [INF] Executed page /Account/RegisterConfirmation in 136.0313ms
+2025-12-05 14:51:59.628 -05:00 [INF] Executed endpoint '/Account/RegisterConfirmation'
+2025-12-05 14:51:59.644 -05:00 [INF] HTTP GET /Identity/Account/RegisterConfirmation responded 200 in 176.5897 ms
+2025-12-05 14:51:59.648 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/Identity/Account/RegisterConfirmation?email=asd123@gmail.com&returnUrl=%2F - 200 null text/html; charset=utf-8 182.1415ms
+2025-12-05 14:52:06.080 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/Identity/Account/ConfirmEmail?userId=66942cea-572c-4dce-b6d3-c865565758c6&code=Q2ZESjhOd2c2OGZER2xsRGlsMjIrVW8rb3JWMHdMZEVwMDJUYnE2L2RUei91T2JTWmNLQWJ0ZXhxSURGSWxoMG00a3J1TzhiVmhOcFN2elpVR1pXT0VUUkRUSmprcEQxK3lLcHVaQWN3VGxjRWc4S2hpNU5ncnNJbEt0VTBpbTJFbUtjUDZoYVRseTlLcmx3cU1VclVKMk9GdXVKY05TR3NNcWVkTXNBaStMcVFWaW9zTDhiRVJRNGlROVI2RHUrcUhNM2ZwQ3ZjM285cDNpSU5kWUNsS2YvdUpwU0FCcE5PLzB2dzdzVzd3bWNtY0ZvQVpLdGFHZDU4MUN6aDRacWxuSTAzUT09&returnUrl=%2F - null null
+2025-12-05 14:52:06.082 -05:00 [INF] Executing endpoint '/Account/ConfirmEmail'
+2025-12-05 14:52:06.085 -05:00 [INF] Route matched with {page = "/Account/ConfirmEmail", area = "Identity", action = "", controller = ""}. Executing page /Account/ConfirmEmail
+2025-12-05 14:52:06.086 -05:00 [INF] Executing handler method Assignment1.Areas.Identity.Pages.Account.ConfirmEmailModel.OnGetAsync - ModelState is "Valid"
+2025-12-05 14:52:06.182 -05:00 [INF] Executed DbCommand (89ms) [Parameters=[@__p_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."DateOfBirth", a."Email", a."EmailConfirmed", a."FullName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."ProfilePictureUrl", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."Id" = @__p_0
+LIMIT 1
+2025-12-05 14:52:06.279 -05:00 [INF] Executed DbCommand (92ms) [Parameters=[@__normalizedUserName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."DateOfBirth", a."Email", a."EmailConfirmed", a."FullName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."ProfilePictureUrl", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedUserName" = @__normalizedUserName_0
+LIMIT 1
+2025-12-05 14:52:06.370 -05:00 [INF] Executed DbCommand (87ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."DateOfBirth", a."Email", a."EmailConfirmed", a."FullName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."ProfilePictureUrl", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-12-05 14:52:06.480 -05:00 [INF] Executed DbCommand (104ms) [Parameters=[@p17='?', @p0='?' (DbType = Int32), @p1='?', @p18='?', @p2='?' (DbType = DateTime), @p3='?', @p4='?' (DbType = Boolean), @p5='?', @p6='?' (DbType = Boolean), @p7='?' (DbType = DateTime), @p8='?', @p9='?', @p10='?', @p11='?', @p12='?' (DbType = Boolean), @p13='?', @p14='?', @p15='?' (DbType = Boolean), @p16='?'], CommandType='"Text"', CommandTimeout='30']
+UPDATE "AspNetUsers" SET "AccessFailedCount" = @p0, "ConcurrencyStamp" = @p1, "DateOfBirth" = @p2, "Email" = @p3, "EmailConfirmed" = @p4, "FullName" = @p5, "LockoutEnabled" = @p6, "LockoutEnd" = @p7, "NormalizedEmail" = @p8, "NormalizedUserName" = @p9, "PasswordHash" = @p10, "PhoneNumber" = @p11, "PhoneNumberConfirmed" = @p12, "ProfilePictureUrl" = @p13, "SecurityStamp" = @p14, "TwoFactorEnabled" = @p15, "UserName" = @p16
+WHERE "Id" = @p17 AND "ConcurrencyStamp" = @p18;
+2025-12-05 14:52:06.529 -05:00 [INF] Executed handler method OnGetAsync, returned result Microsoft.AspNetCore.Mvc.LocalRedirectResult.
+2025-12-05 14:52:06.531 -05:00 [INF] Executing LocalRedirectResult, redirecting to /.
+2025-12-05 14:52:06.532 -05:00 [INF] Executed page /Account/ConfirmEmail in 446.6883ms
+2025-12-05 14:52:06.533 -05:00 [INF] Executed endpoint '/Account/ConfirmEmail'
+2025-12-05 14:52:06.534 -05:00 [INF] HTTP GET /Identity/Account/ConfirmEmail responded 302 in 452.4167 ms
+2025-12-05 14:52:06.535 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/Identity/Account/ConfirmEmail?userId=66942cea-572c-4dce-b6d3-c865565758c6&code=Q2ZESjhOd2c2OGZER2xsRGlsMjIrVW8rb3JWMHdMZEVwMDJUYnE2L2RUei91T2JTWmNLQWJ0ZXhxSURGSWxoMG00a3J1TzhiVmhOcFN2elpVR1pXT0VUUkRUSmprcEQxK3lLcHVaQWN3VGxjRWc4S2hpNU5ncnNJbEt0VTBpbTJFbUtjUDZoYVRseTlLcmx3cU1VclVKMk9GdXVKY05TR3NNcWVkTXNBaStMcVFWaW9zTDhiRVJRNGlROVI2RHUrcUhNM2ZwQ3ZjM285cDNpSU5kWUNsS2YvdUpwU0FCcE5PLzB2dzdzVzd3bWNtY0ZvQVpLdGFHZDU4MUN6aDRacWxuSTAzUT09&returnUrl=%2F - 302 0 null 455.8447ms
+2025-12-05 14:52:06.545 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/ - null null
+2025-12-05 14:52:06.550 -05:00 [INF] Executing endpoint 'Assignment1.Controllers.HomeController.Index (Assignment1)'
+2025-12-05 14:52:06.551 -05:00 [INF] Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Assignment1.Controllers.HomeController (Assignment1).
+2025-12-05 14:52:06.554 -05:00 [INF] Executing action method Assignment1.Controllers.HomeController.Index (Assignment1) - Validation state: "Valid"
+2025-12-05 14:52:06.555 -05:00 [INF] Executed action method Assignment1.Controllers.HomeController.Index (Assignment1), returned result Microsoft.AspNetCore.Mvc.ViewResult in 0.0503ms.
+2025-12-05 14:52:06.556 -05:00 [INF] Executing ViewResult, running view Index.
+2025-12-05 14:52:06.559 -05:00 [INF] Executed ViewResult - view Index executed in 2.775ms.
+2025-12-05 14:52:06.560 -05:00 [INF] Executed action Assignment1.Controllers.HomeController.Index (Assignment1) in 6.378ms
+2025-12-05 14:52:06.561 -05:00 [INF] Executed endpoint 'Assignment1.Controllers.HomeController.Index (Assignment1)'
+2025-12-05 14:52:06.562 -05:00 [INF] HTTP GET / responded 200 in 12.0489 ms
+2025-12-05 14:52:06.563 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/ - 200 null text/html; charset=utf-8 17.6986ms
+2025-12-05 14:52:06.566 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/css/site.css?v=9G1QJVx0ZIOX3jcAGmBJKGiOUe5r_DA7ZRGgBYfugv4 - null null
+2025-12-05 14:52:06.567 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/js/site.js?v=12TvawF91DhvTy28hqozziyVgr6ofAOcoQFw-ygfB9k - null null
+2025-12-05 14:52:06.573 -05:00 [INF] The file /css/site.css was not modified
+2025-12-05 14:52:06.575 -05:00 [INF] The file /js/site.js was not modified
+2025-12-05 14:52:06.575 -05:00 [INF] HTTP GET /js/site.js responded 304 in 0.6678 ms
+2025-12-05 14:52:06.576 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/js/site.js?v=12TvawF91DhvTy28hqozziyVgr6ofAOcoQFw-ygfB9k - 304 null text/javascript 10.2212ms
+2025-12-05 14:52:06.575 -05:00 [INF] HTTP GET /css/site.css responded 304 in 2.5571 ms
+2025-12-05 14:52:06.581 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/css/site.css?v=9G1QJVx0ZIOX3jcAGmBJKGiOUe5r_DA7ZRGgBYfugv4 - 304 null text/css 14.6689ms
+2025-12-05 14:52:08.580 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/ - null null
+2025-12-05 14:52:08.583 -05:00 [INF] Executing endpoint 'Assignment1.Controllers.HomeController.Index (Assignment1)'
+2025-12-05 14:52:08.584 -05:00 [INF] Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Assignment1.Controllers.HomeController (Assignment1).
+2025-12-05 14:52:08.586 -05:00 [INF] Executing action method Assignment1.Controllers.HomeController.Index (Assignment1) - Validation state: "Valid"
+2025-12-05 14:52:08.586 -05:00 [INF] Executed action method Assignment1.Controllers.HomeController.Index (Assignment1), returned result Microsoft.AspNetCore.Mvc.ViewResult in 0.0202ms.
+2025-12-05 14:52:08.588 -05:00 [INF] Executing ViewResult, running view Index.
+2025-12-05 14:52:08.589 -05:00 [INF] Executed ViewResult - view Index executed in 1.6731ms.
+2025-12-05 14:52:08.593 -05:00 [INF] Executed action Assignment1.Controllers.HomeController.Index (Assignment1) in 6.8402ms
+2025-12-05 14:52:08.594 -05:00 [INF] Executed endpoint 'Assignment1.Controllers.HomeController.Index (Assignment1)'
+2025-12-05 14:52:08.595 -05:00 [INF] HTTP GET / responded 200 in 12.2710 ms
+2025-12-05 14:52:08.596 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/ - 200 null text/html; charset=utf-8 15.9466ms
+2025-12-05 14:52:09.220 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/Events - null null
+2025-12-05 14:52:09.221 -05:00 [INF] Executing endpoint 'Assignment1.Controllers.EventsController.Index (Assignment1)'
+2025-12-05 14:52:09.226 -05:00 [INF] Route matched with {action = "Index", controller = "Events", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index(System.String, System.String, System.String, System.String, System.String) on controller Assignment1.Controllers.EventsController (Assignment1).
+2025-12-05 14:52:09.229 -05:00 [INF] Executing action method Assignment1.Controllers.EventsController.Index (Assignment1) - Validation state: "Valid"
+2025-12-05 14:52:09.392 -05:00 [INF] Executed DbCommand (91ms) [Parameters=[@__now_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT e."EventId", e."AvailableTickets", e."Category", e."CreatedByUserId", e."Date", e."Description", e."ImageUrl", e."Price", e."Title", e0."EventRatingId", e0."EventId", e0."GuestEmail", e0."RatedAtUtc", e0."Rating", e0."UserId"
+FROM "Events" AS e
+LEFT JOIN "EventRatings" AS e0 ON e."EventId" = e0."EventId"
+ORDER BY CASE
+    WHEN e."Date" < @__now_0 THEN 1
+    ELSE 0
+END, CASE
+    WHEN e."Date" >= @__now_0 AND e."AvailableTickets" <= 5 THEN 0
+    ELSE 1
+END, e."Date", e."EventId"
+2025-12-05 14:52:09.438 -05:00 [INF] Executed action method Assignment1.Controllers.EventsController.Index (Assignment1), returned result Microsoft.AspNetCore.Mvc.ViewResult in 208.45ms.
+2025-12-05 14:52:09.442 -05:00 [INF] Executing ViewResult, running view Index.
+2025-12-05 14:52:09.483 -05:00 [INF] Executed ViewResult - view Index executed in 41.2612ms.
+2025-12-05 14:52:09.484 -05:00 [INF] Executed action Assignment1.Controllers.EventsController.Index (Assignment1) in 256.4618ms
+2025-12-05 14:52:09.484 -05:00 [INF] Executed endpoint 'Assignment1.Controllers.EventsController.Index (Assignment1)'
+2025-12-05 14:52:09.485 -05:00 [INF] HTTP GET /Events responded 200 in 263.8331 ms
+2025-12-05 14:52:09.486 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/Events - 200 null text/html; charset=utf-8 266.4219ms
+2025-12-05 14:52:18.516 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/Tickets - null null
+2025-12-05 14:52:18.518 -05:00 [INF] Executing endpoint 'Assignment1.Controllers.TicketsController.Index (Assignment1)'
+2025-12-05 14:52:18.522 -05:00 [INF] Route matched with {action = "Index", controller = "Tickets", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index(System.String, System.String, System.Nullable`1[System.Decimal], System.Nullable`1[System.Decimal], System.String, System.String, System.String, System.Nullable`1[System.Int32]) on controller Assignment1.Controllers.TicketsController (Assignment1).
+2025-12-05 14:52:18.527 -05:00 [INF] Executing action method Assignment1.Controllers.TicketsController.Index (Assignment1) - Validation state: "Valid"
+2025-12-05 14:52:18.627 -05:00 [INF] Executed DbCommand (91ms) [Parameters=[@__now_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT e."EventId", e."AvailableTickets", e."Category", e."CreatedByUserId", e."Date", e."Description", e."ImageUrl", e."Price", e."Title", e0."EventRatingId", e0."EventId", e0."GuestEmail", e0."RatedAtUtc", e0."Rating", e0."UserId"
+FROM "Events" AS e
+LEFT JOIN "EventRatings" AS e0 ON e."EventId" = e0."EventId"
+ORDER BY CASE
+    WHEN e."Date" < @__now_0 THEN 1
+    ELSE 0
+END, CASE
+    WHEN e."Date" >= @__now_0 AND e."AvailableTickets" <= 5 THEN 0
+    ELSE 1
+END, e."Date", e."EventId"
+2025-12-05 14:52:18.647 -05:00 [INF] Executed action method Assignment1.Controllers.TicketsController.Index (Assignment1), returned result Microsoft.AspNetCore.Mvc.ViewResult in 119.1291ms.
+2025-12-05 14:52:18.650 -05:00 [INF] Executing ViewResult, running view Index.
+2025-12-05 14:52:18.686 -05:00 [INF] Executed ViewResult - view Index executed in 37.56ms.
+2025-12-05 14:52:18.688 -05:00 [INF] Executed action Assignment1.Controllers.TicketsController.Index (Assignment1) in 162.4217ms
+2025-12-05 14:52:18.688 -05:00 [INF] Executed endpoint 'Assignment1.Controllers.TicketsController.Index (Assignment1)'
+2025-12-05 14:52:18.690 -05:00 [INF] HTTP GET /Tickets responded 200 in 171.9965 ms
+2025-12-05 14:52:18.693 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/Tickets - 200 null text/html; charset=utf-8 176.6339ms
+2025-12-05 14:54:06.173 -05:00 [INF] Application is shutting down...
+2025-12-05 14:54:10.866 -05:00 [INF] User profile is available. Using 'C:\Users\ashka\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-12-05 14:54:12.817 -05:00 [INF] Executed DbCommand (127ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-12-05 14:54:13.040 -05:00 [INF] Executed DbCommand (168ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-12-05 14:54:13.150 -05:00 [INF] Executed DbCommand (108ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-12-05 14:54:13.256 -05:00 [INF] Executed DbCommand (97ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."DateOfBirth", a."Email", a."EmailConfirmed", a."FullName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."ProfilePictureUrl", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-12-05 14:54:13.388 -05:00 [INF] Executed DbCommand (88ms) [Parameters=[@__normalizedRoleName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedRoleName_0
+LIMIT 2
+2025-12-05 14:54:13.506 -05:00 [INF] Executed DbCommand (101ms) [Parameters=[@__p_0='?', @__p_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."UserId", a."RoleId"
+FROM "AspNetUserRoles" AS a
+WHERE a."UserId" = @__p_0 AND a."RoleId" = @__p_1
+LIMIT 1
+2025-12-05 14:54:13.703 -05:00 [INF] Executed DbCommand (186ms) [Parameters=[@__normalizedRoleName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedRoleName_0
+LIMIT 2
+2025-12-05 14:54:13.801 -05:00 [INF] Executed DbCommand (95ms) [Parameters=[@__p_0='?', @__p_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."UserId", a."RoleId"
+FROM "AspNetUserRoles" AS a
+WHERE a."UserId" = @__p_0 AND a."RoleId" = @__p_1
+LIMIT 1
+2025-12-05 14:54:13.895 -05:00 [INF] Executed DbCommand (86ms) [Parameters=[@__normalizedRoleName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedRoleName_0
+LIMIT 2
+2025-12-05 14:54:13.985 -05:00 [INF] Executed DbCommand (88ms) [Parameters=[@__p_0='?', @__p_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."UserId", a."RoleId"
+FROM "AspNetUserRoles" AS a
+WHERE a."UserId" = @__p_0 AND a."RoleId" = @__p_1
+LIMIT 1
+2025-12-05 14:54:13.990 -05:00 [INF] Starting application
+2025-12-05 14:54:14.031 -05:00 [INF] Now listening on: http://localhost:5084
+2025-12-05 14:54:14.032 -05:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-05 14:54:14.033 -05:00 [INF] Hosting environment: Development
+2025-12-05 14:54:14.034 -05:00 [INF] Content root path: C:\Users\ashka\OneDrive\Desktop\jafar\COMP2139-ASSIGNMENT-1
+2025-12-05 14:54:14.566 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/ - null null
+2025-12-05 14:54:14.603 -05:00 [WRN] Failed to determine the https port for redirect.
+2025-12-05 14:54:14.635 -05:00 [INF] Executing endpoint 'Assignment1.Controllers.HomeController.Index (Assignment1)'
+2025-12-05 14:54:14.642 -05:00 [INF] Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Assignment1.Controllers.HomeController (Assignment1).
+2025-12-05 14:54:14.647 -05:00 [INF] Executing action method Assignment1.Controllers.HomeController.Index (Assignment1) - Validation state: "Valid"
+2025-12-05 14:54:14.650 -05:00 [INF] Executed action method Assignment1.Controllers.HomeController.Index (Assignment1), returned result Microsoft.AspNetCore.Mvc.ViewResult in 0.4875ms.
+2025-12-05 14:54:14.660 -05:00 [INF] Executing ViewResult, running view Index.
+2025-12-05 14:54:14.802 -05:00 [INF] Executed ViewResult - view Index executed in 142.3889ms.
+2025-12-05 14:54:14.811 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/css/site.css?v=9G1QJVx0ZIOX3jcAGmBJKGiOUe5r_DA7ZRGgBYfugv4 - null null
+2025-12-05 14:54:14.811 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/js/site.js?v=12TvawF91DhvTy28hqozziyVgr6ofAOcoQFw-ygfB9k - null null
+2025-12-05 14:54:14.820 -05:00 [INF] Executed action Assignment1.Controllers.HomeController.Index (Assignment1) in 177.0087ms
+2025-12-05 14:54:14.829 -05:00 [INF] The file /css/site.css was not modified
+2025-12-05 14:54:14.831 -05:00 [INF] The file /js/site.js was not modified
+2025-12-05 14:54:14.832 -05:00 [INF] Executed endpoint 'Assignment1.Controllers.HomeController.Index (Assignment1)'
+2025-12-05 14:54:14.836 -05:00 [INF] HTTP GET /css/site.css responded 304 in 11.0899 ms
+2025-12-05 14:54:14.837 -05:00 [INF] HTTP GET /js/site.js responded 304 in 6.6330 ms
+2025-12-05 14:54:14.839 -05:00 [INF] HTTP GET / responded 200 in 238.0883 ms
+2025-12-05 14:54:14.840 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/css/site.css?v=9G1QJVx0ZIOX3jcAGmBJKGiOUe5r_DA7ZRGgBYfugv4 - 304 null text/css 29.06ms
+2025-12-05 14:54:14.841 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/js/site.js?v=12TvawF91DhvTy28hqozziyVgr6ofAOcoQFw-ygfB9k - 304 null text/javascript 29.4825ms
+2025-12-05 14:54:14.844 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/ - 200 null text/html; charset=utf-8 285.2232ms
+2025-12-05 14:54:15.428 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/Events - null null
+2025-12-05 14:54:15.432 -05:00 [INF] Executing endpoint 'Assignment1.Controllers.EventsController.Index (Assignment1)'
+2025-12-05 14:54:15.448 -05:00 [INF] Route matched with {action = "Index", controller = "Events", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index(System.String, System.String, System.String, System.String, System.String) on controller Assignment1.Controllers.EventsController (Assignment1).
+2025-12-05 14:54:15.469 -05:00 [INF] Executing action method Assignment1.Controllers.EventsController.Index (Assignment1) - Validation state: "Valid"
+2025-12-05 14:54:15.662 -05:00 [INF] Executed DbCommand (89ms) [Parameters=[@__now_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT e."EventId", e."AvailableTickets", e."Category", e."CreatedByUserId", e."Date", e."Description", e."ImageUrl", e."Price", e."Title", e0."EventRatingId", e0."EventId", e0."GuestEmail", e0."RatedAtUtc", e0."Rating", e0."UserId"
+FROM "Events" AS e
+LEFT JOIN "EventRatings" AS e0 ON e."EventId" = e0."EventId"
+ORDER BY CASE
+    WHEN e."Date" < @__now_0 THEN 1
+    ELSE 0
+END, CASE
+    WHEN e."Date" >= @__now_0 AND e."AvailableTickets" <= 5 THEN 0
+    ELSE 1
+END, e."Date", e."EventId"
+2025-12-05 14:54:15.691 -05:00 [INF] Executed action method Assignment1.Controllers.EventsController.Index (Assignment1), returned result Microsoft.AspNetCore.Mvc.ViewResult in 220.5131ms.
+2025-12-05 14:54:15.694 -05:00 [INF] Executing ViewResult, running view Index.
+2025-12-05 14:54:15.744 -05:00 [INF] Executed ViewResult - view Index executed in 50.416ms.
+2025-12-05 14:54:15.746 -05:00 [INF] Executed action Assignment1.Controllers.EventsController.Index (Assignment1) in 296.5489ms
+2025-12-05 14:54:15.747 -05:00 [INF] Executed endpoint 'Assignment1.Controllers.EventsController.Index (Assignment1)'
+2025-12-05 14:54:15.749 -05:00 [INF] HTTP GET /Events responded 200 in 319.7059 ms
+2025-12-05 14:54:15.756 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/Events - 200 null text/html; charset=utf-8 328.3235ms
+2025-12-05 14:54:17.945 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/Identity/Account/Login - null null
+2025-12-05 14:54:17.951 -05:00 [INF] Executing endpoint '/Account/Login'
+2025-12-05 14:54:17.963 -05:00 [INF] Route matched with {page = "/Account/Login", area = "Identity", action = "", controller = ""}. Executing page /Account/Login
+2025-12-05 14:54:17.972 -05:00 [INF] Executing handler method Assignment1.Areas.Identity.Pages.Account.LoginModel.OnGetAsync - ModelState is "Valid"
+2025-12-05 14:54:17.977 -05:00 [INF] AuthenticationScheme: Identity.External signed out.
+2025-12-05 14:54:17.978 -05:00 [INF] Executed handler method OnGetAsync, returned result .
+2025-12-05 14:54:17.981 -05:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2025-12-05 14:54:17.982 -05:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2025-12-05 14:54:18.013 -05:00 [INF] Executed page /Account/Login in 48.9001ms
+2025-12-05 14:54:18.013 -05:00 [INF] Executed endpoint '/Account/Login'
+2025-12-05 14:54:18.014 -05:00 [INF] HTTP GET /Identity/Account/Login responded 200 in 66.1269 ms
+2025-12-05 14:54:18.015 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/Identity/Account/Login - 200 null text/html; charset=utf-8 69.9124ms
+2025-12-05 14:54:19.670 -05:00 [INF] Request starting HTTP/1.1 POST http://localhost:5084/Identity/Account/Login - application/x-www-form-urlencoded 272
+2025-12-05 14:54:19.681 -05:00 [INF] Executing endpoint '/Account/Login'
+2025-12-05 14:54:19.722 -05:00 [INF] Route matched with {page = "/Account/Login", area = "Identity", action = "", controller = ""}. Executing page /Account/Login
+2025-12-05 14:54:19.734 -05:00 [INF] Executing handler method Assignment1.Areas.Identity.Pages.Account.LoginModel.OnPostAsync - ModelState is "Valid"
+2025-12-05 14:54:19.858 -05:00 [INF] Executed DbCommand (108ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."DateOfBirth", a."Email", a."EmailConfirmed", a."FullName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."ProfilePictureUrl", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 1
+2025-12-05 14:54:19.959 -05:00 [INF] Executed DbCommand (90ms) [Parameters=[@__normalizedUserName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."DateOfBirth", a."Email", a."EmailConfirmed", a."FullName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."ProfilePictureUrl", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedUserName" = @__normalizedUserName_0
+LIMIT 1
+2025-12-05 14:54:20.206 -05:00 [INF] Executed DbCommand (87ms) [Parameters=[@__user_Id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ClaimType", a."ClaimValue", a."UserId"
+FROM "AspNetUserClaims" AS a
+WHERE a."UserId" = @__user_Id_0
+2025-12-05 14:54:20.314 -05:00 [INF] Executed DbCommand (88ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-12-05 14:54:20.409 -05:00 [INF] Executed DbCommand (89ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-12-05 14:54:20.544 -05:00 [INF] Executed DbCommand (106ms) [Parameters=[@__role_Id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."ClaimType", a."ClaimValue"
+FROM "AspNetRoleClaims" AS a
+WHERE a."RoleId" = @__role_Id_0
+2025-12-05 14:54:20.703 -05:00 [INF] Executed DbCommand (146ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-12-05 14:54:20.796 -05:00 [INF] Executed DbCommand (89ms) [Parameters=[@__role_Id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."ClaimType", a."ClaimValue"
+FROM "AspNetRoleClaims" AS a
+WHERE a."RoleId" = @__role_Id_0
+2025-12-05 14:54:20.888 -05:00 [INF] Executed DbCommand (87ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-12-05 14:54:20.980 -05:00 [INF] Executed DbCommand (88ms) [Parameters=[@__role_Id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."ClaimType", a."ClaimValue"
+FROM "AspNetRoleClaims" AS a
+WHERE a."RoleId" = @__role_Id_0
+2025-12-05 14:54:20.985 -05:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2025-12-05 14:54:21.000 -05:00 [INF] User admin@eventhub.local logged in successfully from IP ::1
+2025-12-05 14:54:21.002 -05:00 [INF] Executed handler method OnPostAsync, returned result Microsoft.AspNetCore.Mvc.LocalRedirectResult.
+2025-12-05 14:54:21.004 -05:00 [INF] Executing LocalRedirectResult, redirecting to /.
+2025-12-05 14:54:21.005 -05:00 [INF] Executed page /Account/Login in 1281.7886ms
+2025-12-05 14:54:21.006 -05:00 [INF] Executed endpoint '/Account/Login'
+2025-12-05 14:54:21.007 -05:00 [INF] HTTP POST /Identity/Account/Login responded 302 in 1332.5182 ms
+2025-12-05 14:54:21.009 -05:00 [INF] Request finished HTTP/1.1 POST http://localhost:5084/Identity/Account/Login - 302 0 null 1339.8417ms
+2025-12-05 14:54:21.012 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/ - null null
+2025-12-05 14:54:21.015 -05:00 [INF] Executing endpoint 'Assignment1.Controllers.HomeController.Index (Assignment1)'
+2025-12-05 14:54:21.016 -05:00 [INF] Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Assignment1.Controllers.HomeController (Assignment1).
+2025-12-05 14:54:21.017 -05:00 [INF] Executing action method Assignment1.Controllers.HomeController.Index (Assignment1) - Validation state: "Valid"
+2025-12-05 14:54:21.018 -05:00 [INF] Executed action method Assignment1.Controllers.HomeController.Index (Assignment1), returned result Microsoft.AspNetCore.Mvc.ViewResult in 0.0167ms.
+2025-12-05 14:54:21.019 -05:00 [INF] Executing ViewResult, running view Index.
+2025-12-05 14:54:21.023 -05:00 [INF] Executed ViewResult - view Index executed in 4.3338ms.
+2025-12-05 14:54:21.023 -05:00 [INF] Executed action Assignment1.Controllers.HomeController.Index (Assignment1) in 6.513ms
+2025-12-05 14:54:21.024 -05:00 [INF] Executed endpoint 'Assignment1.Controllers.HomeController.Index (Assignment1)'
+2025-12-05 14:54:21.024 -05:00 [INF] HTTP GET / responded 200 in 11.1487 ms
+2025-12-05 14:54:21.025 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/ - 200 null text/html; charset=utf-8 13.0554ms
+2025-12-05 14:54:21.467 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/ - null null
+2025-12-05 14:54:21.470 -05:00 [INF] Executing endpoint 'Assignment1.Controllers.HomeController.Index (Assignment1)'
+2025-12-05 14:54:21.470 -05:00 [INF] Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Assignment1.Controllers.HomeController (Assignment1).
+2025-12-05 14:54:21.472 -05:00 [INF] Executing action method Assignment1.Controllers.HomeController.Index (Assignment1) - Validation state: "Valid"
+2025-12-05 14:54:21.472 -05:00 [INF] Executed action method Assignment1.Controllers.HomeController.Index (Assignment1), returned result Microsoft.AspNetCore.Mvc.ViewResult in 0.0448ms.
+2025-12-05 14:54:21.473 -05:00 [INF] Executing ViewResult, running view Index.
+2025-12-05 14:54:21.475 -05:00 [INF] Executed ViewResult - view Index executed in 1.6129ms.
+2025-12-05 14:54:21.475 -05:00 [INF] Executed action Assignment1.Controllers.HomeController.Index (Assignment1) in 3.946ms
+2025-12-05 14:54:21.476 -05:00 [INF] Executed endpoint 'Assignment1.Controllers.HomeController.Index (Assignment1)'
+2025-12-05 14:54:21.477 -05:00 [INF] HTTP GET / responded 200 in 8.0597 ms
+2025-12-05 14:54:21.477 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/ - 200 null text/html; charset=utf-8 10.6136ms
+2025-12-05 14:54:21.980 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/Events - null null
+2025-12-05 14:54:21.984 -05:00 [INF] Executing endpoint 'Assignment1.Controllers.EventsController.Index (Assignment1)'
+2025-12-05 14:54:21.984 -05:00 [INF] Route matched with {action = "Index", controller = "Events", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index(System.String, System.String, System.String, System.String, System.String) on controller Assignment1.Controllers.EventsController (Assignment1).
+2025-12-05 14:54:21.987 -05:00 [INF] Executing action method Assignment1.Controllers.EventsController.Index (Assignment1) - Validation state: "Valid"
+2025-12-05 14:54:22.075 -05:00 [INF] Executed DbCommand (87ms) [Parameters=[@__now_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT e."EventId", e."AvailableTickets", e."Category", e."CreatedByUserId", e."Date", e."Description", e."ImageUrl", e."Price", e."Title", e0."EventRatingId", e0."EventId", e0."GuestEmail", e0."RatedAtUtc", e0."Rating", e0."UserId"
+FROM "Events" AS e
+LEFT JOIN "EventRatings" AS e0 ON e."EventId" = e0."EventId"
+ORDER BY CASE
+    WHEN e."Date" < @__now_0 THEN 1
+    ELSE 0
+END, CASE
+    WHEN e."Date" >= @__now_0 AND e."AvailableTickets" <= 5 THEN 0
+    ELSE 1
+END, e."Date", e."EventId"
+2025-12-05 14:54:22.079 -05:00 [INF] Executed action method Assignment1.Controllers.EventsController.Index (Assignment1), returned result Microsoft.AspNetCore.Mvc.ViewResult in 91.3661ms.
+2025-12-05 14:54:22.081 -05:00 [INF] Executing ViewResult, running view Index.
+2025-12-05 14:54:22.088 -05:00 [INF] Executed ViewResult - view Index executed in 7.2697ms.
+2025-12-05 14:54:22.091 -05:00 [INF] Executed action Assignment1.Controllers.EventsController.Index (Assignment1) in 104.902ms
+2025-12-05 14:54:22.092 -05:00 [INF] Executed endpoint 'Assignment1.Controllers.EventsController.Index (Assignment1)'
+2025-12-05 14:54:22.093 -05:00 [INF] HTTP GET /Events responded 200 in 111.6282 ms
+2025-12-05 14:54:22.095 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/Events - 200 null text/html; charset=utf-8 115.0797ms
+2025-12-05 14:54:23.044 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/Events/GetComments?eventId=1 - null null
+2025-12-05 14:54:23.046 -05:00 [INF] Executing endpoint 'Assignment1.Controllers.EventsController.GetComments (Assignment1)'
+2025-12-05 14:54:23.049 -05:00 [INF] Route matched with {action = "GetComments", controller = "Events", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetComments(Int32) on controller Assignment1.Controllers.EventsController (Assignment1).
+2025-12-05 14:54:23.054 -05:00 [INF] Executing action method Assignment1.Controllers.EventsController.GetComments (Assignment1) - Validation state: "Valid"
+2025-12-05 14:54:23.224 -05:00 [INF] Executed DbCommand (142ms) [Parameters=[@__eventId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT e."EventCommentId", e."Content", CASE
+    WHEN a."Id" IS NOT NULL THEN a."FullName"
+    ELSE COALESCE(e."GuestName", 'Anonymous')
+END, e."CreatedAtUtc"::timestamp
+FROM "EventComments" AS e
+LEFT JOIN "AspNetUsers" AS a ON e."UserId" = a."Id"
+WHERE e."EventId" = @__eventId_0
+ORDER BY e."CreatedAtUtc" DESC
+2025-12-05 14:54:23.230 -05:00 [INF] Executed action method Assignment1.Controllers.EventsController.GetComments (Assignment1), returned result Microsoft.AspNetCore.Mvc.JsonResult in 174.7736ms.
+2025-12-05 14:54:23.236 -05:00 [INF] Executing JsonResult, writing value of type '<>f__AnonymousType26`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.List`1[[<>f__AnonymousType25`5[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], Assignment1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-12-05 14:54:23.267 -05:00 [INF] Executed action Assignment1.Controllers.EventsController.GetComments (Assignment1) in 216.3563ms
+2025-12-05 14:54:23.268 -05:00 [INF] Executed endpoint 'Assignment1.Controllers.EventsController.GetComments (Assignment1)'
+2025-12-05 14:54:23.269 -05:00 [INF] HTTP GET /Events/GetComments responded 200 in 224.0005 ms
+2025-12-05 14:54:23.271 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/Events/GetComments?eventId=1 - 200 null application/json; charset=utf-8 226.6312ms
+2025-12-05 14:54:28.238 -05:00 [INF] Request starting HTTP/1.1 POST http://localhost:5084/Events/AddComment - application/x-www-form-urlencoded 31
+2025-12-05 14:54:28.241 -05:00 [INF] Executing endpoint 'Assignment1.Controllers.EventsController.AddComment (Assignment1)'
+2025-12-05 14:54:28.246 -05:00 [INF] Route matched with {action = "AddComment", controller = "Events", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AddComment(Int32, System.String, System.String) on controller Assignment1.Controllers.EventsController (Assignment1).
+2025-12-05 14:54:28.248 -05:00 [INF] Executing action method Assignment1.Controllers.EventsController.AddComment (Assignment1) - Validation state: "Valid"
+2025-12-05 14:54:28.354 -05:00 [INF] Executed DbCommand (97ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT e."EventId", e."AvailableTickets", e."Category", e."CreatedByUserId", e."Date", e."Description", e."ImageUrl", e."Price", e."Title"
+FROM "Events" AS e
+WHERE e."EventId" = @__p_0
+LIMIT 1
+2025-12-05 14:54:28.557 -05:00 [INF] Executed DbCommand (94ms) [Parameters=[@p0='?', @p1='?' (DbType = DateTime), @p2='?' (DbType = Int32), @p3='?', @p4='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "EventComments" ("Content", "CreatedAtUtc", "EventId", "GuestName", "UserId")
+VALUES (@p0, @p1, @p2, @p3, @p4)
+RETURNING "EventCommentId";
+2025-12-05 14:54:28.692 -05:00 [INF] Executed DbCommand (102ms) [Parameters=[@__p_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."DateOfBirth", a."Email", a."EmailConfirmed", a."FullName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."ProfilePictureUrl", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."Id" = @__p_0
+LIMIT 1
+2025-12-05 14:54:28.711 -05:00 [INF] Executed action method Assignment1.Controllers.EventsController.AddComment (Assignment1), returned result Microsoft.AspNetCore.Mvc.JsonResult in 462.0791ms.
+2025-12-05 14:54:28.714 -05:00 [INF] Executing JsonResult, writing value of type '<>f__AnonymousType27`2[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[<>f__AnonymousType25`5[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], Assignment1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-12-05 14:54:28.723 -05:00 [INF] Executed action Assignment1.Controllers.EventsController.AddComment (Assignment1) in 475.7499ms
+2025-12-05 14:54:28.727 -05:00 [INF] Executed endpoint 'Assignment1.Controllers.EventsController.AddComment (Assignment1)'
+2025-12-05 14:54:28.728 -05:00 [INF] HTTP POST /Events/AddComment responded 200 in 488.2899 ms
+2025-12-05 14:54:28.730 -05:00 [INF] Request finished HTTP/1.1 POST http://localhost:5084/Events/AddComment - 200 null application/json; charset=utf-8 492.1383ms
+2025-12-05 14:54:33.541 -05:00 [INF] Application is shutting down...

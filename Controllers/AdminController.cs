@@ -138,15 +138,47 @@ public class AdminController : Controller
             return RedirectToAction(nameof(Users));
         }
 
-        var result = await _userManager.DeleteAsync(user);
-        TempData["StatusMessage"] = result.Succeeded
-            ? $"User {user.Email} deleted."
-            : $"Failed to delete user {user.Email}.";
-
-        if (!result.Succeeded)
+        try
         {
-            _logger.LogWarning("Admin failed to delete user {UserId}: {Errors}",
-                user.Id, string.Join(", ", result.Errors.Select(e => e.Description)));
+            var uid = user.Id;
+            await using var tx = await _context.Database.BeginTransactionAsync();
+
+            // Detach or remove dependent records so FK constraints don't block deletion
+            await _context.EventComments
+                .Where(c => c.UserId == uid)
+                .ExecuteUpdateAsync(setters => setters.SetProperty(c => c.UserId, (string?)null));
+
+            await _context.EventRatings
+                .Where(r => r.UserId == uid)
+                .ExecuteDeleteAsync();
+
+            await _context.TicketPurchases
+                .Where(p => p.BuyerUserId == uid)
+                .ExecuteUpdateAsync(setters => setters.SetProperty(p => p.BuyerUserId, (string?)null));
+
+            await _context.Events
+                .Where(e => e.CreatedByUserId == uid)
+                .ExecuteUpdateAsync(setters => setters.SetProperty(e => e.CreatedByUserId, (string?)null));
+
+            var result = await _userManager.DeleteAsync(user);
+            TempData["StatusMessage"] = result.Succeeded
+                ? $"User {user.Email} deleted."
+                : $"Failed to delete user {user.Email}.";
+
+            if (!result.Succeeded)
+            {
+                _logger.LogWarning("Admin failed to delete user {UserId}: {Errors}",
+                    user.Id, string.Join(", ", result.Errors.Select(e => e.Description)));
+                await tx.RollbackAsync();
+                return RedirectToAction(nameof(Users));
+            }
+
+            await tx.CommitAsync();
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Admin failed to delete user {UserId}", user.Id);
+            TempData["StatusMessage"] = $"Failed to delete user {user.Email}.";
         }
 
         return RedirectToAction(nameof(Users));

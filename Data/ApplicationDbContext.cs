@@ -1,4 +1,6 @@
-﻿using Assignment1.Models;
+﻿using System;
+using System.Linq;
+using Assignment1.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +15,18 @@ namespace Assignment1.Data
         public DbSet<TicketPurchase> TicketPurchases { get; set; }
         public DbSet<EventComment> EventComments { get; set; }
         public DbSet<EventRating> EventRatings { get; set; }
+
+        public override int SaveChanges()
+        {
+            NormalizeDateTimesToUtc();
+            return base.SaveChanges();
+        }
+
+        public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+        {
+            NormalizeDateTimesToUtc();
+            return base.SaveChangesAsync(cancellationToken);
+        }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -29,6 +43,33 @@ namespace Assignment1.Data
                 .HasIndex(r => new { r.EventId, r.GuestEmail })
                 .IsUnique()
                 .HasFilter("\"GuestEmail\" IS NOT NULL");
+        }
+
+        private void NormalizeDateTimesToUtc()
+        {
+            foreach (var entry in ChangeTracker.Entries()
+                         .Where(e => e.State is EntityState.Added or EntityState.Modified))
+            {
+                foreach (var property in entry.Properties)
+                {
+                    if (property.Metadata.ClrType == typeof(DateTime) && property.CurrentValue is DateTime dt)
+                    {
+                        property.CurrentValue = Normalize(dt);
+                    }
+                    else if (property.Metadata.ClrType == typeof(DateTime?) && property.CurrentValue is DateTime ndt)
+                    {
+                        property.CurrentValue = Normalize(ndt);
+                    }
+                }
+            }
+
+            static DateTime Normalize(DateTime value) =>
+                value.Kind switch
+                {
+                    DateTimeKind.Utc => value,
+                    DateTimeKind.Local => value.ToUniversalTime(),
+                    _ => DateTime.SpecifyKind(value, DateTimeKind.Utc)
+                };
         }
     }
 }
