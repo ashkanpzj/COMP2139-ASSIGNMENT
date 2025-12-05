@@ -113,7 +113,11 @@ namespace Assignment1.Areas.Identity.Pages.Account
             var user = CreateUser();
             user.FullName = string.IsNullOrWhiteSpace(Input.FullName) ? null : Input.FullName.Trim();
             user.PhoneNumber = string.IsNullOrWhiteSpace(Input.PhoneNumber) ? null : Input.PhoneNumber.Trim();
-            user.DateOfBirth = Input.DateOfBirth;
+            
+            // Force UTC to satisfy PostgreSQL timestamptz
+            user.DateOfBirth = Input.DateOfBirth.HasValue
+                ? DateTime.SpecifyKind(Input.DateOfBirth.Value, DateTimeKind.Utc)
+                : null;
             await _userStore.SetUserNameAsync(user, Input.UserName, CancellationToken.None);
             await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
 
