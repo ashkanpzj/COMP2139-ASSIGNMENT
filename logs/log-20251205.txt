@@ -28439,3 +28439,950 @@ END, e."Date", e."EventId"
 2025-12-05 05:47:28.455 -05:00 [INF] HTTP GET / responded 200 in 7.1972 ms
 2025-12-05 05:47:28.458 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/ - 200 null text/html; charset=utf-8 12.1558ms
 2025-12-05 05:47:31.035 -05:00 [INF] Application is shutting down...
+2025-12-05 05:53:56.549 -05:00 [INF] User profile is available. Using 'C:\Users\ashka\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2025-12-05 05:53:57.747 -05:00 [INF] Executed DbCommand (55ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-12-05 05:53:57.846 -05:00 [INF] Executed DbCommand (2ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-12-05 05:53:57.849 -05:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-12-05 05:53:57.862 -05:00 [INF] Executed DbCommand (4ms) [Parameters=[@__normalizedEmail_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."DateOfBirth", a."Email", a."EmailConfirmed", a."FullName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."ProfilePictureUrl", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedEmail" = @__normalizedEmail_0
+LIMIT 2
+2025-12-05 05:53:57.901 -05:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedRoleName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedRoleName_0
+LIMIT 2
+2025-12-05 05:53:57.928 -05:00 [INF] Executed DbCommand (4ms) [Parameters=[@__p_0='?', @__p_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."UserId", a."RoleId"
+FROM "AspNetUserRoles" AS a
+WHERE a."UserId" = @__p_0 AND a."RoleId" = @__p_1
+LIMIT 1
+2025-12-05 05:53:57.953 -05:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedRoleName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedRoleName_0
+LIMIT 2
+2025-12-05 05:53:57.960 -05:00 [INF] Executed DbCommand (2ms) [Parameters=[@__p_0='?', @__p_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."UserId", a."RoleId"
+FROM "AspNetUserRoles" AS a
+WHERE a."UserId" = @__p_0 AND a."RoleId" = @__p_1
+LIMIT 1
+2025-12-05 05:53:57.970 -05:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedRoleName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedRoleName_0
+LIMIT 2
+2025-12-05 05:53:57.977 -05:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?', @__p_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."UserId", a."RoleId"
+FROM "AspNetUserRoles" AS a
+WHERE a."UserId" = @__p_0 AND a."RoleId" = @__p_1
+LIMIT 1
+2025-12-05 05:53:57.988 -05:00 [INF] Starting application
+2025-12-05 05:53:58.061 -05:00 [INF] Now listening on: http://localhost:5084
+2025-12-05 05:53:58.063 -05:00 [INF] Application started. Press Ctrl+C to shut down.
+2025-12-05 05:53:58.071 -05:00 [INF] Hosting environment: Development
+2025-12-05 05:53:58.075 -05:00 [INF] Content root path: C:\Users\ashka\RiderProjects\COMP2139-ASSIGNMENT
+2025-12-05 05:53:59.055 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/ - null null
+2025-12-05 05:53:59.090 -05:00 [WRN] Failed to determine the https port for redirect.
+2025-12-05 05:53:59.244 -05:00 [INF] Executing endpoint 'Assignment1.Controllers.HomeController.Index (Assignment1)'
+2025-12-05 05:53:59.278 -05:00 [INF] Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Assignment1.Controllers.HomeController (Assignment1).
+2025-12-05 05:53:59.287 -05:00 [INF] Executing action method Assignment1.Controllers.HomeController.Index (Assignment1) - Validation state: "Valid"
+2025-12-05 05:53:59.292 -05:00 [INF] Executed action method Assignment1.Controllers.HomeController.Index (Assignment1), returned result Microsoft.AspNetCore.Mvc.ViewResult in 0.6945ms.
+2025-12-05 05:53:59.307 -05:00 [INF] Executing ViewResult, running view Index.
+2025-12-05 05:53:59.497 -05:00 [INF] Executed ViewResult - view Index executed in 192.873ms.
+2025-12-05 05:53:59.514 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/js/site.js?v=RG_QSvEldQaTdgjLDfdZ_p2vOi-2P4gP62vAG4KX770 - null null
+2025-12-05 05:53:59.514 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/css/site.css?v=Q0eXrmnUH8-Eu9WpFfZ4Xvb_GZFcG4nxL3IQVK-QePQ - null null
+2025-12-05 05:53:59.535 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/Assignment1.styles.css?v=7lHnFlCJZb7Y0QPMGCN-wfjKjS-3UNek5lyeWY7qRqM - null null
+2025-12-05 05:53:59.537 -05:00 [INF] Executed action Assignment1.Controllers.HomeController.Index (Assignment1) in 257.2005ms
+2025-12-05 05:53:59.546 -05:00 [INF] Executed endpoint 'Assignment1.Controllers.HomeController.Index (Assignment1)'
+2025-12-05 05:53:59.550 -05:00 [INF] Sending file. Request path: '/css/site.css'. Physical path: 'C:\Users\ashka\RiderProjects\COMP2139-ASSIGNMENT\wwwroot\css\site.css'
+2025-12-05 05:53:59.550 -05:00 [INF] Sending file. Request path: '/Assignment1.styles.css'. Physical path: 'C:\Users\ashka\RiderProjects\COMP2139-ASSIGNMENT\obj\Debug\net9.0\scopedcss\bundle\Assignment1.styles.css'
+2025-12-05 05:53:59.550 -05:00 [INF] Sending file. Request path: '/js/site.js'. Physical path: 'C:\Users\ashka\RiderProjects\COMP2139-ASSIGNMENT\wwwroot\js\site.js'
+2025-12-05 05:53:59.553 -05:00 [INF] HTTP GET / responded 200 in 463.8648 ms
+2025-12-05 05:53:59.555 -05:00 [INF] HTTP GET /css/site.css responded 200 in 14.6507 ms
+2025-12-05 05:53:59.556 -05:00 [INF] HTTP GET /Assignment1.styles.css responded 200 in 13.7678 ms
+2025-12-05 05:53:59.557 -05:00 [INF] HTTP GET /js/site.js responded 200 in 19.5184 ms
+2025-12-05 05:53:59.567 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/ - 200 null text/html; charset=utf-8 514.9964ms
+2025-12-05 05:53:59.567 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/css/site.css?v=Q0eXrmnUH8-Eu9WpFfZ4Xvb_GZFcG4nxL3IQVK-QePQ - 200 7806 text/css 52.3905ms
+2025-12-05 05:53:59.567 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/Assignment1.styles.css?v=7lHnFlCJZb7Y0QPMGCN-wfjKjS-3UNek5lyeWY7qRqM - 200 1129 text/css 31.6723ms
+2025-12-05 05:53:59.568 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/js/site.js?v=RG_QSvEldQaTdgjLDfdZ_p2vOi-2P4gP62vAG4KX770 - 200 1259 text/javascript 53.6591ms
+2025-12-05 05:54:01.182 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/Guest/Login - null null
+2025-12-05 05:54:01.189 -05:00 [INF] Executing endpoint 'Assignment1.Controllers.GuestController.Login (Assignment1)'
+2025-12-05 05:54:01.193 -05:00 [INF] Route matched with {action = "Login", controller = "Guest", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Login() on controller Assignment1.Controllers.GuestController (Assignment1).
+2025-12-05 05:54:01.198 -05:00 [INF] Executing action method Assignment1.Controllers.GuestController.Login (Assignment1) - Validation state: "Valid"
+2025-12-05 05:54:01.202 -05:00 [INF] Executed action method Assignment1.Controllers.GuestController.Login (Assignment1), returned result Microsoft.AspNetCore.Mvc.ViewResult in 0.7944ms.
+2025-12-05 05:54:01.204 -05:00 [INF] Executing ViewResult, running view Login.
+2025-12-05 05:54:01.245 -05:00 [INF] Executed ViewResult - view Login executed in 41.7114ms.
+2025-12-05 05:54:01.246 -05:00 [INF] Executed action Assignment1.Controllers.GuestController.Login (Assignment1) in 50.5241ms
+2025-12-05 05:54:01.247 -05:00 [INF] Executed endpoint 'Assignment1.Controllers.GuestController.Login (Assignment1)'
+2025-12-05 05:54:01.247 -05:00 [INF] HTTP GET /Guest/Login responded 200 in 63.0614 ms
+2025-12-05 05:54:01.249 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/Guest/Login - 200 null text/html; charset=utf-8 67.181ms
+2025-12-05 05:54:01.258 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/Assignment1.styles.css?v=7lHnFlCJZb7Y0QPMGCN-wfjKjS-3UNek5lyeWY7qRqM - null null
+2025-12-05 05:54:01.262 -05:00 [INF] The file /Assignment1.styles.css was not modified
+2025-12-05 05:54:01.263 -05:00 [INF] HTTP GET /Assignment1.styles.css responded 304 in 1.7267 ms
+2025-12-05 05:54:01.264 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/Assignment1.styles.css?v=7lHnFlCJZb7Y0QPMGCN-wfjKjS-3UNek5lyeWY7qRqM - 304 null text/css 6.2957ms
+2025-12-05 05:54:03.865 -05:00 [INF] Request starting HTTP/1.1 POST http://localhost:5084/Guest/Login - application/x-www-form-urlencoded 210
+2025-12-05 05:54:03.870 -05:00 [INF] Executing endpoint 'Assignment1.Controllers.GuestController.Login (Assignment1)'
+2025-12-05 05:54:03.881 -05:00 [INF] Route matched with {action = "Login", controller = "Guest", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(GuestLoginVm) on controller Assignment1.Controllers.GuestController (Assignment1).
+2025-12-05 05:54:03.899 -05:00 [INF] Executing action method Assignment1.Controllers.GuestController.Login (Assignment1) - Validation state: "Valid"
+2025-12-05 05:54:03.987 -05:00 [INF] Executed DbCommand (12ms) [Parameters=[@__email_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "TicketPurchases" AS t
+    WHERE t."GuestEmail" IS NOT NULL AND lower(t."GuestEmail") = @__email_0)
+2025-12-05 05:54:04.002 -05:00 [INF] Executed DbCommand (3ms) [Parameters=[@__email_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT t."TicketPurchaseId", t."BuyerUserId", t."EventId", t."GuestEmail", t."GuestFirstName", t."GuestLastName", t."PurchasedAtUtc", t."Quantity", t."Rating", t."TotalPrice", t."UnitPrice"
+FROM "TicketPurchases" AS t
+WHERE t."GuestEmail" IS NOT NULL AND lower(t."GuestEmail") = @__email_0
+ORDER BY t."PurchasedAtUtc" DESC
+LIMIT 1
+2025-12-05 05:54:04.031 -05:00 [INF] Guest logged in: asd@yahoo.com
+2025-12-05 05:54:04.033 -05:00 [INF] Executed action method Assignment1.Controllers.GuestController.Login (Assignment1), returned result Microsoft.AspNetCore.Mvc.RedirectToActionResult in 132.1083ms.
+2025-12-05 05:54:04.038 -05:00 [INF] Executing RedirectResult, redirecting to /Guest/MyPurchases.
+2025-12-05 05:54:04.040 -05:00 [INF] Executed action Assignment1.Controllers.GuestController.Login (Assignment1) in 158.0603ms
+2025-12-05 05:54:04.042 -05:00 [INF] Executed endpoint 'Assignment1.Controllers.GuestController.Login (Assignment1)'
+2025-12-05 05:54:04.044 -05:00 [INF] Session started; Key:ef1b77fa-8c9c-1da5-8e27-15a71d2523c7, Id:115ac435-59e3-fc86-db8c-de9221f40364
+2025-12-05 05:54:04.045 -05:00 [INF] HTTP POST /Guest/Login responded 302 in 178.8489 ms
+2025-12-05 05:54:04.049 -05:00 [INF] Request finished HTTP/1.1 POST http://localhost:5084/Guest/Login - 302 0 null 184.9489ms
+2025-12-05 05:54:04.052 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/Guest/MyPurchases - null null
+2025-12-05 05:54:04.056 -05:00 [INF] Executing endpoint 'Assignment1.Controllers.GuestController.MyPurchases (Assignment1)'
+2025-12-05 05:54:04.141 -05:00 [INF] Route matched with {action = "MyPurchases", controller = "Guest", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult MyPurchases() on controller Assignment1.Controllers.GuestController (Assignment1).
+2025-12-05 05:54:04.163 -05:00 [INF] Executing action method Assignment1.Controllers.GuestController.MyPurchases (Assignment1) - Validation state: "Valid"
+2025-12-05 05:54:04.167 -05:00 [INF] Executed action method Assignment1.Controllers.GuestController.MyPurchases (Assignment1), returned result Microsoft.AspNetCore.Mvc.ViewResult in 1.1616ms.
+2025-12-05 05:54:04.169 -05:00 [INF] Executing ViewResult, running view MyPurchases.
+2025-12-05 05:54:04.180 -05:00 [INF] Executed ViewResult - view MyPurchases executed in 11.647ms.
+2025-12-05 05:54:04.181 -05:00 [INF] Executed action Assignment1.Controllers.GuestController.MyPurchases (Assignment1) in 33.9633ms
+2025-12-05 05:54:04.182 -05:00 [INF] Executed endpoint 'Assignment1.Controllers.GuestController.MyPurchases (Assignment1)'
+2025-12-05 05:54:04.183 -05:00 [INF] HTTP GET /Guest/MyPurchases responded 200 in 127.5445 ms
+2025-12-05 05:54:04.184 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/Guest/MyPurchases - 200 null text/html; charset=utf-8 131.9198ms
+2025-12-05 05:54:04.190 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/Assignment1.styles.css?v=7lHnFlCJZb7Y0QPMGCN-wfjKjS-3UNek5lyeWY7qRqM - null null
+2025-12-05 05:54:04.190 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/css/site.css?v=Q0eXrmnUH8-Eu9WpFfZ4Xvb_GZFcG4nxL3IQVK-QePQ - null null
+2025-12-05 05:54:04.191 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/js/site.js?v=RG_QSvEldQaTdgjLDfdZ_p2vOi-2P4gP62vAG4KX770 - null null
+2025-12-05 05:54:04.192 -05:00 [INF] The file /Assignment1.styles.css was not modified
+2025-12-05 05:54:04.193 -05:00 [INF] The file /css/site.css was not modified
+2025-12-05 05:54:04.201 -05:00 [INF] The file /js/site.js was not modified
+2025-12-05 05:54:04.202 -05:00 [INF] HTTP GET /Assignment1.styles.css responded 304 in 9.9358 ms
+2025-12-05 05:54:04.203 -05:00 [INF] HTTP GET /css/site.css responded 304 in 9.7518 ms
+2025-12-05 05:54:04.208 -05:00 [INF] HTTP GET /js/site.js responded 304 in 13.9376 ms
+2025-12-05 05:54:04.209 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/Assignment1.styles.css?v=7lHnFlCJZb7Y0QPMGCN-wfjKjS-3UNek5lyeWY7qRqM - 304 null text/css 19.1116ms
+2025-12-05 05:54:04.210 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/css/site.css?v=Q0eXrmnUH8-Eu9WpFfZ4Xvb_GZFcG4nxL3IQVK-QePQ - 304 null text/css 19.9537ms
+2025-12-05 05:54:04.211 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/js/site.js?v=RG_QSvEldQaTdgjLDfdZ_p2vOi-2P4gP62vAG4KX770 - 304 null text/javascript 19.8914ms
+2025-12-05 05:54:04.322 -05:00 [INF] Request starting HTTP/1.1 POST http://localhost:5084/Guest/MyPurchases - application/x-www-form-urlencoded 21
+2025-12-05 05:54:04.327 -05:00 [INF] Executing endpoint 'Assignment1.Controllers.GuestController.MyPurchases (Assignment1)'
+2025-12-05 05:54:04.334 -05:00 [INF] Route matched with {action = "MyPurchases", controller = "Guest", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] MyPurchases(GuestPurchaseLookupVm) on controller Assignment1.Controllers.GuestController (Assignment1).
+2025-12-05 05:54:04.338 -05:00 [INF] Executing action method Assignment1.Controllers.GuestController.MyPurchases (Assignment1) - Validation state: "Valid"
+2025-12-05 05:54:04.382 -05:00 [INF] Executed DbCommand (7ms) [Parameters=[@__email_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT t."TicketPurchaseId", t."BuyerUserId", t."EventId", t."GuestEmail", t."GuestFirstName", t."GuestLastName", t."PurchasedAtUtc", t."Quantity", t."Rating", t."TotalPrice", t."UnitPrice", e."EventId", e."AvailableTickets", e."Category", e."CreatedByUserId", e."Date", e."Description", e."ImageUrl", e."Price", e."Title"
+FROM "TicketPurchases" AS t
+INNER JOIN "Events" AS e ON t."EventId" = e."EventId"
+WHERE t."GuestEmail" IS NOT NULL AND lower(t."GuestEmail") = @__email_0
+ORDER BY t."PurchasedAtUtc" DESC
+2025-12-05 05:54:04.519 -05:00 [INF] Executed DbCommand (41ms) [Parameters=[@__email_0='?', @__pastEventIds_1='?' (DbType = Object)], CommandType='"Text"', CommandTimeout='30']
+SELECT e."EventRatingId", e."EventId", e."GuestEmail", e."RatedAtUtc", e."Rating", e."UserId"
+FROM "EventRatings" AS e
+WHERE e."GuestEmail" IS NOT NULL AND lower(e."GuestEmail") = @__email_0 AND e."EventId" = ANY (@__pastEventIds_1)
+2025-12-05 05:54:04.532 -05:00 [INF] Executed action method Assignment1.Controllers.GuestController.MyPurchases (Assignment1), returned result Microsoft.AspNetCore.Mvc.JsonResult in 193.335ms.
+2025-12-05 05:54:04.534 -05:00 [INF] Executing JsonResult, writing value of type '<>f__AnonymousType28`4[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.List`1[[Assignment1.Controllers.GuestController+GuestTicketCard, Assignment1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.List`1[[Assignment1.Controllers.GuestController+GuestPurchaseCard, Assignment1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-12-05 05:54:04.563 -05:00 [INF] Executed action Assignment1.Controllers.GuestController.MyPurchases (Assignment1) in 228.1966ms
+2025-12-05 05:54:04.564 -05:00 [INF] Executed endpoint 'Assignment1.Controllers.GuestController.MyPurchases (Assignment1)'
+2025-12-05 05:54:04.565 -05:00 [INF] HTTP POST /Guest/MyPurchases responded 200 in 238.7470 ms
+2025-12-05 05:54:04.566 -05:00 [INF] Request finished HTTP/1.1 POST http://localhost:5084/Guest/MyPurchases - 200 null application/json; charset=utf-8 243.6816ms
+2025-12-05 05:54:09.280 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/Guest/MyPurchases - null null
+2025-12-05 05:54:09.282 -05:00 [INF] Executing endpoint 'Assignment1.Controllers.GuestController.MyPurchases (Assignment1)'
+2025-12-05 05:54:09.282 -05:00 [INF] Route matched with {action = "MyPurchases", controller = "Guest", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult MyPurchases() on controller Assignment1.Controllers.GuestController (Assignment1).
+2025-12-05 05:54:09.283 -05:00 [INF] Executing action method Assignment1.Controllers.GuestController.MyPurchases (Assignment1) - Validation state: "Valid"
+2025-12-05 05:54:09.284 -05:00 [INF] Executed action method Assignment1.Controllers.GuestController.MyPurchases (Assignment1), returned result Microsoft.AspNetCore.Mvc.ViewResult in 0.0536ms.
+2025-12-05 05:54:09.286 -05:00 [INF] Executing ViewResult, running view MyPurchases.
+2025-12-05 05:54:09.288 -05:00 [INF] Executed ViewResult - view MyPurchases executed in 2.498ms.
+2025-12-05 05:54:09.289 -05:00 [INF] Executed action Assignment1.Controllers.GuestController.MyPurchases (Assignment1) in 6.4486ms
+2025-12-05 05:54:09.292 -05:00 [INF] Executed endpoint 'Assignment1.Controllers.GuestController.MyPurchases (Assignment1)'
+2025-12-05 05:54:09.293 -05:00 [INF] HTTP GET /Guest/MyPurchases responded 200 in 11.1721 ms
+2025-12-05 05:54:09.294 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/Guest/MyPurchases - 200 null text/html; charset=utf-8 13.8548ms
+2025-12-05 05:54:09.296 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/Assignment1.styles.css?v=7lHnFlCJZb7Y0QPMGCN-wfjKjS-3UNek5lyeWY7qRqM - null null
+2025-12-05 05:54:09.296 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/js/site.js?v=RG_QSvEldQaTdgjLDfdZ_p2vOi-2P4gP62vAG4KX770 - null null
+2025-12-05 05:54:09.298 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/css/site.css?v=Q0eXrmnUH8-Eu9WpFfZ4Xvb_GZFcG4nxL3IQVK-QePQ - null null
+2025-12-05 05:54:09.299 -05:00 [INF] The file /Assignment1.styles.css was not modified
+2025-12-05 05:54:09.300 -05:00 [INF] The file /js/site.js was not modified
+2025-12-05 05:54:09.300 -05:00 [INF] The file /css/site.css was not modified
+2025-12-05 05:54:09.301 -05:00 [INF] HTTP GET /Assignment1.styles.css responded 304 in 1.8536 ms
+2025-12-05 05:54:09.301 -05:00 [INF] HTTP GET /js/site.js responded 304 in 1.5835 ms
+2025-12-05 05:54:09.302 -05:00 [INF] HTTP GET /css/site.css responded 304 in 1.4867 ms
+2025-12-05 05:54:09.303 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/Assignment1.styles.css?v=7lHnFlCJZb7Y0QPMGCN-wfjKjS-3UNek5lyeWY7qRqM - 304 null text/css 6.3456ms
+2025-12-05 05:54:09.303 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/js/site.js?v=RG_QSvEldQaTdgjLDfdZ_p2vOi-2P4gP62vAG4KX770 - 304 null text/javascript 7.0478ms
+2025-12-05 05:54:09.304 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/css/site.css?v=Q0eXrmnUH8-Eu9WpFfZ4Xvb_GZFcG4nxL3IQVK-QePQ - 304 null text/css 6.0239ms
+2025-12-05 05:54:09.417 -05:00 [INF] Request starting HTTP/1.1 POST http://localhost:5084/Guest/MyPurchases - application/x-www-form-urlencoded 21
+2025-12-05 05:54:09.418 -05:00 [INF] Executing endpoint 'Assignment1.Controllers.GuestController.MyPurchases (Assignment1)'
+2025-12-05 05:54:09.419 -05:00 [INF] Route matched with {action = "MyPurchases", controller = "Guest", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] MyPurchases(GuestPurchaseLookupVm) on controller Assignment1.Controllers.GuestController (Assignment1).
+2025-12-05 05:54:09.421 -05:00 [INF] Executing action method Assignment1.Controllers.GuestController.MyPurchases (Assignment1) - Validation state: "Valid"
+2025-12-05 05:54:09.427 -05:00 [INF] Executed DbCommand (4ms) [Parameters=[@__email_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT t."TicketPurchaseId", t."BuyerUserId", t."EventId", t."GuestEmail", t."GuestFirstName", t."GuestLastName", t."PurchasedAtUtc", t."Quantity", t."Rating", t."TotalPrice", t."UnitPrice", e."EventId", e."AvailableTickets", e."Category", e."CreatedByUserId", e."Date", e."Description", e."ImageUrl", e."Price", e."Title"
+FROM "TicketPurchases" AS t
+INNER JOIN "Events" AS e ON t."EventId" = e."EventId"
+WHERE t."GuestEmail" IS NOT NULL AND lower(t."GuestEmail") = @__email_0
+ORDER BY t."PurchasedAtUtc" DESC
+2025-12-05 05:54:09.443 -05:00 [INF] Executed DbCommand (1ms) [Parameters=[@__email_0='?', @__pastEventIds_1='?' (DbType = Object)], CommandType='"Text"', CommandTimeout='30']
+SELECT e."EventRatingId", e."EventId", e."GuestEmail", e."RatedAtUtc", e."Rating", e."UserId"
+FROM "EventRatings" AS e
+WHERE e."GuestEmail" IS NOT NULL AND lower(e."GuestEmail") = @__email_0 AND e."EventId" = ANY (@__pastEventIds_1)
+2025-12-05 05:54:09.444 -05:00 [INF] Executed action method Assignment1.Controllers.GuestController.MyPurchases (Assignment1), returned result Microsoft.AspNetCore.Mvc.JsonResult in 23.0124ms.
+2025-12-05 05:54:09.445 -05:00 [INF] Executing JsonResult, writing value of type '<>f__AnonymousType28`4[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.List`1[[Assignment1.Controllers.GuestController+GuestTicketCard, Assignment1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.List`1[[Assignment1.Controllers.GuestController+GuestPurchaseCard, Assignment1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-12-05 05:54:09.446 -05:00 [INF] Executed action Assignment1.Controllers.GuestController.MyPurchases (Assignment1) in 25.8545ms
+2025-12-05 05:54:09.446 -05:00 [INF] Executed endpoint 'Assignment1.Controllers.GuestController.MyPurchases (Assignment1)'
+2025-12-05 05:54:09.448 -05:00 [INF] HTTP POST /Guest/MyPurchases responded 200 in 30.7524 ms
+2025-12-05 05:54:09.450 -05:00 [INF] Request finished HTTP/1.1 POST http://localhost:5084/Guest/MyPurchases - 200 null application/json; charset=utf-8 33.4425ms
+2025-12-05 05:54:17.483 -05:00 [INF] Request starting HTTP/1.1 POST http://localhost:5084/Guest/SubmitRating - application/x-www-form-urlencoded 41
+2025-12-05 05:54:17.487 -05:00 [INF] Executing endpoint 'Assignment1.Controllers.GuestController.SubmitRating (Assignment1)'
+2025-12-05 05:54:17.490 -05:00 [INF] Route matched with {action = "SubmitRating", controller = "Guest", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] SubmitRating(Int32, Int32, System.String) on controller Assignment1.Controllers.GuestController (Assignment1).
+2025-12-05 05:54:17.492 -05:00 [INF] Executing action method Assignment1.Controllers.GuestController.SubmitRating (Assignment1) - Validation state: "Valid"
+2025-12-05 05:54:17.500 -05:00 [INF] Executed DbCommand (1ms) [Parameters=[@__eventId_0='?' (DbType = Int32), @__normalizedEmail_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "TicketPurchases" AS t
+    WHERE t."EventId" = @__eventId_0 AND t."GuestEmail" IS NOT NULL AND lower(t."GuestEmail") = @__normalizedEmail_1)
+2025-12-05 05:54:17.503 -05:00 [INF] Executed DbCommand (1ms) [Parameters=[@__eventId_0='?' (DbType = Int32), @__normalizedEmail_1='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "EventRatings" AS e
+    WHERE e."EventId" = @__eventId_0 AND e."GuestEmail" IS NOT NULL AND lower(e."GuestEmail") = @__normalizedEmail_1)
+2025-12-05 05:54:17.573 -05:00 [INF] Executed DbCommand (12ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?', @p2='?' (DbType = DateTime), @p3='?' (DbType = Int32), @p4='?'], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "EventRatings" ("EventId", "GuestEmail", "RatedAtUtc", "Rating", "UserId")
+VALUES (@p0, @p1, @p2, @p3, @p4)
+RETURNING "EventRatingId";
+2025-12-05 05:54:17.588 -05:00 [INF] Guest asd@yahoo.com rated event 13 with 3 stars
+2025-12-05 05:54:17.589 -05:00 [INF] Executed action method Assignment1.Controllers.GuestController.SubmitRating (Assignment1), returned result Microsoft.AspNetCore.Mvc.JsonResult in 95.7767ms.
+2025-12-05 05:54:17.590 -05:00 [INF] Executing JsonResult, writing value of type '<>f__AnonymousType20`1[[System.Boolean, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2025-12-05 05:54:17.592 -05:00 [INF] Executed action Assignment1.Controllers.GuestController.SubmitRating (Assignment1) in 101.3807ms
+2025-12-05 05:54:17.593 -05:00 [INF] Executed endpoint 'Assignment1.Controllers.GuestController.SubmitRating (Assignment1)'
+2025-12-05 05:54:17.594 -05:00 [INF] HTTP POST /Guest/SubmitRating responded 200 in 107.0082 ms
+2025-12-05 05:54:17.594 -05:00 [INF] Request finished HTTP/1.1 POST http://localhost:5084/Guest/SubmitRating - 200 null application/json; charset=utf-8 110.8379ms
+2025-12-05 05:54:19.493 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/Guest/Logout - null null
+2025-12-05 05:54:19.495 -05:00 [INF] Executing endpoint 'Assignment1.Controllers.GuestController.Logout (Assignment1)'
+2025-12-05 05:54:19.496 -05:00 [INF] Route matched with {action = "Logout", controller = "Guest", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Logout() on controller Assignment1.Controllers.GuestController (Assignment1).
+2025-12-05 05:54:19.497 -05:00 [INF] Executing action method Assignment1.Controllers.GuestController.Logout (Assignment1) - Validation state: "Valid"
+2025-12-05 05:54:19.498 -05:00 [INF] Guest logged out
+2025-12-05 05:54:19.498 -05:00 [INF] Executed action method Assignment1.Controllers.GuestController.Logout (Assignment1), returned result Microsoft.AspNetCore.Mvc.RedirectToActionResult in 0.628ms.
+2025-12-05 05:54:19.499 -05:00 [INF] Executing RedirectResult, redirecting to /.
+2025-12-05 05:54:19.500 -05:00 [INF] Executed action Assignment1.Controllers.GuestController.Logout (Assignment1) in 3.6905ms
+2025-12-05 05:54:19.501 -05:00 [INF] Executed endpoint 'Assignment1.Controllers.GuestController.Logout (Assignment1)'
+2025-12-05 05:54:19.502 -05:00 [INF] HTTP GET /Guest/Logout responded 302 in 7.4201 ms
+2025-12-05 05:54:19.503 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/Guest/Logout - 302 0 null 10.1671ms
+2025-12-05 05:54:19.507 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/ - null null
+2025-12-05 05:54:19.509 -05:00 [INF] Executing endpoint 'Assignment1.Controllers.HomeController.Index (Assignment1)'
+2025-12-05 05:54:19.509 -05:00 [INF] Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Assignment1.Controllers.HomeController (Assignment1).
+2025-12-05 05:54:19.510 -05:00 [INF] Executing action method Assignment1.Controllers.HomeController.Index (Assignment1) - Validation state: "Valid"
+2025-12-05 05:54:19.510 -05:00 [INF] Executed action method Assignment1.Controllers.HomeController.Index (Assignment1), returned result Microsoft.AspNetCore.Mvc.ViewResult in 0.0119ms.
+2025-12-05 05:54:19.511 -05:00 [INF] Executing ViewResult, running view Index.
+2025-12-05 05:54:19.512 -05:00 [INF] Executed ViewResult - view Index executed in 1.0986ms.
+2025-12-05 05:54:19.512 -05:00 [INF] Executed action Assignment1.Controllers.HomeController.Index (Assignment1) in 2.5234ms
+2025-12-05 05:54:19.514 -05:00 [INF] Executed endpoint 'Assignment1.Controllers.HomeController.Index (Assignment1)'
+2025-12-05 05:54:19.515 -05:00 [INF] HTTP GET / responded 200 in 5.5909 ms
+2025-12-05 05:54:19.521 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/css/site.css?v=Q0eXrmnUH8-Eu9WpFfZ4Xvb_GZFcG4nxL3IQVK-QePQ - null null
+2025-12-05 05:54:19.521 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/Assignment1.styles.css?v=7lHnFlCJZb7Y0QPMGCN-wfjKjS-3UNek5lyeWY7qRqM - null null
+2025-12-05 05:54:19.521 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/js/site.js?v=RG_QSvEldQaTdgjLDfdZ_p2vOi-2P4gP62vAG4KX770 - null null
+2025-12-05 05:54:19.523 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/ - 200 null text/html; charset=utf-8 15.9374ms
+2025-12-05 05:54:19.525 -05:00 [INF] The file /css/site.css was not modified
+2025-12-05 05:54:19.526 -05:00 [INF] The file /Assignment1.styles.css was not modified
+2025-12-05 05:54:19.527 -05:00 [INF] The file /js/site.js was not modified
+2025-12-05 05:54:19.529 -05:00 [INF] HTTP GET /css/site.css responded 304 in 3.7831 ms
+2025-12-05 05:54:19.529 -05:00 [INF] HTTP GET /Assignment1.styles.css responded 304 in 3.3514 ms
+2025-12-05 05:54:19.530 -05:00 [INF] HTTP GET /js/site.js responded 304 in 2.5537 ms
+2025-12-05 05:54:19.530 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/css/site.css?v=Q0eXrmnUH8-Eu9WpFfZ4Xvb_GZFcG4nxL3IQVK-QePQ - 304 null text/css 9.5999ms
+2025-12-05 05:54:19.531 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/Assignment1.styles.css?v=7lHnFlCJZb7Y0QPMGCN-wfjKjS-3UNek5lyeWY7qRqM - 304 null text/css 9.9763ms
+2025-12-05 05:54:19.531 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/js/site.js?v=RG_QSvEldQaTdgjLDfdZ_p2vOi-2P4gP62vAG4KX770 - 304 null text/javascript 10.3954ms
+2025-12-05 05:54:20.934 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/Identity/Account/Login - null null
+2025-12-05 05:54:20.936 -05:00 [INF] Executing endpoint '/Account/Login'
+2025-12-05 05:54:20.943 -05:00 [INF] Route matched with {page = "/Account/Login", area = "Identity", action = "", controller = ""}. Executing page /Account/Login
+2025-12-05 05:54:20.947 -05:00 [INF] Executing handler method Assignment1.Areas.Identity.Pages.Account.LoginModel.OnGetAsync - ModelState is "Valid"
+2025-12-05 05:54:20.950 -05:00 [INF] AuthenticationScheme: Identity.External signed out.
+2025-12-05 05:54:20.951 -05:00 [INF] Executed handler method OnGetAsync, returned result .
+2025-12-05 05:54:20.953 -05:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2025-12-05 05:54:20.953 -05:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2025-12-05 05:54:20.977 -05:00 [INF] Executed page /Account/Login in 33.4124ms
+2025-12-05 05:54:20.978 -05:00 [INF] Executed endpoint '/Account/Login'
+2025-12-05 05:54:20.979 -05:00 [INF] HTTP GET /Identity/Account/Login responded 200 in 43.0703 ms
+2025-12-05 05:54:20.980 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/Identity/Account/Login - 200 null text/html; charset=utf-8 45.1221ms
+2025-12-05 05:54:22.429 -05:00 [INF] Request starting HTTP/1.1 POST http://localhost:5084/Identity/Account/Login - application/x-www-form-urlencoded 261
+2025-12-05 05:54:22.432 -05:00 [INF] Executing endpoint '/Account/Login'
+2025-12-05 05:54:22.433 -05:00 [INF] Route matched with {page = "/Account/Login", area = "Identity", action = "", controller = ""}. Executing page /Account/Login
+2025-12-05 05:54:22.436 -05:00 [INF] Executing handler method Assignment1.Areas.Identity.Pages.Account.LoginModel.OnPostAsync - ModelState is "Valid"
+2025-12-05 05:54:22.445 -05:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedUserName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."DateOfBirth", a."Email", a."EmailConfirmed", a."FullName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."ProfilePictureUrl", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedUserName" = @__normalizedUserName_0
+LIMIT 1
+2025-12-05 05:54:22.448 -05:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedUserName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."DateOfBirth", a."Email", a."EmailConfirmed", a."FullName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."ProfilePictureUrl", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."NormalizedUserName" = @__normalizedUserName_0
+LIMIT 1
+2025-12-05 05:54:22.535 -05:00 [INF] Executed DbCommand (3ms) [Parameters=[@__user_Id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ClaimType", a."ClaimValue", a."UserId"
+FROM "AspNetUserClaims" AS a
+WHERE a."UserId" = @__user_Id_0
+2025-12-05 05:54:22.546 -05:00 [INF] Executed DbCommand (1ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a0."Name"
+FROM "AspNetUserRoles" AS a
+INNER JOIN "AspNetRoles" AS a0 ON a."RoleId" = a0."Id"
+WHERE a."UserId" = @__userId_0
+2025-12-05 05:54:22.549 -05:00 [INF] Executed DbCommand (0ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-12-05 05:54:22.554 -05:00 [INF] Executed DbCommand (2ms) [Parameters=[@__role_Id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."ClaimType", a."ClaimValue"
+FROM "AspNetRoleClaims" AS a
+WHERE a."RoleId" = @__role_Id_0
+2025-12-05 05:54:22.558 -05:00 [INF] Executed DbCommand (1ms) [Parameters=[@__normalizedName_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."ConcurrencyStamp", a."Name", a."NormalizedName"
+FROM "AspNetRoles" AS a
+WHERE a."NormalizedName" = @__normalizedName_0
+LIMIT 1
+2025-12-05 05:54:22.561 -05:00 [INF] Executed DbCommand (1ms) [Parameters=[@__role_Id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."ClaimType", a."ClaimValue"
+FROM "AspNetRoleClaims" AS a
+WHERE a."RoleId" = @__role_Id_0
+2025-12-05 05:54:22.565 -05:00 [INF] AuthenticationScheme: Identity.Application signed in.
+2025-12-05 05:54:22.570 -05:00 [INF] User ashkanpzj logged in successfully from IP ::1
+2025-12-05 05:54:22.571 -05:00 [INF] Executed handler method OnPostAsync, returned result Microsoft.AspNetCore.Mvc.LocalRedirectResult.
+2025-12-05 05:54:22.574 -05:00 [INF] Executing LocalRedirectResult, redirecting to /.
+2025-12-05 05:54:22.575 -05:00 [INF] Executed page /Account/Login in 141.0739ms
+2025-12-05 05:54:22.575 -05:00 [INF] Executed endpoint '/Account/Login'
+2025-12-05 05:54:22.576 -05:00 [INF] HTTP POST /Identity/Account/Login responded 302 in 145.6247 ms
+2025-12-05 05:54:22.577 -05:00 [INF] Request finished HTTP/1.1 POST http://localhost:5084/Identity/Account/Login - 302 0 null 148.2145ms
+2025-12-05 05:54:22.580 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/ - null null
+2025-12-05 05:54:22.583 -05:00 [INF] Executing endpoint 'Assignment1.Controllers.HomeController.Index (Assignment1)'
+2025-12-05 05:54:22.583 -05:00 [INF] Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Assignment1.Controllers.HomeController (Assignment1).
+2025-12-05 05:54:22.584 -05:00 [INF] Executing action method Assignment1.Controllers.HomeController.Index (Assignment1) - Validation state: "Valid"
+2025-12-05 05:54:22.585 -05:00 [INF] Executed action method Assignment1.Controllers.HomeController.Index (Assignment1), returned result Microsoft.AspNetCore.Mvc.ViewResult in 0.0181ms.
+2025-12-05 05:54:22.586 -05:00 [INF] Executing ViewResult, running view Index.
+2025-12-05 05:54:22.588 -05:00 [INF] Executed ViewResult - view Index executed in 2.3135ms.
+2025-12-05 05:54:22.590 -05:00 [INF] Executed action Assignment1.Controllers.HomeController.Index (Assignment1) in 5.4325ms
+2025-12-05 05:54:22.592 -05:00 [INF] Executed endpoint 'Assignment1.Controllers.HomeController.Index (Assignment1)'
+2025-12-05 05:54:22.593 -05:00 [INF] HTTP GET / responded 200 in 12.2152 ms
+2025-12-05 05:54:22.594 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/ - 200 null text/html; charset=utf-8 14.0435ms
+2025-12-05 05:54:22.597 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/Assignment1.styles.css?v=7lHnFlCJZb7Y0QPMGCN-wfjKjS-3UNek5lyeWY7qRqM - null null
+2025-12-05 05:54:22.598 -05:00 [INF] The file /Assignment1.styles.css was not modified
+2025-12-05 05:54:22.599 -05:00 [INF] HTTP GET /Assignment1.styles.css responded 304 in 0.6361 ms
+2025-12-05 05:54:22.599 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/Assignment1.styles.css?v=7lHnFlCJZb7Y0QPMGCN-wfjKjS-3UNek5lyeWY7qRqM - 304 null text/css 2.3217ms
+2025-12-05 05:54:23.923 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/Events - null null
+2025-12-05 05:54:23.930 -05:00 [INF] Executing endpoint 'Assignment1.Controllers.EventsController.Index (Assignment1)'
+2025-12-05 05:54:23.933 -05:00 [INF] Route matched with {action = "Index", controller = "Events", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index(System.String, System.String, System.String, System.String, System.String) on controller Assignment1.Controllers.EventsController (Assignment1).
+2025-12-05 05:54:23.934 -05:00 [INF] Executing action method Assignment1.Controllers.EventsController.Index (Assignment1) - Validation state: "Valid"
+2025-12-05 05:54:23.970 -05:00 [INF] Executed DbCommand (2ms) [Parameters=[@__now_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT e."EventId", e."AvailableTickets", e."Category", e."CreatedByUserId", e."Date", e."Description", e."ImageUrl", e."Price", e."Title", e0."EventRatingId", e0."EventId", e0."GuestEmail", e0."RatedAtUtc", e0."Rating", e0."UserId"
+FROM "Events" AS e
+LEFT JOIN "EventRatings" AS e0 ON e."EventId" = e0."EventId"
+ORDER BY CASE
+    WHEN e."Date" < @__now_0 THEN 1
+    ELSE 0
+END, CASE
+    WHEN e."Date" >= @__now_0 AND e."AvailableTickets" <= 5 THEN 0
+    ELSE 1
+END, e."Date", e."EventId"
+2025-12-05 05:54:23.985 -05:00 [INF] Executed action method Assignment1.Controllers.EventsController.Index (Assignment1), returned result Microsoft.AspNetCore.Mvc.ViewResult in 50.4377ms.
+2025-12-05 05:54:23.986 -05:00 [INF] Executing ViewResult, running view Index.
+2025-12-05 05:54:24.022 -05:00 [INF] Executed ViewResult - view Index executed in 35.7006ms.
+2025-12-05 05:54:24.023 -05:00 [INF] Executed action Assignment1.Controllers.EventsController.Index (Assignment1) in 89.3541ms
+2025-12-05 05:54:24.025 -05:00 [INF] Executed endpoint 'Assignment1.Controllers.EventsController.Index (Assignment1)'
+2025-12-05 05:54:24.026 -05:00 [INF] HTTP GET /Events responded 200 in 96.7599 ms
+2025-12-05 05:54:24.028 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/Events - 200 null text/html; charset=utf-8 104.9434ms
+2025-12-05 05:54:24.028 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/css/site.css?v=Q0eXrmnUH8-Eu9WpFfZ4Xvb_GZFcG4nxL3IQVK-QePQ - null null
+2025-12-05 05:54:24.030 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/js/site.js?v=RG_QSvEldQaTdgjLDfdZ_p2vOi-2P4gP62vAG4KX770 - null null
+2025-12-05 05:54:24.031 -05:00 [INF] The file /css/site.css was not modified
+2025-12-05 05:54:24.033 -05:00 [INF] The file /js/site.js was not modified
+2025-12-05 05:54:24.034 -05:00 [INF] HTTP GET /js/site.js responded 304 in 0.7684 ms
+2025-12-05 05:54:24.033 -05:00 [INF] HTTP GET /css/site.css responded 304 in 1.9676 ms
+2025-12-05 05:54:24.034 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/js/site.js?v=RG_QSvEldQaTdgjLDfdZ_p2vOi-2P4gP62vAG4KX770 - 304 null text/javascript 4.1981ms
+2025-12-05 05:54:24.035 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/css/site.css?v=Q0eXrmnUH8-Eu9WpFfZ4Xvb_GZFcG4nxL3IQVK-QePQ - 304 null text/css 7.3539ms
+2025-12-05 05:54:26.395 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/Events/Create - null null
+2025-12-05 05:54:26.401 -05:00 [INF] Executing endpoint 'Assignment1.Controllers.EventsController.Create (Assignment1)'
+2025-12-05 05:54:26.402 -05:00 [INF] Route matched with {action = "Create", controller = "Events", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Create() on controller Assignment1.Controllers.EventsController (Assignment1).
+2025-12-05 05:54:26.403 -05:00 [INF] Executing action method Assignment1.Controllers.EventsController.Create (Assignment1) - Validation state: "Valid"
+2025-12-05 05:54:26.406 -05:00 [INF] Executed action method Assignment1.Controllers.EventsController.Create (Assignment1), returned result Microsoft.AspNetCore.Mvc.ViewResult in 2.991ms.
+2025-12-05 05:54:26.409 -05:00 [INF] Executing ViewResult, running view Create.
+2025-12-05 05:54:26.437 -05:00 [INF] Executed ViewResult - view Create executed in 28.7778ms.
+2025-12-05 05:54:26.437 -05:00 [INF] Executed action Assignment1.Controllers.EventsController.Create (Assignment1) in 34.6356ms
+2025-12-05 05:54:26.441 -05:00 [INF] Executed endpoint 'Assignment1.Controllers.EventsController.Create (Assignment1)'
+2025-12-05 05:54:26.441 -05:00 [INF] HTTP GET /Events/Create responded 200 in 45.2747 ms
+2025-12-05 05:54:26.443 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/Events/Create - 200 null text/html; charset=utf-8 48.2101ms
+2025-12-05 05:54:26.443 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/Assignment1.styles.css?v=7lHnFlCJZb7Y0QPMGCN-wfjKjS-3UNek5lyeWY7qRqM - null null
+2025-12-05 05:54:26.446 -05:00 [INF] The file /Assignment1.styles.css was not modified
+2025-12-05 05:54:26.446 -05:00 [INF] HTTP GET /Assignment1.styles.css responded 304 in 0.5464 ms
+2025-12-05 05:54:26.447 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/Assignment1.styles.css?v=7lHnFlCJZb7Y0QPMGCN-wfjKjS-3UNek5lyeWY7qRqM - 304 null text/css 3.5895ms
+2025-12-05 05:54:34.756 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/ - null null
+2025-12-05 05:54:34.757 -05:00 [INF] Executing endpoint 'Assignment1.Controllers.HomeController.Index (Assignment1)'
+2025-12-05 05:54:34.758 -05:00 [INF] Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Assignment1.Controllers.HomeController (Assignment1).
+2025-12-05 05:54:34.759 -05:00 [INF] Executing action method Assignment1.Controllers.HomeController.Index (Assignment1) - Validation state: "Valid"
+2025-12-05 05:54:34.760 -05:00 [INF] Executed action method Assignment1.Controllers.HomeController.Index (Assignment1), returned result Microsoft.AspNetCore.Mvc.ViewResult in 0.0333ms.
+2025-12-05 05:54:34.760 -05:00 [INF] Executing ViewResult, running view Index.
+2025-12-05 05:54:34.761 -05:00 [INF] Executed ViewResult - view Index executed in 1.153ms.
+2025-12-05 05:54:34.762 -05:00 [INF] Executed action Assignment1.Controllers.HomeController.Index (Assignment1) in 3.5021ms
+2025-12-05 05:54:34.763 -05:00 [INF] Executed endpoint 'Assignment1.Controllers.HomeController.Index (Assignment1)'
+2025-12-05 05:54:34.763 -05:00 [INF] HTTP GET / responded 200 in 6.4188 ms
+2025-12-05 05:54:34.764 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/ - 200 null text/html; charset=utf-8 8.6781ms
+2025-12-05 05:54:34.767 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/css/site.css?v=Q0eXrmnUH8-Eu9WpFfZ4Xvb_GZFcG4nxL3IQVK-QePQ - null null
+2025-12-05 05:54:34.767 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/Assignment1.styles.css?v=7lHnFlCJZb7Y0QPMGCN-wfjKjS-3UNek5lyeWY7qRqM - null null
+2025-12-05 05:54:34.768 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/js/site.js?v=RG_QSvEldQaTdgjLDfdZ_p2vOi-2P4gP62vAG4KX770 - null null
+2025-12-05 05:54:34.769 -05:00 [INF] The file /css/site.css was not modified
+2025-12-05 05:54:34.770 -05:00 [INF] The file /Assignment1.styles.css was not modified
+2025-12-05 05:54:34.770 -05:00 [INF] The file /js/site.js was not modified
+2025-12-05 05:54:34.771 -05:00 [INF] HTTP GET /css/site.css responded 304 in 2.4183 ms
+2025-12-05 05:54:34.771 -05:00 [INF] HTTP GET /Assignment1.styles.css responded 304 in 1.5172 ms
+2025-12-05 05:54:34.772 -05:00 [INF] HTTP GET /js/site.js responded 304 in 1.3419 ms
+2025-12-05 05:54:34.773 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/css/site.css?v=Q0eXrmnUH8-Eu9WpFfZ4Xvb_GZFcG4nxL3IQVK-QePQ - 304 null text/css 5.7065ms
+2025-12-05 05:54:34.774 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/Assignment1.styles.css?v=7lHnFlCJZb7Y0QPMGCN-wfjKjS-3UNek5lyeWY7qRqM - 304 null text/css 7.2476ms
+2025-12-05 05:54:34.775 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/js/site.js?v=RG_QSvEldQaTdgjLDfdZ_p2vOi-2P4gP62vAG4KX770 - 304 null text/javascript 7.3802ms
+2025-12-05 05:54:38.267 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/Analytics/MyAnalytics - null null
+2025-12-05 05:54:38.269 -05:00 [INF] Executing endpoint 'Assignment1.Controllers.AnalyticsController.MyAnalytics (Assignment1)'
+2025-12-05 05:54:38.272 -05:00 [INF] Route matched with {action = "MyAnalytics", controller = "Analytics", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult MyAnalytics() on controller Assignment1.Controllers.AnalyticsController (Assignment1).
+2025-12-05 05:54:38.276 -05:00 [INF] Executing action method Assignment1.Controllers.AnalyticsController.MyAnalytics (Assignment1) - Validation state: "Valid"
+2025-12-05 05:54:38.276 -05:00 [INF] Executed action method Assignment1.Controllers.AnalyticsController.MyAnalytics (Assignment1), returned result Microsoft.AspNetCore.Mvc.ViewResult in 0.1265ms.
+2025-12-05 05:54:38.278 -05:00 [INF] Executing ViewResult, running view MyAnalytics.
+2025-12-05 05:54:38.282 -05:00 [INF] Executed ViewResult - view MyAnalytics executed in 4.3391ms.
+2025-12-05 05:54:38.282 -05:00 [INF] Executed action Assignment1.Controllers.AnalyticsController.MyAnalytics (Assignment1) in 6.7442ms
+2025-12-05 05:54:38.282 -05:00 [INF] Executed endpoint 'Assignment1.Controllers.AnalyticsController.MyAnalytics (Assignment1)'
+2025-12-05 05:54:38.283 -05:00 [INF] HTTP GET /Analytics/MyAnalytics responded 200 in 15.3371 ms
+2025-12-05 05:54:38.283 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/Analytics/MyAnalytics - 200 null text/html; charset=utf-8 16.9688ms
+2025-12-05 05:54:38.291 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/Assignment1.styles.css?v=7lHnFlCJZb7Y0QPMGCN-wfjKjS-3UNek5lyeWY7qRqM - null null
+2025-12-05 05:54:38.292 -05:00 [INF] The file /Assignment1.styles.css was not modified
+2025-12-05 05:54:38.293 -05:00 [INF] HTTP GET /Assignment1.styles.css responded 304 in 0.8252 ms
+2025-12-05 05:54:38.294 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/Assignment1.styles.css?v=7lHnFlCJZb7Y0QPMGCN-wfjKjS-3UNek5lyeWY7qRqM - 304 null text/css 2.9038ms
+2025-12-05 05:54:38.303 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/Analytics/GetSalesByCategory - null null
+2025-12-05 05:54:38.303 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/Analytics/GetTopSellingEvents - null null
+2025-12-05 05:54:38.303 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/Analytics/GetRevenueByMonth - null null
+2025-12-05 05:54:38.309 -05:00 [INF] Executing endpoint 'Assignment1.Controllers.AnalyticsController.GetTopSellingEvents (Assignment1)'
+2025-12-05 05:54:38.309 -05:00 [INF] Executing endpoint 'Assignment1.Controllers.AnalyticsController.GetSalesByCategory (Assignment1)'
+2025-12-05 05:54:38.309 -05:00 [INF] Executing endpoint 'Assignment1.Controllers.AnalyticsController.GetRevenueByMonth (Assignment1)'
+2025-12-05 05:54:38.312 -05:00 [INF] Route matched with {action = "GetSalesByCategory", controller = "Analytics", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetSalesByCategory() on controller Assignment1.Controllers.AnalyticsController (Assignment1).
+2025-12-05 05:54:38.312 -05:00 [INF] Route matched with {action = "GetTopSellingEvents", controller = "Analytics", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetTopSellingEvents() on controller Assignment1.Controllers.AnalyticsController (Assignment1).
+2025-12-05 05:54:38.313 -05:00 [INF] Route matched with {action = "GetRevenueByMonth", controller = "Analytics", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetRevenueByMonth() on controller Assignment1.Controllers.AnalyticsController (Assignment1).
+2025-12-05 05:54:38.313 -05:00 [INF] Executing action method Assignment1.Controllers.AnalyticsController.GetSalesByCategory (Assignment1) - Validation state: "Valid"
+2025-12-05 05:54:38.314 -05:00 [INF] Executing action method Assignment1.Controllers.AnalyticsController.GetTopSellingEvents (Assignment1) - Validation state: "Valid"
+2025-12-05 05:54:38.314 -05:00 [INF] Executing action method Assignment1.Controllers.AnalyticsController.GetRevenueByMonth (Assignment1) - Validation state: "Valid"
+2025-12-05 05:54:38.343 -05:00 [INF] Executed DbCommand (4ms) [Parameters=[@__userId_0='?', @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT t."EventId", e."Title" AS "EventTitle", COALESCE(sum(t."Quantity"), 0)::int AS "TicketsSold", COALESCE(sum(t."TotalPrice"), 0.0) AS "TotalRevenue"
+FROM "TicketPurchases" AS t
+INNER JOIN "Events" AS e ON t."EventId" = e."EventId"
+WHERE e."CreatedByUserId" = @__userId_0
+GROUP BY t."EventId", e."Title"
+ORDER BY COALESCE(sum(t."Quantity"), 0)::int DESC
+LIMIT @__p_1
+2025-12-05 05:54:38.344 -05:00 [INF] Executed action method Assignment1.Controllers.AnalyticsController.GetTopSellingEvents (Assignment1), returned result Microsoft.AspNetCore.Mvc.JsonResult in 28.7656ms.
+2025-12-05 05:54:38.345 -05:00 [INF] Executing JsonResult, writing value of type 'System.Collections.Generic.List`1[[<>f__AnonymousType12`4[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Decimal, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], Assignment1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-12-05 05:54:38.347 -05:00 [INF] Executed action Assignment1.Controllers.AnalyticsController.GetTopSellingEvents (Assignment1) in 33.6704ms
+2025-12-05 05:54:38.348 -05:00 [INF] Executed endpoint 'Assignment1.Controllers.AnalyticsController.GetTopSellingEvents (Assignment1)'
+2025-12-05 05:54:38.349 -05:00 [INF] HTTP GET /Analytics/GetTopSellingEvents responded 200 in 43.5240 ms
+2025-12-05 05:54:38.350 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/Analytics/GetTopSellingEvents - 200 null application/json; charset=utf-8 46.8164ms
+2025-12-05 05:54:38.391 -05:00 [INF] Executed DbCommand (5ms) [Parameters=[@__userId_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT s."Key" AS "Category", COALESCE(sum(s."Quantity"), 0)::int AS "TicketsSold"
+FROM (
+    SELECT t."Quantity", COALESCE(e."Category", 'Uncategorized') AS "Key"
+    FROM "TicketPurchases" AS t
+    INNER JOIN "Events" AS e ON t."EventId" = e."EventId"
+    WHERE e."CreatedByUserId" = @__userId_0
+) AS s
+GROUP BY s."Key"
+ORDER BY COALESCE(sum(s."Quantity"), 0)::int DESC
+2025-12-05 05:54:38.391 -05:00 [INF] Executed DbCommand (5ms) [Parameters=[@__userId_0='?', @__startDate_1='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT s."Year", s."Month", COALESCE(sum(s."TotalPrice"), 0.0) AS "Revenue"
+FROM (
+    SELECT t."TotalPrice", date_part('year', t."PurchasedAtUtc" AT TIME ZONE 'UTC')::int AS "Year", date_part('month', t."PurchasedAtUtc" AT TIME ZONE 'UTC')::int AS "Month"
+    FROM "TicketPurchases" AS t
+    INNER JOIN "Events" AS e ON t."EventId" = e."EventId"
+    WHERE e."CreatedByUserId" = @__userId_0 AND t."PurchasedAtUtc" >= @__startDate_1
+) AS s
+GROUP BY s."Year", s."Month"
+ORDER BY s."Year", s."Month"
+2025-12-05 05:54:38.392 -05:00 [INF] Executed action method Assignment1.Controllers.AnalyticsController.GetSalesByCategory (Assignment1), returned result Microsoft.AspNetCore.Mvc.JsonResult in 77.471ms.
+2025-12-05 05:54:38.393 -05:00 [INF] Executed action method Assignment1.Controllers.AnalyticsController.GetRevenueByMonth (Assignment1), returned result Microsoft.AspNetCore.Mvc.JsonResult in 77.8038ms.
+2025-12-05 05:54:38.394 -05:00 [INF] Executing JsonResult, writing value of type 'System.Collections.Generic.List`1[[<>f__AnonymousType7`2[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], Assignment1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-12-05 05:54:38.394 -05:00 [INF] Executing JsonResult, writing value of type 'System.Linq.Enumerable+ListSelectIterator`2[[<>f__AnonymousType9`3[[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Int32, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Decimal, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], Assignment1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null],[<>f__AnonymousType10`2[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Decimal, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]], Assignment1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2025-12-05 05:54:38.396 -05:00 [INF] Executed action Assignment1.Controllers.AnalyticsController.GetSalesByCategory (Assignment1) in 82.7314ms
+2025-12-05 05:54:38.397 -05:00 [INF] Executed endpoint 'Assignment1.Controllers.AnalyticsController.GetSalesByCategory (Assignment1)'
+2025-12-05 05:54:38.397 -05:00 [INF] Executed action Assignment1.Controllers.AnalyticsController.GetRevenueByMonth (Assignment1) in 82.2374ms
+2025-12-05 05:54:38.397 -05:00 [INF] HTTP GET /Analytics/GetSalesByCategory responded 200 in 93.3706 ms
+2025-12-05 05:54:38.398 -05:00 [INF] Executed endpoint 'Assignment1.Controllers.AnalyticsController.GetRevenueByMonth (Assignment1)'
+2025-12-05 05:54:38.402 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/Analytics/GetSalesByCategory - 200 null application/json; charset=utf-8 99.7423ms
+2025-12-05 05:54:38.403 -05:00 [INF] HTTP GET /Analytics/GetRevenueByMonth responded 200 in 93.8474 ms
+2025-12-05 05:54:38.405 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/Analytics/GetRevenueByMonth - 200 null application/json; charset=utf-8 102.1957ms
+2025-12-05 05:54:40.277 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/ - null null
+2025-12-05 05:54:40.279 -05:00 [INF] Executing endpoint 'Assignment1.Controllers.HomeController.Index (Assignment1)'
+2025-12-05 05:54:40.279 -05:00 [INF] Route matched with {action = "Index", controller = "Home", page = "", area = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller Assignment1.Controllers.HomeController (Assignment1).
+2025-12-05 05:54:40.280 -05:00 [INF] Executing action method Assignment1.Controllers.HomeController.Index (Assignment1) - Validation state: "Valid"
+2025-12-05 05:54:40.281 -05:00 [INF] Executed action method Assignment1.Controllers.HomeController.Index (Assignment1), returned result Microsoft.AspNetCore.Mvc.ViewResult in 0.0227ms.
+2025-12-05 05:54:40.281 -05:00 [INF] Executing ViewResult, running view Index.
+2025-12-05 05:54:40.282 -05:00 [INF] Executed ViewResult - view Index executed in 1.0352ms.
+2025-12-05 05:54:40.283 -05:00 [INF] Executed action Assignment1.Controllers.HomeController.Index (Assignment1) in 2.9143ms
+2025-12-05 05:54:40.283 -05:00 [INF] Executed endpoint 'Assignment1.Controllers.HomeController.Index (Assignment1)'
+2025-12-05 05:54:40.284 -05:00 [INF] HTTP GET / responded 200 in 5.7291 ms
+2025-12-05 05:54:40.285 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/ - 200 null text/html; charset=utf-8 7.5418ms
+2025-12-05 05:54:41.957 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/Dashboard - null null
+2025-12-05 05:54:41.959 -05:00 [INF] Executing endpoint 'Assignment1.Controllers.DashboardController.Index (Assignment1)'
+2025-12-05 05:54:41.962 -05:00 [INF] Route matched with {action = "Index", controller = "Dashboard", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index(Int32) on controller Assignment1.Controllers.DashboardController (Assignment1).
+2025-12-05 05:54:41.964 -05:00 [INF] Executing action method Assignment1.Controllers.DashboardController.Index (Assignment1) - Validation state: "Valid"
+2025-12-05 05:54:41.970 -05:00 [INF] Executed DbCommand (1ms) [Parameters=[@__p_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT a."Id", a."AccessFailedCount", a."ConcurrencyStamp", a."DateOfBirth", a."Email", a."EmailConfirmed", a."FullName", a."LockoutEnabled", a."LockoutEnd", a."NormalizedEmail", a."NormalizedUserName", a."PasswordHash", a."PhoneNumber", a."PhoneNumberConfirmed", a."ProfilePictureUrl", a."SecurityStamp", a."TwoFactorEnabled", a."UserName"
+FROM "AspNetUsers" AS a
+WHERE a."Id" = @__p_0
+LIMIT 1
+2025-12-05 05:54:41.983 -05:00 [INF] Executed DbCommand (2ms) [Parameters=[@__user_Id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT t."TicketPurchaseId", t."BuyerUserId", t."EventId", t."GuestEmail", t."GuestFirstName", t."GuestLastName", t."PurchasedAtUtc", t."Quantity", t."Rating", t."TotalPrice", t."UnitPrice", e."EventId", e."AvailableTickets", e."Category", e."CreatedByUserId", e."Date", e."Description", e."ImageUrl", e."Price", e."Title"
+FROM "TicketPurchases" AS t
+INNER JOIN "Events" AS e ON t."EventId" = e."EventId"
+WHERE t."BuyerUserId" = @__user_Id_0
+ORDER BY e."Date"
+2025-12-05 05:54:41.997 -05:00 [INF] Executed DbCommand (3ms) [Parameters=[@__user_Id_0='?', @__pastEventIds_1='?' (DbType = Object)], CommandType='"Text"', CommandTimeout='30']
+SELECT e."EventRatingId", e."EventId", e."GuestEmail", e."RatedAtUtc", e."Rating", e."UserId"
+FROM "EventRatings" AS e
+WHERE e."UserId" = @__user_Id_0 AND e."EventId" = ANY (@__pastEventIds_1)
+2025-12-05 05:54:42.008 -05:00 [INF] Executed DbCommand (2ms) [Parameters=[@__user_Id_0='?'], CommandType='"Text"', CommandTimeout='30']
+SELECT e."EventId", e."Title", e."Date", COALESCE(e."Price", 0.0) AS "TicketPrice", COALESCE((
+    SELECT COALESCE(sum(t."Quantity"), 0)::int
+    FROM "TicketPurchases" AS t
+    WHERE e."EventId" = t."EventId"), 0) AS "TicketsSold", COALESCE((
+    SELECT COALESCE(sum(t0."TotalPrice"), 0.0)
+    FROM "TicketPurchases" AS t0
+    WHERE e."EventId" = t0."EventId"), 0.0) AS "TotalRevenue"
+FROM "Events" AS e
+WHERE e."CreatedByUserId" = @__user_Id_0
+ORDER BY e."Date" DESC
+2025-12-05 05:54:42.011 -05:00 [INF] Executed action method Assignment1.Controllers.DashboardController.Index (Assignment1), returned result Microsoft.AspNetCore.Mvc.ViewResult in 46.346ms.
+2025-12-05 05:54:42.012 -05:00 [INF] Executing ViewResult, running view Index.
+2025-12-05 05:54:42.020 -05:00 [INF] Executed ViewResult - view Index executed in 8.1689ms.
+2025-12-05 05:54:42.021 -05:00 [INF] Executed action Assignment1.Controllers.DashboardController.Index (Assignment1) in 57.2137ms
+2025-12-05 05:54:42.021 -05:00 [INF] Executed endpoint 'Assignment1.Controllers.DashboardController.Index (Assignment1)'
+2025-12-05 05:54:42.025 -05:00 [INF] HTTP GET /Dashboard responded 200 in 66.3247 ms
+2025-12-05 05:54:42.026 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/css/site.css?v=Q0eXrmnUH8-Eu9WpFfZ4Xvb_GZFcG4nxL3IQVK-QePQ - null null
+2025-12-05 05:54:42.028 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/Assignment1.styles.css?v=7lHnFlCJZb7Y0QPMGCN-wfjKjS-3UNek5lyeWY7qRqM - null null
+2025-12-05 05:54:42.028 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/js/site.js?v=RG_QSvEldQaTdgjLDfdZ_p2vOi-2P4gP62vAG4KX770 - null null
+2025-12-05 05:54:42.028 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/Dashboard - 200 null text/html; charset=utf-8 71.0953ms
+2025-12-05 05:54:42.029 -05:00 [INF] The file /css/site.css was not modified
+2025-12-05 05:54:42.031 -05:00 [INF] The file /Assignment1.styles.css was not modified
+2025-12-05 05:54:42.032 -05:00 [INF] The file /js/site.js was not modified
+2025-12-05 05:54:42.034 -05:00 [INF] HTTP GET /css/site.css responded 304 in 4.8641 ms
+2025-12-05 05:54:42.034 -05:00 [INF] HTTP GET /Assignment1.styles.css responded 304 in 3.0648 ms
+2025-12-05 05:54:42.036 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/Assignment1.styles.css?v=7lHnFlCJZb7Y0QPMGCN-wfjKjS-3UNek5lyeWY7qRqM - 304 null text/css 8.629ms
+2025-12-05 05:54:42.035 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/css/site.css?v=Q0eXrmnUH8-Eu9WpFfZ4Xvb_GZFcG4nxL3IQVK-QePQ - 304 null text/css 8.5697ms
+2025-12-05 05:54:42.034 -05:00 [INF] HTTP GET /js/site.js responded 304 in 2.3463 ms
+2025-12-05 05:54:42.040 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/js/site.js?v=RG_QSvEldQaTdgjLDfdZ_p2vOi-2P4gP62vAG4KX770 - 304 null text/javascript 11.9913ms
+2025-12-05 05:54:50.141 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/Events - null null
+2025-12-05 05:54:50.143 -05:00 [INF] Executing endpoint 'Assignment1.Controllers.EventsController.Index (Assignment1)'
+2025-12-05 05:54:50.143 -05:00 [INF] Route matched with {action = "Index", controller = "Events", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index(System.String, System.String, System.String, System.String, System.String) on controller Assignment1.Controllers.EventsController (Assignment1).
+2025-12-05 05:54:50.145 -05:00 [INF] Executing action method Assignment1.Controllers.EventsController.Index (Assignment1) - Validation state: "Valid"
+2025-12-05 05:54:50.151 -05:00 [INF] Executed DbCommand (4ms) [Parameters=[@__now_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT e."EventId", e."AvailableTickets", e."Category", e."CreatedByUserId", e."Date", e."Description", e."ImageUrl", e."Price", e."Title", e0."EventRatingId", e0."EventId", e0."GuestEmail", e0."RatedAtUtc", e0."Rating", e0."UserId"
+FROM "Events" AS e
+LEFT JOIN "EventRatings" AS e0 ON e."EventId" = e0."EventId"
+ORDER BY CASE
+    WHEN e."Date" < @__now_0 THEN 1
+    ELSE 0
+END, CASE
+    WHEN e."Date" >= @__now_0 AND e."AvailableTickets" <= 5 THEN 0
+    ELSE 1
+END, e."Date", e."EventId"
+2025-12-05 05:54:50.152 -05:00 [INF] Executed action method Assignment1.Controllers.EventsController.Index (Assignment1), returned result Microsoft.AspNetCore.Mvc.ViewResult in 6.3828ms.
+2025-12-05 05:54:50.153 -05:00 [INF] Executing ViewResult, running view Index.
+2025-12-05 05:54:50.164 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/css/site.css?v=Q0eXrmnUH8-Eu9WpFfZ4Xvb_GZFcG4nxL3IQVK-QePQ - null null
+2025-12-05 05:54:50.164 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/Assignment1.styles.css?v=7lHnFlCJZb7Y0QPMGCN-wfjKjS-3UNek5lyeWY7qRqM - null null
+2025-12-05 05:54:50.166 -05:00 [INF] The file /css/site.css was not modified
+2025-12-05 05:54:50.166 -05:00 [INF] The file /Assignment1.styles.css was not modified
+2025-12-05 05:54:50.166 -05:00 [INF] HTTP GET /css/site.css responded 304 in 1.1765 ms
+2025-12-05 05:54:50.167 -05:00 [INF] Executed ViewResult - view Index executed in 13.9688ms.
+2025-12-05 05:54:50.167 -05:00 [INF] HTTP GET /Assignment1.styles.css responded 304 in 0.8872 ms
+2025-12-05 05:54:50.169 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/Assignment1.styles.css?v=7lHnFlCJZb7Y0QPMGCN-wfjKjS-3UNek5lyeWY7qRqM - 304 null text/css 5.3848ms
+2025-12-05 05:54:50.168 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/css/site.css?v=Q0eXrmnUH8-Eu9WpFfZ4Xvb_GZFcG4nxL3IQVK-QePQ - 304 null text/css 4.0512ms
+2025-12-05 05:54:50.170 -05:00 [INF] Executed action Assignment1.Controllers.EventsController.Index (Assignment1) in 25.4753ms
+2025-12-05 05:54:50.173 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/js/site.js?v=RG_QSvEldQaTdgjLDfdZ_p2vOi-2P4gP62vAG4KX770 - null null
+2025-12-05 05:54:50.175 -05:00 [INF] Executed endpoint 'Assignment1.Controllers.EventsController.Index (Assignment1)'
+2025-12-05 05:54:50.176 -05:00 [INF] The file /js/site.js was not modified
+2025-12-05 05:54:50.176 -05:00 [INF] HTTP GET /Events responded 200 in 33.7687 ms
+2025-12-05 05:54:50.176 -05:00 [INF] HTTP GET /js/site.js responded 304 in 0.7639 ms
+2025-12-05 05:54:50.177 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/Events - 200 null text/html; charset=utf-8 36.2002ms
+2025-12-05 05:54:50.178 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/js/site.js?v=RG_QSvEldQaTdgjLDfdZ_p2vOi-2P4gP62vAG4KX770 - 304 null text/javascript 5.2106ms
+2025-12-05 05:54:54.588 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/Tickets - null null
+2025-12-05 05:54:54.589 -05:00 [INF] Executing endpoint 'Assignment1.Controllers.TicketsController.Index (Assignment1)'
+2025-12-05 05:54:54.596 -05:00 [INF] Route matched with {action = "Index", controller = "Tickets", page = "", area = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index(System.String, System.String, System.Nullable`1[System.Decimal], System.Nullable`1[System.Decimal], System.String, System.String, System.String, System.Nullable`1[System.Int32]) on controller Assignment1.Controllers.TicketsController (Assignment1).
+2025-12-05 05:54:54.601 -05:00 [INF] Executing action method Assignment1.Controllers.TicketsController.Index (Assignment1) - Validation state: "Valid"
+2025-12-05 05:54:54.611 -05:00 [INF] Executed DbCommand (2ms) [Parameters=[@__now_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT e."EventId", e."AvailableTickets", e."Category", e."CreatedByUserId", e."Date", e."Description", e."ImageUrl", e."Price", e."Title", e0."EventRatingId", e0."EventId", e0."GuestEmail", e0."RatedAtUtc", e0."Rating", e0."UserId"
+FROM "Events" AS e
+LEFT JOIN "EventRatings" AS e0 ON e."EventId" = e0."EventId"
+ORDER BY CASE
+    WHEN e."Date" < @__now_0 THEN 1
+    ELSE 0
+END, CASE
+    WHEN e."Date" >= @__now_0 AND e."AvailableTickets" <= 5 THEN 0
+    ELSE 1
+END, e."Date", e."EventId"
+2025-12-05 05:54:54.618 -05:00 [INF] Executed action method Assignment1.Controllers.TicketsController.Index (Assignment1), returned result Microsoft.AspNetCore.Mvc.ViewResult in 16.6646ms.
+2025-12-05 05:54:54.619 -05:00 [INF] Executing ViewResult, running view Index.
+2025-12-05 05:54:54.641 -05:00 [INF] Executed ViewResult - view Index executed in 22.7214ms.
+2025-12-05 05:54:54.642 -05:00 [INF] Executed action Assignment1.Controllers.TicketsController.Index (Assignment1) in 42.0618ms
+2025-12-05 05:54:54.643 -05:00 [INF] Executed endpoint 'Assignment1.Controllers.TicketsController.Index (Assignment1)'
+2025-12-05 05:54:54.643 -05:00 [INF] HTTP GET /Tickets responded 200 in 54.2284 ms
+2025-12-05 05:54:54.644 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/Tickets - 200 null text/html; charset=utf-8 56.2258ms
+2025-12-05 05:54:54.647 -05:00 [INF] Request starting HTTP/1.1 GET http://localhost:5084/Assignment1.styles.css?v=7lHnFlCJZb7Y0QPMGCN-wfjKjS-3UNek5lyeWY7qRqM - null null
+2025-12-05 05:54:54.649 -05:00 [INF] The file /Assignment1.styles.css was not modified
+2025-12-05 05:54:54.649 -05:00 [INF] HTTP GET /Assignment1.styles.css responded 304 in 0.7785 ms
+2025-12-05 05:54:54.650 -05:00 [INF] Request finished HTTP/1.1 GET http://localhost:5084/Assignment1.styles.css?v=7lHnFlCJZb7Y0QPMGCN-wfjKjS-3UNek5lyeWY7qRqM - 304 null text/css 2.8986ms
+2025-12-05 05:56:30.970 -05:00 [INF] Application is shutting down...
+2025-12-05 06:46:24.244 -05:00 [ERR] Failed executing DbCommand (101ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-12-05 06:46:25.219 -05:00 [INF] Executed DbCommand (142ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE IF NOT EXISTS "__EFMigrationsHistory" (
+    "MigrationId" character varying(150) NOT NULL,
+    "ProductVersion" character varying(32) NOT NULL,
+    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
+);
+2025-12-05 06:46:25.225 -05:00 [INF] Acquiring an exclusive lock for migration application. See https://aka.ms/efcore-docs-migrations-lock for more information if this takes too long.
+2025-12-05 06:46:25.313 -05:00 [INF] Executed DbCommand (87ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+LOCK TABLE "__EFMigrationsHistory" IN ACCESS EXCLUSIVE MODE
+2025-12-05 06:46:25.404 -05:00 [INF] Executed DbCommand (89ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2025-12-05 06:46:25.417 -05:00 [INF] Applying migration '20251016190709_Sync_Model'.
+2025-12-05 06:46:25.513 -05:00 [INF] Executed DbCommand (93ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+DO $$
+BEGIN
+    IF NOT EXISTS (
+        SELECT 1
+        FROM information_schema.tables
+        WHERE table_schema = 'public' AND table_name = 'tickets'
+    ) THEN
+        CREATE TABLE public."Tickets" (
+            "TicketId" integer GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
+            "EventId" integer NOT NULL,
+            "SeatNumber" text NOT NULL,
+            "Price" numeric(10,2) NOT NULL
+        );
+    END IF;
+END
+$$;
+2025-12-05 06:46:25.617 -05:00 [INF] Executed DbCommand (100ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+DO $$
+BEGIN
+    IF EXISTS (
+        SELECT 1
+        FROM information_schema.columns
+        WHERE table_schema = 'public'
+          AND table_name = 'tickets'
+          AND column_name = 'id'
+    )
+    AND NOT EXISTS (
+        SELECT 1
+        FROM information_schema.columns
+        WHERE table_schema = 'public'
+          AND table_name = 'tickets'
+          AND column_name = 'ticketid'
+    ) THEN
+        ALTER TABLE public."Tickets" RENAME COLUMN "Id" TO "TicketId";
+    END IF;
+END
+$$;
+2025-12-05 06:46:25.707 -05:00 [INF] Executed DbCommand (88ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20251016190709_Sync_Model', '9.0.0');
+2025-12-05 06:46:25.711 -05:00 [INF] Applying migration '20251017151635_Events_Create'.
+2025-12-05 06:46:25.805 -05:00 [INF] Executed DbCommand (92ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+CREATE TABLE IF NOT EXISTS public."Events" (
+    "EventId" integer GENERATED BY DEFAULT AS IDENTITY PRIMARY KEY,
+    "Title" character varying(200) NOT NULL,
+    "Date" timestamp with time zone NOT NULL,
+    "Location" character varying(500),
+    "Price" numeric(10,2)
+);
+2025-12-05 06:46:25.898 -05:00 [INF] Executed DbCommand (90ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+DO $$
+BEGIN
+    IF EXISTS (
+        SELECT 1 FROM information_schema.columns
+        WHERE table_schema = 'public'
+          AND table_name = 'events'
+          AND column_name = 'price'
+          AND (numeric_precision IS NULL OR numeric_scale IS NULL)
+    ) THEN
+        ALTER TABLE public."Events"
+        ALTER COLUMN "Price" TYPE numeric(10,2);
+    END IF;
+END
+$$;
+2025-12-05 06:46:25.986 -05:00 [INF] Executed DbCommand (87ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20251017151635_Events_Create', '9.0.0');
+2025-12-05 06:46:25.987 -05:00 [INF] Applying migration '20251017152235_Events_FixKey'.
+2025-12-05 06:46:26.082 -05:00 [INF] Executed DbCommand (93ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+DO $$
+BEGIN
+    IF to_regclass('public."Events"') IS NOT NULL THEN
+        IF EXISTS (
+            SELECT 1 FROM information_schema.columns
+            WHERE table_schema = 'public'
+              AND table_name  = 'events'
+              AND column_name = 'id'
+        ) AND NOT EXISTS (
+            SELECT 1 FROM information_schema.columns
+            WHERE table_schema = 'public'
+              AND table_name  = 'events'
+              AND column_name = 'eventid'
+        ) THEN
+            ALTER TABLE public."Events" RENAME COLUMN "Id" TO "EventId";
+        END IF;
+    END IF;
+END
+$$;
+2025-12-05 06:46:26.173 -05:00 [INF] Executed DbCommand (90ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+
+DO $$
+BEGIN
+    IF EXISTS (
+        SELECT 1 FROM information_schema.columns
+        WHERE table_schema = 'public'
+          AND table_name  = 'events'
+          AND column_name = 'price'
+          AND (numeric_precision IS NULL OR numeric_scale IS NULL)
+    ) THEN
+        ALTER TABLE public."Events"
+        ALTER COLUMN "Price" TYPE numeric(10,2);
+    END IF;
+END
+$$;
+2025-12-05 06:46:26.262 -05:00 [INF] Executed DbCommand (88ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20251017152235_Events_FixKey', '9.0.0');
+2025-12-05 06:46:26.264 -05:00 [INF] Applying migration '20251017152549_Assignment'.
+2025-12-05 06:46:26.353 -05:00 [INF] Executed DbCommand (87ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20251017152549_Assignment', '9.0.0');
+2025-12-05 06:46:26.355 -05:00 [INF] Applying migration '20251017153709_Event_Update_Description'.
+2025-12-05 06:46:26.448 -05:00 [INF] Executed DbCommand (89ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE "Events" DROP COLUMN "Location";
+2025-12-05 06:46:26.538 -05:00 [INF] Executed DbCommand (88ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE "Events" ADD "Description" character varying(1000);
+2025-12-05 06:46:26.626 -05:00 [INF] Executed DbCommand (87ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20251017153709_Event_Update_Description', '9.0.0');
+2025-12-05 06:46:26.626 -05:00 [INF] Applying migration '20251017153953_Event_AddAvailableTickets'.
+2025-12-05 06:46:26.717 -05:00 [INF] Executed DbCommand (89ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE "Events" ADD "AvailableTickets" integer NOT NULL DEFAULT 0;
+2025-12-05 06:46:26.808 -05:00 [INF] Executed DbCommand (90ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20251017153953_Event_AddAvailableTickets', '9.0.0');
+2025-12-05 06:46:26.811 -05:00 [INF] Applying migration '20251017163441_Identity_Init'.
+2025-12-05 06:46:26.918 -05:00 [INF] Executed DbCommand (90ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetRoles" (
+    "Id" text NOT NULL,
+    "Name" character varying(256),
+    "NormalizedName" character varying(256),
+    "ConcurrencyStamp" text,
+    CONSTRAINT "PK_AspNetRoles" PRIMARY KEY ("Id")
+);
+2025-12-05 06:46:27.070 -05:00 [INF] Executed DbCommand (150ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetUsers" (
+    "Id" text NOT NULL,
+    "UserName" character varying(256),
+    "NormalizedUserName" character varying(256),
+    "Email" character varying(256),
+    "NormalizedEmail" character varying(256),
+    "EmailConfirmed" boolean NOT NULL,
+    "PasswordHash" text,
+    "SecurityStamp" text,
+    "ConcurrencyStamp" text,
+    "PhoneNumber" text,
+    "PhoneNumberConfirmed" boolean NOT NULL,
+    "TwoFactorEnabled" boolean NOT NULL,
+    "LockoutEnd" timestamp with time zone,
+    "LockoutEnabled" boolean NOT NULL,
+    "AccessFailedCount" integer NOT NULL,
+    CONSTRAINT "PK_AspNetUsers" PRIMARY KEY ("Id")
+);
+2025-12-05 06:46:27.171 -05:00 [INF] Executed DbCommand (100ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetRoleClaims" (
+    "Id" integer GENERATED BY DEFAULT AS IDENTITY,
+    "RoleId" text NOT NULL,
+    "ClaimType" text,
+    "ClaimValue" text,
+    CONSTRAINT "PK_AspNetRoleClaims" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_AspNetRoleClaims_AspNetRoles_RoleId" FOREIGN KEY ("RoleId") REFERENCES "AspNetRoles" ("Id") ON DELETE CASCADE
+);
+2025-12-05 06:46:27.261 -05:00 [INF] Executed DbCommand (89ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetUserClaims" (
+    "Id" integer GENERATED BY DEFAULT AS IDENTITY,
+    "UserId" text NOT NULL,
+    "ClaimType" text,
+    "ClaimValue" text,
+    CONSTRAINT "PK_AspNetUserClaims" PRIMARY KEY ("Id"),
+    CONSTRAINT "FK_AspNetUserClaims_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE
+);
+2025-12-05 06:46:27.352 -05:00 [INF] Executed DbCommand (90ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetUserLogins" (
+    "LoginProvider" character varying(128) NOT NULL,
+    "ProviderKey" character varying(128) NOT NULL,
+    "ProviderDisplayName" text,
+    "UserId" text NOT NULL,
+    CONSTRAINT "PK_AspNetUserLogins" PRIMARY KEY ("LoginProvider", "ProviderKey"),
+    CONSTRAINT "FK_AspNetUserLogins_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE
+);
+2025-12-05 06:46:27.447 -05:00 [INF] Executed DbCommand (93ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetUserRoles" (
+    "UserId" text NOT NULL,
+    "RoleId" text NOT NULL,
+    CONSTRAINT "PK_AspNetUserRoles" PRIMARY KEY ("UserId", "RoleId"),
+    CONSTRAINT "FK_AspNetUserRoles_AspNetRoles_RoleId" FOREIGN KEY ("RoleId") REFERENCES "AspNetRoles" ("Id") ON DELETE CASCADE,
+    CONSTRAINT "FK_AspNetUserRoles_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE
+);
+2025-12-05 06:46:27.536 -05:00 [INF] Executed DbCommand (88ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "AspNetUserTokens" (
+    "UserId" text NOT NULL,
+    "LoginProvider" character varying(128) NOT NULL,
+    "Name" character varying(128) NOT NULL,
+    "Value" text,
+    CONSTRAINT "PK_AspNetUserTokens" PRIMARY KEY ("UserId", "LoginProvider", "Name"),
+    CONSTRAINT "FK_AspNetUserTokens_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE
+);
+2025-12-05 06:46:27.626 -05:00 [INF] Executed DbCommand (89ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_AspNetRoleClaims_RoleId" ON "AspNetRoleClaims" ("RoleId");
+2025-12-05 06:46:27.717 -05:00 [INF] Executed DbCommand (90ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE UNIQUE INDEX "RoleNameIndex" ON "AspNetRoles" ("NormalizedName");
+2025-12-05 06:46:27.806 -05:00 [INF] Executed DbCommand (88ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_AspNetUserClaims_UserId" ON "AspNetUserClaims" ("UserId");
+2025-12-05 06:46:27.893 -05:00 [INF] Executed DbCommand (87ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_AspNetUserLogins_UserId" ON "AspNetUserLogins" ("UserId");
+2025-12-05 06:46:27.983 -05:00 [INF] Executed DbCommand (88ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_AspNetUserRoles_RoleId" ON "AspNetUserRoles" ("RoleId");
+2025-12-05 06:46:28.074 -05:00 [INF] Executed DbCommand (90ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "EmailIndex" ON "AspNetUsers" ("NormalizedEmail");
+2025-12-05 06:46:28.164 -05:00 [INF] Executed DbCommand (88ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE UNIQUE INDEX "UserNameIndex" ON "AspNetUsers" ("NormalizedUserName");
+2025-12-05 06:46:28.253 -05:00 [INF] Executed DbCommand (88ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20251017163441_Identity_Init', '9.0.0');
+2025-12-05 06:46:28.255 -05:00 [INF] Applying migration '20251017175004_Add_Event_Category'.
+2025-12-05 06:46:28.346 -05:00 [INF] Executed DbCommand (87ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE "Events" ADD "Category" character varying(50) NOT NULL DEFAULT '';
+2025-12-05 06:46:28.444 -05:00 [INF] Executed DbCommand (97ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20251017175004_Add_Event_Category', '9.0.0');
+2025-12-05 06:46:28.444 -05:00 [INF] Applying migration '20251017214749_Tickets_Purchase'.
+2025-12-05 06:46:28.541 -05:00 [INF] Executed DbCommand (92ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "TicketPurchases" (
+    "TicketPurchaseId" integer GENERATED BY DEFAULT AS IDENTITY,
+    "EventId" integer NOT NULL,
+    "Quantity" integer NOT NULL,
+    "UnitPrice" numeric NOT NULL,
+    "TotalPrice" numeric NOT NULL,
+    "PurchasedAtUtc" timestamp with time zone NOT NULL,
+    "BuyerUserId" text,
+    "GuestFirstName" character varying(100),
+    "GuestLastName" character varying(100),
+    "GuestEmail" character varying(256),
+    CONSTRAINT "PK_TicketPurchases" PRIMARY KEY ("TicketPurchaseId"),
+    CONSTRAINT "FK_TicketPurchases_Events_EventId" FOREIGN KEY ("EventId") REFERENCES "Events" ("EventId") ON DELETE CASCADE
+);
+2025-12-05 06:46:28.639 -05:00 [INF] Executed DbCommand (97ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_TicketPurchases_EventId" ON "TicketPurchases" ("EventId");
+2025-12-05 06:46:28.728 -05:00 [INF] Executed DbCommand (88ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20251017214749_Tickets_Purchase', '9.0.0');
+2025-12-05 06:46:28.729 -05:00 [INF] Applying migration '20251204065150_DashboardPortal'.
+2025-12-05 06:46:28.825 -05:00 [INF] Executed DbCommand (87ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE "TicketPurchases" ADD "Rating" integer;
+2025-12-05 06:46:28.919 -05:00 [INF] Executed DbCommand (92ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE "Events" ALTER COLUMN "Category" TYPE character varying(100);
+ALTER TABLE "Events" ALTER COLUMN "Category" DROP NOT NULL;
+2025-12-05 06:46:29.008 -05:00 [INF] Executed DbCommand (87ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE "Events" ADD "CreatedByUserId" character varying(450);
+2025-12-05 06:46:29.100 -05:00 [INF] Executed DbCommand (91ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE "AspNetUsers" ADD "FullName" character varying(100);
+2025-12-05 06:46:29.192 -05:00 [INF] Executed DbCommand (91ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE "AspNetUsers" ADD "ProfileImagePath" character varying(256);
+2025-12-05 06:46:29.291 -05:00 [INF] Executed DbCommand (98ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_Events_CreatedByUserId" ON "Events" ("CreatedByUserId");
+2025-12-05 06:46:29.379 -05:00 [INF] Executed DbCommand (88ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE "Events" ADD CONSTRAINT "FK_Events_AspNetUsers_CreatedByUserId" FOREIGN KEY ("CreatedByUserId") REFERENCES "AspNetUsers" ("Id");
+2025-12-05 06:46:29.467 -05:00 [INF] Executed DbCommand (87ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20251204065150_DashboardPortal', '9.0.0');
+2025-12-05 06:46:29.468 -05:00 [INF] Applying migration '20251204072520_IdentityEnhancements'.
+2025-12-05 06:46:29.559 -05:00 [INF] Executed DbCommand (87ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE "AspNetUsers" RENAME COLUMN "ProfileImagePath" TO "ProfilePictureUrl";
+2025-12-05 06:46:29.649 -05:00 [INF] Executed DbCommand (89ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE "AspNetUsers" ADD "DateOfBirth" timestamp with time zone;
+2025-12-05 06:46:29.741 -05:00 [INF] Executed DbCommand (90ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20251204072520_IdentityEnhancements', '9.0.0');
+2025-12-05 06:46:29.741 -05:00 [INF] Applying migration '20251205032950_ProfilePhoneNumberUpdate'.
+2025-12-05 06:46:29.843 -05:00 [INF] Executed DbCommand (95ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE "AspNetUsers" ALTER COLUMN "PhoneNumber" TYPE character varying(20);
+2025-12-05 06:46:29.942 -05:00 [INF] Executed DbCommand (98ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20251205032950_ProfilePhoneNumberUpdate', '9.0.0');
+2025-12-05 06:46:29.943 -05:00 [INF] Applying migration '20251205041444_AddEventImage'.
+2025-12-05 06:46:30.037 -05:00 [INF] Executed DbCommand (87ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+ALTER TABLE "Events" ADD "ImageUrl" character varying(500);
+2025-12-05 06:46:30.125 -05:00 [INF] Executed DbCommand (88ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20251205041444_AddEventImage', '9.0.0');
+2025-12-05 06:46:30.127 -05:00 [INF] Applying migration '20251205060324_AddEventComments'.
+2025-12-05 06:46:30.227 -05:00 [INF] Executed DbCommand (96ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "EventComments" (
+    "EventCommentId" integer GENERATED BY DEFAULT AS IDENTITY,
+    "EventId" integer NOT NULL,
+    "UserId" text,
+    "GuestName" text,
+    "Content" character varying(1000) NOT NULL,
+    "CreatedAtUtc" timestamp with time zone NOT NULL,
+    CONSTRAINT "PK_EventComments" PRIMARY KEY ("EventCommentId"),
+    CONSTRAINT "FK_EventComments_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers" ("Id"),
+    CONSTRAINT "FK_EventComments_Events_EventId" FOREIGN KEY ("EventId") REFERENCES "Events" ("EventId") ON DELETE CASCADE
+);
+2025-12-05 06:46:30.317 -05:00 [INF] Executed DbCommand (89ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_EventComments_EventId" ON "EventComments" ("EventId");
+2025-12-05 06:46:30.409 -05:00 [INF] Executed DbCommand (91ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_EventComments_UserId" ON "EventComments" ("UserId");
+2025-12-05 06:46:30.498 -05:00 [INF] Executed DbCommand (88ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20251205060324_AddEventComments', '9.0.0');
+2025-12-05 06:46:30.499 -05:00 [INF] Applying migration '20251205063508_AddEventRatings'.
+2025-12-05 06:46:30.596 -05:00 [INF] Executed DbCommand (93ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "EventRatings" (
+    "EventRatingId" integer GENERATED BY DEFAULT AS IDENTITY,
+    "EventId" integer NOT NULL,
+    "UserId" text,
+    "GuestEmail" character varying(256),
+    "Rating" integer NOT NULL,
+    "RatedAtUtc" timestamp with time zone NOT NULL,
+    CONSTRAINT "PK_EventRatings" PRIMARY KEY ("EventRatingId"),
+    CONSTRAINT "FK_EventRatings_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers" ("Id"),
+    CONSTRAINT "FK_EventRatings_Events_EventId" FOREIGN KEY ("EventId") REFERENCES "Events" ("EventId") ON DELETE CASCADE
+);
+2025-12-05 06:46:30.687 -05:00 [INF] Executed DbCommand (89ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE UNIQUE INDEX "IX_EventRatings_EventId_GuestEmail" ON "EventRatings" ("EventId", "GuestEmail") WHERE "GuestEmail" IS NOT NULL;
+2025-12-05 06:46:30.775 -05:00 [INF] Executed DbCommand (87ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE UNIQUE INDEX "IX_EventRatings_EventId_UserId" ON "EventRatings" ("EventId", "UserId") WHERE "UserId" IS NOT NULL;
+2025-12-05 06:46:30.866 -05:00 [INF] Executed DbCommand (90ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_EventRatings_UserId" ON "EventRatings" ("UserId");
+2025-12-05 06:46:30.956 -05:00 [INF] Executed DbCommand (87ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
+VALUES ('20251205063508_AddEventRatings', '9.0.0');
